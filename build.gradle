@@ -36,14 +36,14 @@ task prepareResources(type: Copy) {
 }
 
 task prepareCommands(type: Copy) {
-  from 'src/main/scripts'
+  from 'src/main/scripts/bin'
   into 'build/jenv/bin'
   exclude 'jenv*'
   filter(ReplaceTokens, tokens: [JENV_VERSION: config.jenvVersion, JENV_SERVICE: config.jenvService])
 }
 
 task prepareJenvCommands(type: Copy, dependsOn: [prepareResources, prepareCommands]) {
-  from 'src/main/scripts'
+  from 'src/main/scripts/commands'
   into 'build/jenv/commands'
   include 'jenv*'
   filter(ReplaceTokens, tokens: [JENV_VERSION: config.jenvVersion, JENV_SERVICE: config.jenvService])
