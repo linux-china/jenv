@@ -19,11 +19,13 @@
 export JENV_VERSION="@JENV_VERSION@"
 export JENV_PLATFORM=$(uname)
 
+# contains function
 function __jenvtool_contains {
     replaced=$(echo "$1" | sed -e s,"$2",,g)
     [ "$replaced" != "$1" ]
 }
 
+# jenv init function
 function __jenvtool_init {
 
     # OS specific support (must be 'true' or 'false').
@@ -33,7 +35,7 @@ function __jenvtool_init {
         CYGWIN*)
             cygwin=true
             ;;
-        
+
         Darwin*)
             darwin=true
             ;;
@@ -62,7 +64,6 @@ function __jenvtool_init {
     #if [[ -f "${candidate_cache}" && "${*/--flush/}" == "${*}" ]]; then
     if [[ -f "${candidate_cache}" ]]; then
         JENV_CANDIDATES=($(cat "${candidate_cache}"))
-
     else
         JENV_CANDIDATES=($(curl -s "${JENV_SERVICE}/candidates" | sed -e 's/,//g'))
         if [[ "${#JENV_CANDIDATES[@]}" == "0" ]]; then
