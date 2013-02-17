@@ -2,88 +2,66 @@ import org.apache.tools.ant.filters.*
 
 apply plugin: 'groovy'
 apply plugin: 'idea'
-apply plugin: 'eclipse'
 
-defaultTasks 'clean', 'prepareScripts', 'prepareServer', 'prepareTemplates', 'assembleArchive', 'test'
+defaultTasks 'clean', 'prepareResources', 'prepareCommands', 'prepareJenvCommands', 'assembleArchive', 'test'
 
-ext.installBinDir = "${System.getProperty('user.home')}/.jenv/bin"
-ext.installSrcDir = "${System.getProperty('user.home')}/.jenv/src"
+ext.installDir = "${System.getProperty('user.home')}/.jenv"
 
 loadConfiguration()
 
 repositories {
-    mavenCentral()
+  mavenCentral()
 }
 
 dependencies {
-    groovy group: 'org.codehaus.groovy', name: 'groovy', version: '2.0.5'
-    groovy group: 'org.codehaus.groovy', name: 'groovy-templates', version: '2.0.5'
-    testCompile group: 'junit', name: 'junit', version: '4.11'
-    testCompile group: 'info.cukes', name: 'cucumber-groovy', version: '1.1.1'
-    testCompile group: 'info.cukes', name: 'cucumber-junit', version: '1.1.1'
-    testCompile group: 'org.vert-x', name: 'vertx-core', version: '1.3.0.final'
-    testCompile group: 'org.vert-x', name: 'vertx-lang-groovy', version: '1.3.0.final'
-}
-
-task wrapper(type: Wrapper) {
-    gradleVersion = '1.4'
+  groovy group: 'org.codehaus.groovy', name: 'groovy', version: '2.0.5'
+  groovy group: 'org.apache.ant', name: 'ant', version: '1.8.4'
 }
 
 def loadConfiguration() {
-    def environment = hasProperty('env') ? env : 'dev'
-    ext.environment = environment
-    println "Environment is set to: $environment"
-    
-    def configFile = file('config.groovy')
-    def config = new ConfigSlurper(environment).parse(configFile.toURL())
-    ext.config = config
+  def environment = hasProperty('env') ? env : 'dev'
+  ext.environment = environment
+  println "Environment is set to: $environment"
+
+  def configFile = file('config.groovy')
+  def config = new ConfigSlurper(environment).parse(configFile.toURL())
+  ext.config = config
 }
 
-task prepareTemplates(type: Copy) {
-	from "src/main/resources/templates"
-	into "build/templates"
-	include "*.gtpl"
+task prepareCommands(type: Copy) {
+  from 'src/main/scripts'
+  into 'build/jenv/bin'
+  exclude 'jenv*'
+  filter(ReplaceTokens, tokens: [JENV_VERSION: config.jenvVersion, JENV_SERVICE: config.jenvService])
 }
 
-task prepareServer(type: Copy){
-	from 'src/main/resources'
-	into 'build/server'
-	include 'server.groovy'
-	filter(ReplaceTokens, tokens: [JENV_VERSION:config.jenvVersion, VERTX_VERSION:config.vertxVersion])
+task prepareJenvCommands(type: Copy) {
+  from 'src/main/scripts'
+  into 'build/jenv/commands'
+  include 'jenv*'
+  filter(ReplaceTokens, tokens: [JENV_VERSION: config.jenvVersion, JENV_SERVICE: config.jenvService])
 }
 
-task prepareScripts(type: Copy) {
-	from 'src/main/resources/scripts'
-	into 'build/scripts'
-	include '**/*'
-	filter(ReplaceTokens, tokens: [JENV_VERSION:config.jenvVersion, JENV_SERVICE:config.jenvService])
+task prepareResources(type: Copy) {
+  from 'src/main/resources'
+  into 'build/jenv'
+  include '**/*'
+  filter(ReplaceTokens, tokens: [JENV_VERSION: config.jenvVersion, JENV_SERVICE: config.jenvService])
 }
 
 task assembleArchive(type: Zip) {
-	classifier = 'scripts'
-	from "build/scripts"
-	include "jenv*"
+  classifier = config.jenvVersion
+  from "build/jenv"
+  include "**/*"
 }
 
-task cleanInstallInit(type: Delete) {
-	delete installBinDir
+task cleanJenvDir(type: Delete) {
+  delete installDir
 }
 
-task cleanInstallModules(type: Delete) {
-    delete installSrcDir
+task installJenv(type: Copy, dependsOn: [cleanJenvDir, prepareJenvCommands]) {
+  from "build/jenv"
+  into installDir
 }
 
-task installInit(type: Copy, dependsOn: [cleanInstallInit, prepareScripts]) {
-	from "build/scripts"
-	into installBinDir
-	include "jenv-init.sh"
-}
-
-task installModules(type: Copy, dependsOn: [cleanInstallModules, prepareScripts]) {
-    from "build/scripts"
-    into installSrcDir
-    include "jenv-*.sh"
-    exclude "jenv-init.sh"
-}
-
-task install(dependsOn: [installInit, installModules])
+task install(dependsOn: [installJenv])
