@@ -18,9 +18,5 @@
 
 # update jenv self
 function __jenvtool_selfupdate {
-	if [[ "${JENV_ONLINE}" == "false" ]]; then
-		echo "${OFFLINE_MESSAGE}"
-	else
-		curl -s "${JENV_SERVICE}/selfupdate" | bash
-	fi
+	source "${JENV_DIR}/commands/selfupdate.sh"
 }
