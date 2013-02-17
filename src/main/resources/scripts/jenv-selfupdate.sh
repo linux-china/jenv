@@ -16,6 +16,7 @@
 #   limitations under the License.
 #
 
+# update jenv self
 function __jenvtool_selfupdate {
 	if [[ "${JENV_ONLINE}" == "false" ]]; then
 		echo "${OFFLINE_MESSAGE}"
