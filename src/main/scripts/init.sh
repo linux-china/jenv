@@ -35,9 +35,6 @@ function __jenvtool_contains {
 # @return JENV_DIR jenv dir
 # @return JENV_SERVICE jenv service url
 # @return JENV_CANDIDATES jenv candidate array
-# @return OFFLINE_BROADCAST offline broadcast
-# @return ONLINE_BROADCAST online broadcast
-# @return OFFLINE_MESSAGE offline message
 function __jenvtool_init {
 
     # OS specific support (must be 'true' or 'false').
@@ -61,29 +58,15 @@ function __jenvtool_init {
     fi
     mkdir -p $JENV_DIR/var/candidates
 
-    if [ -z "${JENV_SERVICE}" ]; then
-        if [ -f "${JENV_DIR}/var/service" ]; then
-            JENV_SERVICE=$(cat "${JENV_DIR}/var/service")
-        else
-            JENV_SERVICE=${JENV_SERVICE_DEFAULT}
-        fi
-    fi
+    JENV_SERVICE=${JENV_SERVICE_DEFAULT}
     export JENV_SERVICE
-    echo -n ${JENV_SERVICE} > "${JENV_DIR}/var/service"
 
     # check cached candidates first
-    candidate_cache="${JENV_DIR}/var/candidates/$(echo ${JENV_SERVICE} | tr ':/' '_')"
-    #if [[ -f "${candidate_cache}" && "${*/--flush/}" == "${*}" ]]; then
+    candidate_cache="${JENV_DIR}/config/candidates"
     if [[ -f "${candidate_cache}" ]]; then
         JENV_CANDIDATES=($(cat "${candidate_cache}"))
     else
-        JENV_CANDIDATES=($(curl -s "${JENV_SERVICE}/candidates" | sed -e 's/,//g'))
-        if [[ "${#JENV_CANDIDATES[@]}" == "0" ]]; then
-            JENV_CANDIDATES=(${JENV_CANDIDATES_DEFAULT[@]})
-        else
-            # only cache the candidates if derived from online service
-            echo -n ${JENV_CANDIDATES[@]} > "${candidate_cache}"
-        fi
+        JENV_CANDIDATES=(${JENV_CANDIDATES_DEFAULT[@]})
     fi
     export JENV_CANDIDATES
     # update PATH env
@@ -93,32 +76,13 @@ function __jenvtool_init {
         fi
     done
 
-    OFFLINE_BROADCAST=$( cat << EOF
-==== BROADCAST =============================================
-
-AEROPLANE MODE ENABLED! Some functionality is now disabled.
-
-============================================================
-EOF
-    )
-
-    ONLINE_BROADCAST=$( cat << EOF
-==== BROADCAST =============================================
-
-ONLINE MODE RE-ENABLED! All functionality now restored.
-
-============================================================
-EOF
-    )
-
-    OFFLINE_MESSAGE="This command is not available in aeroplane mode."
     if ! __jenvtool_contains "$PATH" "JENV_DIR"; then
         PATH="${JENV_DIR}/bin:${JENV_DIR}/ext:$PATH"
     fi
 
-    # Source jenv module scripts (except this one).
-    for f in $(find "${JENV_DIR}/src" -type f -name 'jenv-*'); do
-        if [ "${f##*/}" != "jenv-init.sh" ]; then source "${f}"; fi
+    # Source jenv module scripts
+    for f in $(find "${JENV_DIR}/commands" -type f -name 'jenv-*'); do
+         source "${f}"
     done
 
     # Source extension files prefixed with 'jenv-' and found in the ext/ folder
