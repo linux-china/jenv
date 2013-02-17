@@ -40,12 +40,12 @@ function __jenvtool_use {
 
 	# Just update the *_HOME and PATH for this shell.
 	UPPER_CANDIDATE=`echo "${CANDIDATE}" | tr '[:lower:]' '[:upper:]'`
-	export "${UPPER_CANDIDATE}_HOME"="${JENV_DIR}/${CANDIDATE}/${VERSION}"
+	export "${UPPER_CANDIDATE}_HOME"="${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}"
 
 	# if PATH already has this candidate
-	export PATH=`echo $PATH | sed -E "s!/current/bin!@jenvtmp@!g" | sed -E "s!${JENV_DIR}/${CANDIDATE}/([^/]+)!${JENV_DIR}/${CANDIDATE}/${VERSION}!g" | sed -E "s!@jenvtmp@!/current/bin!g"`
-	if ! __jenvtool_contains "$PATH" "${JENV_DIR}/${CANDIDATE}/${VERSION}"; then
-		export PATH=${JENV_DIR}/${CANDIDATE}/${VERSION}/bin:$PATH
+	export PATH=`echo $PATH | sed -E "s!/current/bin!@jenvtmp@!g" | sed -E "s!${JENV_DIR}/${CANDIDATE}/([^/]+)!${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}!g" | sed -E "s!@jenvtmp@!/current/bin!g"`
+	if ! __jenvtool_contains "$PATH" "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}"; then
+		export PATH=${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/bin:$PATH
 	fi
 
 	echo ""
