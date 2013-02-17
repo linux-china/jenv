@@ -83,6 +83,7 @@ function __jenvtool_init {
         fi
     fi
     export JENV_CANDIDATES
+    # update PATH env
     for CANDIDATE in $JENV_CANDIDATES; do
         if ! __jenvtool_contains "$PATH" "$CANDIDATE/current" && [ -e ${JENV_DIR}/${CANDIDATE}/current ]; then
             PATH="${JENV_DIR}/${CANDIDATE}/current/bin:$PATH"
