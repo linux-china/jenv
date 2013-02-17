@@ -16,6 +16,8 @@
 #   limitations under the License.
 #
 
+# list candidate versions
+# @param $1 candidate name
 function __jenvtool_list {
 	CANDIDATE="$1"
 	__jenvtool_check_candidate_present "${CANDIDATE}" || return 1
