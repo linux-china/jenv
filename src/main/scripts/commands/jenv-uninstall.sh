@@ -25,17 +25,17 @@ function __jenvtool_uninstall {
 	__jenvtool_check_candidate_present "${CANDIDATE}" || return 1
 	__jenvtool_check_version_present "${VERSION}" || return 1
     # unlink current
-	CURRENT=$(readlink "${JENV_DIR}/${CANDIDATE}/current" | sed -e "s_${JENV_DIR}/${CANDIDATE}/__g")
-	if [[ -h "${JENV_DIR}/${CANDIDATE}/current" && ( "${VERSION}" == "${CURRENT}" ) ]]; then
+	CURRENT=$(readlink "${JENV_DIR}/candidates/${CANDIDATE}/current" | sed -e "s_${JENV_DIR}/candidates/${CANDIDATE}/__g")
+	if [[ -h "${JENV_DIR}/candidates/${CANDIDATE}/current" && ( "${VERSION}" == "${CURRENT}" ) ]]; then
 		echo ""
 		echo "Unselecting ${CANDIDATE} ${VERSION}..."
-		unlink "${JENV_DIR}/${CANDIDATE}/current"
+		unlink "${JENV_DIR}/candidates/${CANDIDATE}/current"
 	fi
 	echo ""
 	# delete candidate version directory
-	if [ -d "${JENV_DIR}/${CANDIDATE}/${VERSION}" ]; then
+	if [ -d "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}" ]; then
 		echo "Uninstalling ${CANDIDATE} ${VERSION}..."
-		rm -rf "${JENV_DIR}/${CANDIDATE}/${VERSION}"
+		rm -rf "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}"
 	else
 		echo "${CANDIDATE} ${VERSION} is not installed."
 	fi
