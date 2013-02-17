@@ -22,7 +22,7 @@
 #
 
 # check candidate present.
-# $1: candidate name
+# @param $1 candidate name
 function __jenvtool_check_candidate_present {
 	if [ -z "$1" ]; then
 		echo -e "\nNo candidate provided."
@@ -32,7 +32,7 @@ function __jenvtool_check_candidate_present {
 }
 
 # check candidate version present.
-# $1: candidate version
+# @param $1 candidate version
 function __jenvtool_check_version_present {
 	if [ -z "$1" ]; then
 		echo -e "\nNo candidate version provided."
@@ -42,7 +42,7 @@ function __jenvtool_check_version_present {
 }
 
 # determine candidate version.
-# $1: candidate version
+# @param $1 candidate version
 function __jenvtool_determine_version {
 	if [[ "${JENV_ONLINE}" == "false" && -n "$1" && -d "${JENV_DIR}/${CANDIDATE}/$1" ]]; then
 		VERSION="$1"
@@ -79,7 +79,8 @@ function __jenvtool_determine_version {
 }
 
 # build candidate all version to csv
-# $1: candidate name
+# @param $1 candidate name
+# @return CSV candidate version csv
 function __jenvtool_build_version_csv {
 	CANDIDATE="$1"
 	CSV=""
@@ -92,7 +93,8 @@ function __jenvtool_build_version_csv {
 }
 
 # determine candidate current version
-# $1: candidate name
+# @param $1 candidate name
+# @return CURRENT candidate current version number
 function __jenvtool_determine_current_version {
 	CANDIDATE="$1"
 	CURRENT=$(echo $PATH | sed -E "s|.jenv/${CANDIDATE}/([^/]+)/bin|!!\1!!|1" | sed -E "s|^.*!!(.+)!!.*$|\1|g")
@@ -106,8 +108,8 @@ function __jenvtool_determine_current_version {
 }
 
 # download candidate with version
-# $1: candidate name
-# $2: candidate version
+# @param $1 candidate name
+# @param $2 candidate version
 function __jenvtool_download {
 	CANDIDATE="$1"
 	VERSION="$2"
@@ -129,7 +131,7 @@ function __jenvtool_download {
 }
 
 # validate zip file
-# $1: zip file
+# @param $1 zip file
 function __jenvtool_validate_zip {
 	ZIP_ARCHIVE="$1"
 	ZIP_OK=$(unzip -t "${ZIP_ARCHIVE}" | grep 'No errors detected in compressed data')
@@ -141,7 +143,9 @@ function __jenvtool_validate_zip {
 	fi
 }
 
-# jenv default enviroment variable: JENV_DIR and JENV_SERVICE
+# jenv default enviroment
+# @return JENV_SERVICE jenv service url
+# @return JENV_DIR jenv directory
 function __jenvtool_default_environment_variables {
 	if [ ! "${JENV_SERVICE}" ]; then
 		JENV_SERVICE="http://localhost:8080"
@@ -153,6 +157,8 @@ function __jenvtool_default_environment_variables {
 }
 
 # check upgrade available
+# @param $1 command name
+# @return UPGRADE_AVAILABLE upgrade available mark, "true" or empty
 function __jenvtool_check_upgrade_available {
     COMMAND="$1"
 	UPGRADE_AVAILABLE=""
@@ -163,7 +169,7 @@ function __jenvtool_check_upgrade_available {
 }
 
 # update broadcast
-# $1: command name
+# @param $1 command name
 function __jenvtool_update_broadcast {
 	COMMAND="$1"
 	BROADCAST_FILE="${JENV_DIR}/var/broadcast"
@@ -179,8 +185,8 @@ function __jenvtool_update_broadcast {
 }
 
 # link candidate with version to current
-# $1: candidate
-# $2: version
+# @param $1 candidate name
+# @param $2 candidate version
 function __jenvtool_link_candidate_version {
 	CANDIDATE="$1"
 	VERSION="$2"
