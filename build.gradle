@@ -44,7 +44,6 @@ task prepareCommands(type: Copy) {
 task prepareJenvCommands(type: Copy, dependsOn: [prepareResources, prepareCommands]) {
   from 'src/main/scripts/commands'
   into 'build/jenv/commands'
-  include 'jenv*'
   filter(ReplaceTokens, tokens: [JENV_VERSION: config.jenvVersion, JENV_SERVICE: config.jenvService])
 }
 
