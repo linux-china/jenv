@@ -32,28 +32,7 @@ function __jenvtool_install {
 		return 1
 	fi
 
-	if [[ ${VERSION_VALID} == 'valid' ]]; then
-		__jenvtool_install_candidate_version "${CANDIDATE}" "${VERSION}" || return 1
-
-		if [[ "${jenv_auto_answer}" != 'true' ]]; then
-			echo -n "Do you want ${CANDIDATE} ${VERSION} to be set as default? (Y/n): "
-			read USE
-		fi
-		if [[ -z "${USE}" || "${USE}" == "y" || "${USE}" == "Y" ]]; then
-			echo ""
-			echo "Setting ${CANDIDATE} ${VERSION} as default."
-			__jenvtool_link_candidate_version "${CANDIDATE}" "${VERSION}"
-		fi
-		return 1
-
-	elif [[ "${VERSION_VALID}" == 'invalid' && -n "${LOCAL_FOLDER}" ]]; then
-		__jenvtool_install_local_version "${CANDIDATE}" "${VERSION}" "${LOCAL_FOLDER}" || return 1
-
-    else
-        echo ""
-		echo "Stop! $1 is not a valid ${CANDIDATE} version."
-		return 1
-	fi
+	__jenvtool_install_candidate_version "${CANDIDATE}" "${VERSION}" || return 1
 }
 
 # install local installed candidate
@@ -64,10 +43,10 @@ function __jenvtool_install_local_version {
 	CANDIDATE="$1"
 	VERSION="$2"
 	LOCAL_FOLDER="$3"
-	mkdir -p "${JENV_DIR}/${CANDIDATE}"
+	mkdir -p "${JENV_DIR}/candidates/${CANDIDATE}"
 
 	echo "Linking ${CANDIDATE} ${VERSION} to ${LOCAL_FOLDER}"
-	ln -s "${LOCAL_FOLDER}" "${JENV_DIR}/${CANDIDATE}/${VERSION}"
+	ln -s "${LOCAL_FOLDER}" "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}"
 	echo "Done installing!"
 	echo ""
 }
@@ -81,10 +60,10 @@ function __jenvtool_install_candidate_version {
 	__jenvtool_download "${CANDIDATE}" "${VERSION}" || return 1
 	echo "Installing: ${CANDIDATE} ${VERSION}"
 
-	mkdir -p "${JENV_DIR}/${CANDIDATE}"
+	mkdir -p "${JENV_DIR}/candidates/${CANDIDATE}"
 
 	unzip -oq "${JENV_DIR}/archives/${CANDIDATE}-${VERSION}.zip" -d "${JENV_DIR}/tmp/"
-	mv ${JENV_DIR}/tmp/*-${VERSION} "${JENV_DIR}/${CANDIDATE}/${VERSION}"
+	mv ${JENV_DIR}/tmp/*-${VERSION} "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}"
 	echo "Done installing!"
 	echo ""
 }
