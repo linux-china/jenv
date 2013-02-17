@@ -170,22 +170,6 @@ function __jenvtool_check_upgrade_available {
 	fi
 }
 
-# update broadcast
-# @param $1 command name
-function __jenvtool_update_broadcast {
-	COMMAND="$1"
-	BROADCAST_FILE="${JENV_DIR}/var/broadcast"
-	if [ -f "${BROADCAST_FILE}" ]; then
-		BROADCAST_HIST=$(cat "${BROADCAST_FILE}")
-	fi
-
-	if [[ "${JENV_ONLINE}" == "true" && ( "${BROADCAST_LIVE}" != "${BROADCAST_HIST}" ) && ( "${COMMAND}" != 'broadcast' ) ]]; then
-		mkdir -p "${JENV_DIR}/var"
-		echo "${BROADCAST_LIVE}" > "${BROADCAST_FILE}"
-		echo "${BROADCAST_LIVE}"
-	fi
-}
-
 # link candidate with version to current
 # @param $1 candidate name
 # @param $2 candidate version
