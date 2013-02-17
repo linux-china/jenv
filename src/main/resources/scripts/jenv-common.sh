@@ -78,6 +78,8 @@ function __jenvtool_determine_version {
 	fi
 }
 
+# build candidate all version to csv
+# $1: candidate name
 function __jenvtool_build_version_csv {
 	CANDIDATE="$1"
 	CSV=""
@@ -89,6 +91,8 @@ function __jenvtool_build_version_csv {
 	CSV=${CSV%?}
 }
 
+# determine candidate current version
+# $1: candidate name
 function __jenvtool_determine_current_version {
 	CANDIDATE="$1"
 	CURRENT=$(echo $PATH | sed -E "s|.jenv/${CANDIDATE}/([^/]+)/bin|!!\1!!|1" | sed -E "s|^.*!!(.+)!!.*$|\1|g")
@@ -101,6 +105,9 @@ function __jenvtool_determine_current_version {
 	fi
 }
 
+# download candidate with version
+# $1: candidate name
+# $2: candidate version
 function __jenvtool_download {
 	CANDIDATE="$1"
 	VERSION="$2"
@@ -122,6 +129,7 @@ function __jenvtool_download {
 }
 
 # validate zip file
+# $1: zip file
 function __jenvtool_validate_zip {
 	ZIP_ARCHIVE="$1"
 	ZIP_OK=$(unzip -t "${ZIP_ARCHIVE}" | grep 'No errors detected in compressed data')
@@ -155,6 +163,7 @@ function __jenvtool_check_upgrade_available {
 }
 
 # update broadcast
+# $1: command name
 function __jenvtool_update_broadcast {
 	COMMAND="$1"
 	BROADCAST_FILE="${JENV_DIR}/var/broadcast"
@@ -169,6 +178,9 @@ function __jenvtool_update_broadcast {
 	fi
 }
 
+# link candidate with version to current
+# $1: candidate
+# $2: version
 function __jenvtool_link_candidate_version {
 	CANDIDATE="$1"
 	VERSION="$2"
@@ -183,13 +195,14 @@ function __jenvtool_link_candidate_version {
     fi
 }
 
+# offline candidate version list
 function __jenvtool_offline_list {
 	echo "------------------------------------------------------------"
-	echo "Aeroplane Mode: only showing installed ${CANDIDATE} versions"
+	echo "Aeroplane Mode:  only showing installed ${CANDIDATE} versions"
 	echo "------------------------------------------------------------"
 	echo "                                                            "
 
-	jenv_versions=($(echo ${CSV//,/ }))
+	jenv_versions=($(echo ${CSV//,}))
 	for (( i=0 ; i <= ${#jenv_versions} ; i++ )); do
 		if [[ -n "${jenv_versions[${i}]}" ]]; then
 			if [[ "${jenv_versions[${i}]}" == "${CURRENT}" ]]; then
