@@ -28,6 +28,13 @@ def loadConfiguration() {
   ext.config = config
 }
 
+task prepareResources(type: Copy) {
+  from 'src/main/resources'
+  into 'build/jenv'
+  include '**/*'
+  filter(ReplaceTokens, tokens: [JENV_VERSION: config.jenvVersion, JENV_SERVICE: config.jenvService])
+}
+
 task prepareCommands(type: Copy) {
   from 'src/main/scripts'
   into 'build/jenv/bin'
@@ -35,17 +42,10 @@ task prepareCommands(type: Copy) {
   filter(ReplaceTokens, tokens: [JENV_VERSION: config.jenvVersion, JENV_SERVICE: config.jenvService])
 }
 
-task prepareJenvCommands(type: Copy) {
+task prepareJenvCommands(type: Copy, dependsOn: [prepareResources, prepareCommands]) {
   from 'src/main/scripts'
   into 'build/jenv/commands'
   include 'jenv*'
-  filter(ReplaceTokens, tokens: [JENV_VERSION: config.jenvVersion, JENV_SERVICE: config.jenvService])
-}
-
-task prepareResources(type: Copy) {
-  from 'src/main/resources'
-  into 'build/jenv'
-  include '**/*'
   filter(ReplaceTokens, tokens: [JENV_VERSION: config.jenvVersion, JENV_SERVICE: config.jenvService])
 }
 
@@ -64,4 +64,4 @@ task installJenv(type: Copy, dependsOn: [cleanJenvDir, prepareJenvCommands]) {
   into installDir
 }
 
-task install(dependsOn: [installJenv])
+task install(dependsOn: [clean, installJenv])
