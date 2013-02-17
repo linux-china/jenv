@@ -15,9 +15,12 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 #
-
+# jenv version
 export JENV_VERSION="@JENV_VERSION@"
+# platform, such as Linux, Unix, Darwin or CYGWIN etc
 export JENV_PLATFORM=$(uname)
+# matchine platform, such as x86_64 x86_32
+export JENV_MACHINE_PLATFORM=$(uname -m)
 
 # contains function
 # @param $1 text
