@@ -16,6 +16,8 @@
 #   limitations under the License.
 #
 
+# boradcast command
+# @Globals BROADCAST_HIST BROADCAST_LIVE
 function __jenvtool_broadcast {
 	if [ "${BROADCAST_HIST}" ]; then
 		echo "${BROADCAST_HIST}"
