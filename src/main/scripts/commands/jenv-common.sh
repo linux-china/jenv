@@ -44,32 +44,17 @@ function __jenvtool_check_version_present {
 # determine candidate version.
 # @param $1 candidate version
 # @return VERSION candidate version
-# @return VERSION_VALID version valid text, valid or invalid
 function __jenvtool_determine_version {
-	if [[ -n "$1" && -d "${JENV_DIR}/${CANDIDATE}/$1" ]]; then
-		VERSION="$1"
-
-	elif [[ -z "$1" && -L "${JENV_DIR}/${CANDIDATE}/current" ]]; then
-		VERSION=$(readlink "${JENV_DIR}/${CANDIDATE}/current" | sed -e "s!${JENV_DIR}/${CANDIDATE}/!!g")
-
-	elif [[ -z "$1" ]]; then
-		VERSION_VALID='valid'
-		VERSION=$(curl -s "${JENV_SERVICE}/candidates/${CANDIDATE}/default")
-
-	else
-		VERSION_VALID=$(curl -s "${JENV_SERVICE}/candidates/${CANDIDATE}/$1")
-		if [[ "${VERSION_VALID}" == 'valid' || ( "${VERSION_VALID}" == 'invalid' && -n "$2" ) ]]; then
-			VERSION="$1"
-
-		elif [[ "${VERSION_VALID}" == 'invalid' && -h "${JENV_DIR}/${CANDIDATE}/$1" ]]; then
-			VERSION="$1"
-
-		else
-			echo ""
-			echo "Stop! $1 is not a valid ${CANDIDATE} version."
-			return 1
-		fi
-	fi
+    CANDIDATE_VERSIONS=($(cat "${JENV_DIR}/db/${CANDIDATE}.txt"))
+    for candidate_version in "${CANDIDATE_VERSIONS[@]}" ; do
+         if [[ "${candidate_version}" == "$1" ]]; then
+             VERSION="$1"
+             return 0
+         fi
+    done
+    echo ""
+    echo "Stop! $1 is not a valid ${CANDIDATE} version."
+    return 1
 }
 
 # build candidate all version to csv
@@ -78,7 +63,7 @@ function __jenvtool_determine_version {
 function __jenvtool_build_version_csv {
 	CANDIDATE="$1"
 	CSV=""
-	for version in $(ls -1 "${JENV_DIR}/${CANDIDATE}" 2> /dev/null); do
+	for version in $(ls -1 "${JENV_DIR}/candidates/${CANDIDATE}" 2> /dev/null); do
 		if [ ${version} != 'current' ]; then
 			CSV="${version},${CSV}"
 		fi
@@ -91,13 +76,13 @@ function __jenvtool_build_version_csv {
 # @return CURRENT candidate current version number
 function __jenvtool_determine_current_version {
 	CANDIDATE="$1"
-	CURRENT=$(echo $PATH | sed -E "s|.jenv/${CANDIDATE}/([^/]+)/bin|!!\1!!|1" | sed -E "s|^.*!!(.+)!!.*$|\1|g")
+	CURRENT=$(echo $PATH | sed -E "s|.jenv/candidates/${CANDIDATE}/([^/]+)/bin|!!\1!!|1" | sed -E "s|^.*!!(.+)!!.*$|\1|g")
 	if [[ "${CURRENT}" == "current" ]]; then
 	    unset CURRENT
 	fi
 
 	if [[ -z ${CURRENT} ]]; then
-		CURRENT=$(readlink "${JENV_DIR}/${CANDIDATE}/current" | sed -e "s!${JENV_DIR}/${CANDIDATE}/!!g")
+		CURRENT=$(readlink "${JENV_DIR}/candidates/${CANDIDATE}/current" | sed -e "s!${JENV_DIR}/${CANDIDATE}/!!g")
 	fi
 }
 
