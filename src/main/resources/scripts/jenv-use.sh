@@ -16,6 +16,9 @@
 #   limitations under the License.
 #
 
+# use candidate with the version
+# $1: candidate name
+# $2: candidate version
 function __jenvtool_use {
 	CANDIDATE="$1"
 	__jenvtool_check_candidate_present "${CANDIDATE}" || return 1
@@ -46,5 +49,5 @@ function __jenvtool_use {
 	fi
 
 	echo ""
-	echo Using "${CANDIDATE}" version "${VERSION} in this shell."
+	echo "Using ${CANDIDATE} version ${VERSION} in this shell."
 }
