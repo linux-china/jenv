@@ -21,6 +21,8 @@
 # common internal function definitions
 #
 
+# check candidate present.
+# $1 is candidate name
 function __jenvtool_check_candidate_present {
 	if [ -z "$1" ]; then
 		echo -e "\nNo candidate provided."
@@ -29,6 +31,8 @@ function __jenvtool_check_candidate_present {
 	fi
 }
 
+# check candidate version present.
+# $1 is candidate version
 function __jenvtool_check_version_present {
 	if [ -z "$1" ]; then
 		echo -e "\nNo candidate version provided."
@@ -37,6 +41,8 @@ function __jenvtool_check_version_present {
 	fi
 }
 
+# determine candidate version.
+# $1 is candidate version
 function __jenvtool_determine_version {
 	if [[ "${JENV_ONLINE}" == "false" && -n "$1" && -d "${JENV_DIR}/${CANDIDATE}/$1" ]]; then
 		VERSION="$1"
@@ -115,6 +121,7 @@ function __jenvtool_download {
 	echo ""
 }
 
+# validate zip file
 function __jenvtool_validate_zip {
 	ZIP_ARCHIVE="$1"
 	ZIP_OK=$(unzip -t "${ZIP_ARCHIVE}" | grep 'No errors detected in compressed data')
@@ -126,6 +133,7 @@ function __jenvtool_validate_zip {
 	fi
 }
 
+# jenv default enviroment variable: JENV_DIR and JENV_SERVICE
 function __jenvtool_default_environment_variables {
 	if [ ! "${JENV_SERVICE}" ]; then
 		JENV_SERVICE="http://localhost:8080"
@@ -136,7 +144,9 @@ function __jenvtool_default_environment_variables {
 	fi
 }
 
+# check upgrade available
 function __jenvtool_check_upgrade_available {
+    COMMAND="$1"
 	UPGRADE_AVAILABLE=""
 	UPGRADE_NOTICE=$(echo "${BROADCAST_LIVE}" | grep 'Your version of JENV is out of date!')
 	if [[ -n "${UPGRADE_NOTICE}" && ( "${COMMAND}" != 'selfupdate' ) ]]; then
@@ -144,6 +154,7 @@ function __jenvtool_check_upgrade_available {
 	fi
 }
 
+# update broadcast
 function __jenvtool_update_broadcast {
 	COMMAND="$1"
 	BROADCAST_FILE="${JENV_DIR}/var/broadcast"
