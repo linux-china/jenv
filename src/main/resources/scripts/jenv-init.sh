@@ -19,7 +19,7 @@
 export JENV_VERSION="@JENV_VERSION@"
 # platform, such as Linux, Unix, Darwin or CYGWIN etc
 export JENV_PLATFORM=$(uname)
-# matchine platform, such as x86_64 x86_32
+# matchine platform, such as x86_64, i686, i386
 export JENV_MACHINE_PLATFORM=$(uname -m)
 
 # contains function
