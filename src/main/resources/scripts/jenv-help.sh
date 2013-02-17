@@ -16,6 +16,8 @@
 #   limitations under the License.
 #
 
+# help display
+# @Globals JENV_CANDIDATES JENV_CANDIDATES_DEFAULT
 function __jenvtool_help {
 	echo ""
 	echo "Usage: jenv <command> <candidate> [version]"
