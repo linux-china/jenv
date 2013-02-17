@@ -16,6 +16,7 @@
 #   limitations under the License.
 #
 
-function __jvmtool_version {
+# display jenv version
+function __jenvtool_version {
 	echo "Java enVironment Manager ${JENV_VERSION}"
 }
