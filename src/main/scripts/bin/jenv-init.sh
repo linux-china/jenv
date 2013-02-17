@@ -77,7 +77,7 @@ function __jenvtool_init {
     done
 
     if ! __jenvtool_contains "$PATH" "JENV_DIR"; then
-        PATH="${JENV_DIR}/bin:${JENV_DIR}/ext:$PATH"
+        PATH="${JENV_DIR}/bin:$PATH"
     fi
 
     # Source jenv module scripts
@@ -88,12 +88,14 @@ function __jenvtool_init {
     # Source extension files prefixed with 'jenv-' and found in the ext/ folder
     # Use this if extensions are written with the functional approach and want
     # to use functions in the main jenv script.
-    for f in $(find "${JENV_DIR}/ext" -type f -name 'jenv-*'); do
-        if [ -r "${f}" ]; then
-            source "${f}"
-        fi
-    done
-    unset f
+     if [[ -d "${JENV_DIR}/ext" ]]; then
+        for f in $(find "${JENV_DIR}/ext" -type f -name 'jenv-*'); do
+            if [ -r "${f}" ]; then
+                source "${f}"
+            fi
+        done
+        unset f
+    fi
 }
 
 __jenvtool_init
