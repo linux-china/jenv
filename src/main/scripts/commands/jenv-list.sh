@@ -23,11 +23,18 @@ function __jenvtool_list {
 	__jenvtool_check_candidate_present "${CANDIDATE}" || return 1
 	__jenvtool_build_version_csv "${CANDIDATE}"
 	__jenvtool_determine_current_version "${CANDIDATE}"
-	if [[ "${JENV_ONLINE}" == "false" ]]; then
-		__jenvtool_offline_list
-	else
-		FRAGMENT=$(curl -s "${JENV_SERVICE}/candidates/${CANDIDATE}/list?platform=${JENV_PLATFORM}&current=${CURRENT}&installed=${CSV}")
-		echo "${FRAGMENT}"
-		unset FRAGMENT
-	fi
+    CANDIDATE_VERSIONS=($(cat "${JENV_DIR}/db/${CANDIDATE}.txt"))
+    echo "Available ${CANDIDATE} Versions"
+    echo "========================="
+    for candidate_version in "${CANDIDATE_VERSIONS[@]}" ; do
+     if [[ "${candidate_version}" == "${CURRENT}" ]]; then
+          echo ">* ${candidate_version}"
+     elif __jenvtool_contains "${CSV}" "${candidate_version}"; then
+          echo "*  ${candidate_version}"
+     else
+          echo "   ${candidate_version}"
+     fi
+    done
+    unset candidate_version
+	unset CANDIDATE_VERSIONS
 }
