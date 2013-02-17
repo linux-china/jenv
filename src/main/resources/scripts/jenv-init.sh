@@ -20,12 +20,21 @@ export JENV_VERSION="@JENV_VERSION@"
 export JENV_PLATFORM=$(uname)
 
 # contains function
+# @param $1 text
+# @param $2 word
+# @return contained test condition
 function __jenvtool_contains {
     replaced=$(echo "$1" | sed -e s,"$2",,g)
     [ "$replaced" != "$1" ]
 }
 
 # jenv init function
+# @return JENV_DIR jenv dir
+# @return JENV_SERVICE jenv service url
+# @return JENV_CANDIDATES jenv candidate array
+# @return OFFLINE_BROADCAST offline broadcast
+# @return ONLINE_BROADCAST online broadcast
+# @return OFFLINE_MESSAGE offline message
 function __jenvtool_init {
 
     # OS specific support (must be 'true' or 'false').
