@@ -16,6 +16,10 @@
 #   limitations under the License.
 #
 
+# install candidate with the version
+# @param $1 candidate name
+# @param $2 candidate version
+# @param $3 local install folder for candidate with the version. optional
 function __jenvtool_install {
 	CANDIDATE="$1"
 	LOCAL_FOLDER="$3"
@@ -52,6 +56,10 @@ function __jenvtool_install {
 	fi
 }
 
+# install local installed candidate
+# @param $1 candidate name
+# @param $2 candidate version
+# @param $3 local install folder for candidate with the version. optional
 function __jenvtool_install_local_version {
 	CANDIDATE="$1"
 	VERSION="$2"
@@ -64,6 +72,9 @@ function __jenvtool_install_local_version {
 	echo ""
 }
 
+# install candidate from remote repository
+# @param $1 candidate name
+# @param $2 candidate version
 function __jenvtool_install_candidate_version {
 	CANDIDATE="$1"
 	VERSION="$2"
