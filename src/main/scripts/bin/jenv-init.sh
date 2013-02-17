@@ -72,7 +72,7 @@ function __jenvtool_init {
     # update PATH env
     for CANDIDATE in "${JENV_CANDIDATES[@]}" ; do
         if ! __jenvtool_contains "$PATH" "candidates/${CANDIDATE}/current" && [ -e "${JENV_DIR}/${CANDIDATE}/current" ]; then
-            PATH="${JENV_DIR}/${CANDIDATE}/current/bin:$PATH"
+            PATH="${JENV_DIR}/candidates/${CANDIDATE}/current/bin:$PATH"
         fi
     done
 
