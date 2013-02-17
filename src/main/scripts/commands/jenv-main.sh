@@ -26,34 +26,11 @@ function jenv {
 	__jenvtool_default_environment_variables
 	mkdir -p "${JENV_DIR}"
 
-	BROADCAST_LIVE=$(curl -s "${JENV_SERVICE}/broadcast/${JENV_VERSION}")
-	if [[ -z "${BROADCAST_LIVE}" && "${JENV_ONLINE}" == "true" ]]; then
-		echo "${OFFLINE_BROADCAST}"
-	fi
-
-	if [[ -n "${BROADCAST_LIVE}" && "${JENV_ONLINE}" == "false" ]]; then
-		echo "${ONLINE_BROADCAST}"
-	fi
-
-	if [[ -z "${BROADCAST_LIVE}" ]]; then
-		JENV_ONLINE="false"
-	else
-		JENV_ONLINE="true"
-	fi
-
    COMMAND="$1"
 
-	__jenvtool_check_upgrade_available "${COMMAND}"
-	if [[ -n "${UPGRADE_AVAILABLE}" && ( "$1" != "broadcast" ) ]]; then
-		echo "${BROADCAST_LIVE}"
-		echo ""
-	else
-		__jenvtool_update_broadcast "${COMMAND}"
-	fi
-
 	# Load the jenv config if it exists.
-	if [ -f "${JENV_DIR}/etc/config" ]; then
-		source "${JENV_DIR}/etc/config"
+	if [ -f "${JENV_DIR}/config/setting" ]; then
+		source "${JENV_DIR}/etc/setting"
 	fi
 
 	# Check whether the command exists as an internal function...
@@ -70,7 +47,7 @@ function jenv {
 
 	# Check if it is a valid command
 	CMD_FOUND=""
-	CMD_TARGET="${JENV_DIR}/src/jenv-${COMMAND}.sh"
+	CMD_TARGET="${JENV_DIR}/commands/jenv-${COMMAND}.sh"
 	if [[ -f "${CMD_TARGET}" ]]; then
 		CMD_FOUND="${CMD_TARGET}"
 	fi
