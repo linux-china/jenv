@@ -195,14 +195,14 @@ if [ ! -f "${jenv_bash_profile}" -a ! -f "${jenv_profile}" ]; then
 	echo "Created and initialised ${jenv_bash_profile}"
 else
 	if [ -f "${jenv_bash_profile}" ]; then
-		if [[ -z `grep 'init.sh' "${jenv_bash_profile}"` ]]; then
+		if [[ -z `grep 'jenv-init.sh' "${jenv_bash_profile}"` ]]; then
 			echo -e "\n${jenv_init_snippet}" >> "${jenv_bash_profile}"
 			echo "Updated existing ${jenv_bash_profile}"
 		fi
 	fi
 
 	if [ -f "${jenv_profile}" ]; then
-		if [[ -z `grep 'init.sh' "${jenv_profile}"` ]]; then
+		if [[ -z `grep 'jenv-init.sh' "${jenv_profile}"` ]]; then
 			echo -e "\n${jenv_init_snippet}" >> "${jenv_profile}"
 			echo "Updated existing ${jenv_profile}"
 		fi
@@ -214,7 +214,7 @@ if [ ! -f "${jenv_bashrc}" ]; then
 	echo "${jenv_init_snippet}" >> "${jenv_bashrc}"
 	echo "Created and initialised ${jenv_bashrc}"
 else
-	if [[ -z `grep 'init.sh' "${jenv_bashrc}"` ]]; then
+	if [[ -z `grep 'jenv-init.sh' "${jenv_bashrc}"` ]]; then
 		echo -e "\n${jenv_init_snippet}" >> "${jenv_bashrc}"
 		echo "Updated existing ${jenv_bashrc}"
 	fi
@@ -225,7 +225,7 @@ if [ ! -f "${jenv_zshrc}" ]; then
 	echo "${jenv_init_snippet}" >> "${jenv_zshrc}"
 	echo "Created and initialised ${jenv_zshrc}"
 else
-	if [[ -z `grep 'init.sh' "${jenv_zshrc}"` ]]; then
+	if [[ -z `grep 'jenv-init.sh' "${jenv_zshrc}"` ]]; then
 		echo -e "\n${jenv_init_snippet}" >> "${jenv_zshrc}"
 		echo "Updated existing ${jenv_zshrc}"
 	fi
@@ -235,7 +235,7 @@ echo -e "\n\n\nAll done!\n\n"
 
 echo "Please open a new terminal, or run the following in the existing one:"
 echo ""
-echo "    source \"${JENV_DIR}/bin/init.sh\""
+echo "    source \"${JENV_DIR}/bin/jenv-init.sh\""
 echo ""
 echo "Then issue the following command:"
 echo ""
