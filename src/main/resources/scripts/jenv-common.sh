@@ -22,7 +22,7 @@
 #
 
 # check candidate present.
-# $1 is candidate name
+# $1: candidate name
 function __jenvtool_check_candidate_present {
 	if [ -z "$1" ]; then
 		echo -e "\nNo candidate provided."
@@ -32,7 +32,7 @@ function __jenvtool_check_candidate_present {
 }
 
 # check candidate version present.
-# $1 is candidate version
+# $1: candidate version
 function __jenvtool_check_version_present {
 	if [ -z "$1" ]; then
 		echo -e "\nNo candidate version provided."
@@ -42,7 +42,7 @@ function __jenvtool_check_version_present {
 }
 
 # determine candidate version.
-# $1 is candidate version
+# $1: candidate version
 function __jenvtool_determine_version {
 	if [[ "${JENV_ONLINE}" == "false" && -n "$1" && -d "${JENV_DIR}/${CANDIDATE}/$1" ]]; then
 		VERSION="$1"
