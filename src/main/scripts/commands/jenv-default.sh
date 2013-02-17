@@ -24,7 +24,7 @@ function __jenvtool_default {
 	__jenvtool_check_candidate_present "${CANDIDATE}" || return 1
 	__jenvtool_determine_version "$2" || return 1
 
-	if [ ! -d "${JENV_DIR}/${CANDIDATE}/${VERSION}" ]; then
+	if [ ! -d "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}" ]; then
 		echo ""
 		echo "Stop! ${CANDIDATE} ${VERSION} is not installed."
 		return 1
