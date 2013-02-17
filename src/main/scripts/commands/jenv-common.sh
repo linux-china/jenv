@@ -46,21 +46,13 @@ function __jenvtool_check_version_present {
 # @return VERSION candidate version
 # @return VERSION_VALID version valid text, valid or invalid
 function __jenvtool_determine_version {
-	if [[ "${JENV_ONLINE}" == "false" && -n "$1" && -d "${JENV_DIR}/${CANDIDATE}/$1" ]]; then
+	if [[ -n "$1" && -d "${JENV_DIR}/${CANDIDATE}/$1" ]]; then
 		VERSION="$1"
 
-	elif [[ "${JENV_ONLINE}" == "false" && -z "$1" && -L "${JENV_DIR}/${CANDIDATE}/current" ]]; then
+	elif [[ -z "$1" && -L "${JENV_DIR}/${CANDIDATE}/current" ]]; then
 		VERSION=$(readlink "${JENV_DIR}/${CANDIDATE}/current" | sed -e "s!${JENV_DIR}/${CANDIDATE}/!!g")
 
-	elif [[ "${JENV_ONLINE}" == "false" && -n "$1" ]]; then
-		echo "Stop! ${CANDIDATE} ${1} is not available in aeroplane mode."
-		return 1
-
-	elif [[ "${JENV_ONLINE}" == "false" && -z "$1" ]]; then
-        echo "${OFFLINE_MESSAGE}"
-        return 1
-
-	elif [[ "${JENV_ONLINE}" == "true" && -z "$1" ]]; then
+	elif [[ -z "$1" ]]; then
 		VERSION_VALID='valid'
 		VERSION=$(curl -s "${JENV_SERVICE}/candidates/${CANDIDATE}/default")
 
