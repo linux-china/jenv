@@ -32,20 +32,20 @@ function jenv {
 		echo "${ONLINE_BROADCAST}"
 	fi
 
-
 	if [[ -z "${BROADCAST_LIVE}" ]]; then
 		JENV_ONLINE="false"
 	else
 		JENV_ONLINE="true"
 	fi
 
+   COMMAND="$1"
 
-	__jenvtool_check_upgrade_available
+	__jenvtool_check_upgrade_available "${COMMAND}"
 	if [[ -n "${UPGRADE_AVAILABLE}" && ( "$1" != "broadcast" ) ]]; then
 		echo "${BROADCAST_LIVE}"
 		echo ""
 	else
-		__jenvtool_update_broadcast "$1"
+		__jenvtool_update_broadcast "${COMMAND}"
 	fi
 
 	# Load the jenv config if it exists.
@@ -57,23 +57,23 @@ function jenv {
 	#
 	# NOTE Internal commands use underscores rather than hyphens,
 	# hence the name conversion as the first step here.
-	CONVERTED_CMD_NAME=`echo "$1" | tr '-' '_'`
+	CONVERTED_CMD_NAME=`echo "${COMMAND}" | tr '-' '_'`
 
  	# no command provided
-	if [[ -z "$1" ]]; then
+	if [[ -z "${COMMAND}" ]]; then
 		__jenvtool_help
 		return 1
 	fi
 
 	# Check if it is a valid command
 	CMD_FOUND=""
-	CMD_TARGET="${JENV_DIR}/src/jenv-$1.sh"
+	CMD_TARGET="${JENV_DIR}/src/jenv-${COMMAND}.sh"
 	if [[ -f "${CMD_TARGET}" ]]; then
 		CMD_FOUND="${CMD_TARGET}"
 	fi
 
 	# Check if it is a sourced function
-	CMD_TARGET="${JENV_DIR}/ext/jenv-$1.sh"
+	CMD_TARGET="${JENV_DIR}/ext/jenv-${COMMAND}.sh"
 	if [[ -f "${CMD_TARGET}" ]]; then
 		CMD_FOUND="${CMD_TARGET}"
 	fi
