@@ -1,5 +1,4 @@
 import org.apache.tools.ant.filters.*
-import org.codehaus.groovy.runtime.wrappers.Wrapper
 
 apply plugin: 'groovy'
 apply plugin: 'idea'
