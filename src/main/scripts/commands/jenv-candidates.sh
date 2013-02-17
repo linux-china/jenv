@@ -19,6 +19,5 @@
 # display candidates
 # @Globals JENV_DIR
 function __jenvtool_candidates {
-	 candidates=$(cat "${JENV_DIR}/config/candidates.txt")
-	 echo ${candidates}
+	 cat "${JENV_DIR}/config/candidates.txt"
 }
