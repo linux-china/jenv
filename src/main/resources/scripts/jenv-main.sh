@@ -16,10 +16,13 @@
 #   limitations under the License.
 #
 
+# jenv command, get command script and execute with candidate and version params
+# @param $1 command
+# @param $2 candidate name
+# @param $3 candidate version
+# @param $4 other param
 function jenv {
-	#
 	# Various sanity checks and default settings
-	#
 	__jenvtool_default_environment_variables
 	mkdir -p "${JENV_DIR}"
 
