@@ -159,41 +159,11 @@ function __jenvtool_link_candidate_version {
 	VERSION="$2"
 
 	# Change the 'current' symlink for the candidate, hence affecting all shells.
-	if [ -L "${JENV_DIR}/${CANDIDATE}/current" ]; then
-		unlink "${JENV_DIR}/${CANDIDATE}/current"
+	if [ -L "${JENV_DIR}/candidates/${CANDIDATE}/current" ]; then
+		unlink "${JENV_DIR}/candidates/${CANDIDATE}/current"
 	fi
-	ln -s "${JENV_DIR}/${CANDIDATE}/${VERSION}" "${JENV_DIR}/${CANDIDATE}/current"
-    if ! __jenvtool_contains "$PATH" "$CANDIDATE/current"; then
-        PATH="${JENV_DIR}/${CANDIDATE}/current/bin:$PATH"
+	ln -s "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}" "${JENV_DIR}/candidates/${CANDIDATE}/current"
+    if ! __jenvtool_contains "$PATH" "candidates/$CANDIDATE/current"; then
+        PATH="${JENV_DIR}/candidates/${CANDIDATE}/current/bin:$PATH"
     fi
-}
-
-# offline candidate version list
-function __jenvtool_offline_list {
-	echo "------------------------------------------------------------"
-	echo "Aeroplane Mode:  only showing installed ${CANDIDATE} versions"
-	echo "------------------------------------------------------------"
-	echo "                                                            "
-
-	jenv_versions=($(echo ${CSV//,}))
-	for (( i=0 ; i <= ${#jenv_versions} ; i++ )); do
-		if [[ -n "${jenv_versions[${i}]}" ]]; then
-			if [[ "${jenv_versions[${i}]}" == "${CURRENT}" ]]; then
-				echo -e " > ${jenv_versions[${i}]}"
-			else
-				echo -e " * ${jenv_versions[${i}]}"
-			fi
-		fi
-	done
-
-	if [[ -z "${jenv_versions[@]}" ]]; then
-		echo "   None installed!"
-	fi
-
-	echo "------------------------------------------------------------"
-	echo "* - installed                                               "
-	echo "> - currently in use                                        "
-	echo "------------------------------------------------------------"
-
-	unset CSV jenv_versions
 }
