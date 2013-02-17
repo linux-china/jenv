@@ -43,6 +43,7 @@ function __jenvtool_check_version_present {
 
 # determine candidate version.
 # @param $1 candidate version
+# @return VERSION candidate version
 function __jenvtool_determine_version {
 	if [[ "${JENV_ONLINE}" == "false" && -n "$1" && -d "${JENV_DIR}/${CANDIDATE}/$1" ]]; then
 		VERSION="$1"
