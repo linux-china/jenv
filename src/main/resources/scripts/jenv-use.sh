@@ -17,8 +17,8 @@
 #
 
 # use candidate with the version
-# $1: candidate name
-# $2: candidate version
+# @param $1 candidate name
+# @param $2 candidate version
 function __jenvtool_use {
 	CANDIDATE="$1"
 	__jenvtool_check_candidate_present "${CANDIDATE}" || return 1
