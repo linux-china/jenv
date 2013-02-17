@@ -16,7 +16,8 @@
 #   limitations under the License.
 #
 
-
+# display candidate current version
+# @param $1 candidate name
 function __jenvtool_current {
 	if [ -n "$1" ]; then
 		CANDIDATE="$1"
