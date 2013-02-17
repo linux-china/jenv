@@ -16,11 +16,15 @@
 #   limitations under the License.
 #
 
+# uninstall candidate with the version
+# @param $1 candidate name
+# @param $2 candidate version
 function __jenvtool_uninstall {
 	CANDIDATE="$1"
 	VERSION="$2"
 	__jenvtool_check_candidate_present "${CANDIDATE}" || return 1
 	__jenvtool_check_version_present "${VERSION}" || return 1
+    # unlink current
 	CURRENT=$(readlink "${JENV_DIR}/${CANDIDATE}/current" | sed -e "s_${JENV_DIR}/${CANDIDATE}/__g")
 	if [[ -h "${JENV_DIR}/${CANDIDATE}/current" && ( "${VERSION}" == "${CURRENT}" ) ]]; then
 		echo ""
@@ -28,6 +32,7 @@ function __jenvtool_uninstall {
 		unlink "${JENV_DIR}/${CANDIDATE}/current"
 	fi
 	echo ""
+	# delete candidate version directory
 	if [ -d "${JENV_DIR}/${CANDIDATE}/${VERSION}" ]; then
 		echo "Uninstalling ${CANDIDATE} ${VERSION}..."
 		rm -rf "${JENV_DIR}/${CANDIDATE}/${VERSION}"
