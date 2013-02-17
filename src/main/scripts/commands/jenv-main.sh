@@ -29,8 +29,8 @@ function jenv {
    COMMAND="$1"
 
 	# Load the jenv config if it exists.
-	if [ -f "${JENV_DIR}/config/setting" ]; then
-		source "${JENV_DIR}/etc/setting"
+	if [ -f "${JENV_DIR}/etc/config" ]; then
+		source "${JENV_DIR}/etc/config"
 	fi
 
 	# Check whether the command exists as an internal function...
