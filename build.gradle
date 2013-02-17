@@ -38,7 +38,6 @@ task prepareResources(type: Copy) {
 task prepareCommands(type: Copy) {
   from 'src/main/scripts/bin'
   into 'build/jenv/bin'
-  exclude 'jenv*'
   filter(ReplaceTokens, tokens: [JENV_VERSION: config.jenvVersion, JENV_SERVICE: config.jenvService])
 }
 
