@@ -101,7 +101,7 @@ function __jenvtool_download {
 		echo ""
 		echo "Downloading: ${CANDIDATE} ${VERSION}"
 		echo ""
-		DOWNLOAD_URL="${JENV_SERVICE}/download/${CANDIDATE}/${VERSION}?platform=${JENV_PLATFORM}"
+		DOWNLOAD_URL="${JENV_SERVICE}/download/${CANDIDATE}/${CANDIDATE}-${VERSION}.zip?platform=${JENV_PLATFORM}"
 		ZIP_ARCHIVE="${JENV_DIR}/archives/${CANDIDATE}-${VERSION}.zip"
 		curl -L "${DOWNLOAD_URL}" > "${ZIP_ARCHIVE}"
 		__jenvtool_validate_zip "${ZIP_ARCHIVE}" || return 1
