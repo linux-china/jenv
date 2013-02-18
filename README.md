@@ -5,7 +5,7 @@ It provides a convenient command line interface for installing, switching, remov
 
 Please report any bugs and feature request on the [GitHub Issue Tracker](https://github.com/linux-china/jenv/issues).
 
-## Installation
+## Installat jenv
 
 Open your favourite terminal and enter the following:
 
@@ -13,15 +13,18 @@ Open your favourite terminal and enter the following:
 
 If the environment needs tweaking for jenv to be installed, the installer will prompt you accordingly and ask you to restart.
 
-### Making the Local Installation the Default
+## Install tools
 
-To make your local jenv installation work with your local server, run the following commands:
+First view all available candidates:
 
-	$ ./gradlew install
-	$ source ~/.jenv/bin/jenv-init.sh
+    $ jenv candidates
 
-## Publish
-Publish install.sh and zip file to website.
+Second list available version for the candidate, such as maven candidate:
 
-      ./gradlew -Penv=prod clean syncToSite
+    $ jenv list maven
+
+Final install the candidate with the version:
+
+    $ jenv install maven 3.0.4
+In your terminal, input mvn --version to check the installation.
 
