@@ -43,3 +43,5 @@ GAE
    Google App Engine Java SDK
 Clojure
    Clojure is a dynamic programming language with dialect of Lisp in JVM
+Kotlin
+   Statically typed programming language that compiles to JVM byte codes and JavaScript
