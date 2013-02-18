@@ -40,7 +40,7 @@ function __jenvtool_use {
     # validate current version and used version
     __jenvtool_determine_current_version "${CANDIDATE}"
     if [[  "${CURRENT}" != "$2" ]]; then
-       # Just update the *_HOME and PATH for this shell.
+        # Just update the *_HOME and PATH for this shell.
        	UPPER_CANDIDATE=`echo "${CANDIDATE}" | tr '[:lower:]' '[:upper:]'`
        	export "${UPPER_CANDIDATE}_HOME"="${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}"
        	if ! __jenvtool_contains "$PATH" "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}"; then
