@@ -58,12 +58,20 @@ function __jenvtool_install_candidate_version {
 	CANDIDATE="$1"
 	VERSION="$2"
 	__jenvtool_download "${CANDIDATE}" "${VERSION}" || return 1
+	# install from archives directory
 	echo "Installing: ${CANDIDATE} ${VERSION}"
-
 	mkdir -p "${JENV_DIR}/candidates/${CANDIDATE}"
-
 	unzip -oq "${JENV_DIR}/archives/${CANDIDATE}-${VERSION}.zip" -d "${JENV_DIR}/tmp/"
 	mv ${JENV_DIR}/tmp/*-${VERSION} "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}"
+    # set default by confirm
+	echo -n "Do you want ${CANDIDATE} ${VERSION} to be set as default? (Y/n): "
+	read USE
+	if [[ -z "${USE}" || "${USE}" == "y" || "${USE}" == "Y" ]]; then
+		echo ""
+		echo "Setting ${CANDIDATE} ${VERSION} as default."
+		__gvmtool_link_candidate_version "${CANDIDATE}" "${VERSION}"
+	fi
+	# done message
 	echo "Done installing!"
 	echo ""
 }
