@@ -73,7 +73,7 @@ function __jenvtool_init {
     for CANDIDATE in "${JENV_CANDIDATES[@]}" ; do
         if ! __jenvtool_contains "$PATH" "candidates/${CANDIDATE}/current" && [ -e "${JENV_DIR}/candidates/${CANDIDATE}/current" ]; then
            UPPER_CANDIDATE=`echo "${CANDIDATE}" | tr '[:lower:]' '[:upper:]'`
-           export "${UPPER_CANDIDATE}_HOME"="${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}"
+           export "${UPPER_CANDIDATE}_HOME"="${JENV_DIR}/candidates/${CANDIDATE}/current"
            PATH="${JENV_DIR}/candidates/${CANDIDATE}/current/bin:$PATH"
         fi
     done
