@@ -31,6 +31,19 @@ function __jenvtool_contains {
     [ "$replaced" != "$1" ]
 }
 
+# arrays contains item
+# @param $1 array such as array[@]
+# @param $2 item value
+function __jenvtool_array_contains {
+   argAry1=("${!1}")
+   for i in ${argAry1[@]}; do
+     if [ "$i" = "$2" ]; then
+       return 0
+     fi
+   done
+   return 1
+}
+
 # jenv init function
 # @return JENV_DIR jenv dir
 # @return JENV_SERVICE jenv service url
