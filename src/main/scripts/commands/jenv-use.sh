@@ -24,7 +24,7 @@ function __jenvtool_use {
 	__jenvtool_check_candidate_present "${CANDIDATE}" || return 1
 	__jenvtool_determine_version "$2" || return 1
 
-	if [[ "${JENV_ONLINE}" == "true" && ! -d "${JENV_DIR}/${CANDIDATE}/${VERSION}" ]]; then
+	if [[ ! -d "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}" ]]; then
 		echo ""
 		echo "Stop! ${CANDIDATE} ${VERSION} is not installed."
 		if [[ "${jenv_auto_answer}" != 'true' ]]; then
@@ -37,17 +37,16 @@ function __jenvtool_use {
 			return 1
 		fi
 	fi
-
-	# Just update the *_HOME and PATH for this shell.
-	UPPER_CANDIDATE=`echo "${CANDIDATE}" | tr '[:lower:]' '[:upper:]'`
-	export "${UPPER_CANDIDATE}_HOME"="${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}"
-
-	# if PATH already has this candidate
-	export PATH=`echo $PATH | sed -E "s!/current/bin!@jenvtmp@!g" | sed -E "s!${JENV_DIR}/${CANDIDATE}/([^/]+)!${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}!g" | sed -E "s!@jenvtmp@!/current/bin!g"`
-	if ! __jenvtool_contains "$PATH" "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}"; then
-		export PATH=${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/bin:$PATH
+    # validate current version and used version
+    __jenvtool_determine_current_version "${CANDIDATE}"
+    if [[  "${CURRENT}" != "$2" ]]; then
+       # Just update the *_HOME and PATH for this shell.
+       	UPPER_CANDIDATE=`echo "${CANDIDATE}" | tr '[:lower:]' '[:upper:]'`
+       	export "${UPPER_CANDIDATE}_HOME"="${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}"
+       	if ! __jenvtool_contains "$PATH" "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}"; then
+       		export PATH=${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/bin:$PATH
+       	fi
 	fi
-
 	echo ""
 	echo "Using ${CANDIDATE} version ${VERSION} in this shell."
 }
