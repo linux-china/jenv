@@ -26,5 +26,5 @@ function __jenvtool_help {
 	echo "   candidate  :  $(echo "${JENV_CANDIDATES[@]:-${JENV_CANDIDATES_DEFAULT[@]}}" | sed -E 's/ /, /g')"
 	echo "   version    :  optional, defaults to latest stable if not provided"
 	echo ""
-	echo "eg: jenv install groovy"
+	echo "eg: jenv install maven 3.0.4"
 }
