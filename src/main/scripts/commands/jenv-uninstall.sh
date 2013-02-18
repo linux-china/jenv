@@ -20,7 +20,7 @@
 # @param $1 candidate name
 # @param $2 candidate version
 function __jenvtool_uninstall {
-	CANDIDATE="$1"
+	CANDIDATE=`echo "$1" | tr '[:upper:]' '[:lower:]'`
 	VERSION="$2"
 	__jenvtool_check_candidate_present "${CANDIDATE}" || return 1
 	__jenvtool_check_version_present "${VERSION}" || return 1
