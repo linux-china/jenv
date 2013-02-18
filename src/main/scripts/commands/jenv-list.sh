@@ -30,7 +30,7 @@ function __jenvtool_list {
      if [[ "${candidate_version}" == "${CURRENT}" ]]; then
           echo ">* ${candidate_version}"
      elif __jenvtool_contains "${CSV}" "${candidate_version}"; then
-          echo "*  ${candidate_version}"
+          echo " * ${candidate_version}"
      else
           echo "   ${candidate_version}"
      fi
