@@ -52,24 +52,24 @@ task prepareJenvCommands(type: Copy, dependsOn: [prepareResources, prepareComman
   filter(ReplaceTokens, tokens: [JENV_VERSION: config.jenvVersion, JENV_SERVICE: config.jenvService])
 }
 
-task assembleArchive(type: Zip) {
+task assembleArchive(type: Zip, dependsOn: [prepareJenvCommands]) {
   classifier = config.jenvVersion
   from "build/jenv"
   include "**/*"
 }
 
-task syncToSite {
+task syncToSite(dependsOn: [assembleArchive]) {
   // sshAntTask configuration classpath.
   ant.taskdef(name: 'scp', classname: 'org.apache.tools.ant.taskdefs.optional.ssh.Scp',
           classpath: configurations.sshAntTask.asPath)
   // upload install.sh
   ant.scp(keyfile: '${user.home}/.ssh/id_rsa', verbose: 'true',
           localFile: 'build/jenv/commands/install.sh',
-          remoteTofile: 'root@team.mvnsearch.org:/home/virtual_hosts/get.jvmtool.mvnsearch.org/index.html')
+          remoteTofile: 'linux_china@team.mvnsearch.org:/home/virtual_hosts/get.jvmtool.mvnsearch.org/index.html')
   // upload jenv-xxxx.zip
   ant.scp(keyfile: '${user.home}/.ssh/id_rsa', verbose: 'true',
           localFile: 'build/distributions/jenv-' + config.jenvVersion + '.zip',
-          remoteTodir: 'root@team.mvnsearch.org:/home/virtual_hosts/get.jvmtool.mvnsearch.org/')
+          remoteTodir: 'linux_china@team.mvnsearch.org:/home/virtual_hosts/get.jvmtool.mvnsearch.org/')
 }
 
 task cleanJenvDir(type: Delete) {
