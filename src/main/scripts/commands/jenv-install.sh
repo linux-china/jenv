@@ -25,14 +25,30 @@ function __jenvtool_install {
 	LOCAL_FOLDER="$3"
 	__jenvtool_check_candidate_present "${CANDIDATE}" || return 1
 	__jenvtool_determine_version "$2" "$3" || return 1
-
+    # validate installed?
 	if [[ -d "${JENV_DIR}/${CANDIDATE}/${VERSION}" || -h "${JENV_DIR}/${CANDIDATE}/${VERSION}" ]]; then
 		echo ""
 		echo "Stop! ${CANDIDATE} ${VERSION} is already installed."
 		return 1
 	fi
+    # installing
+    if [[ -n "${LOCAL_FOLDER}" ]]; then
+		__jenvtool_install_local_version "${CANDIDATE}" "${VERSION}" "${LOCAL_FOLDER}" || return 1
+	else
+	    __jenvtool_install_candidate_version "${CANDIDATE}" "${VERSION}" || return 1
+	fi
 
-	__jenvtool_install_candidate_version "${CANDIDATE}" "${VERSION}" || return 1
+	# set default by confirm
+	echo -n "Do you want ${CANDIDATE} ${VERSION} to be set as default? (Y/n): "
+	read USE
+	if [[ -z "${USE}" || "${USE}" == "y" || "${USE}" == "Y" ]]; then
+		echo ""
+		echo "Setting ${CANDIDATE} ${VERSION} as default."
+		__jenvtool_link_candidate_version "${CANDIDATE}" "${VERSION}"
+	fi
+	# done message
+	echo "Done installing!"
+	echo ""
 }
 
 # install local installed candidate
@@ -44,11 +60,8 @@ function __jenvtool_install_local_version {
 	VERSION="$2"
 	LOCAL_FOLDER="$3"
 	mkdir -p "${JENV_DIR}/candidates/${CANDIDATE}"
-
-	echo "Linking ${CANDIDATE} ${VERSION} to ${LOCAL_FOLDER}"
-	ln -s "${LOCAL_FOLDER}" "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}"
-	echo "Done installing!"
-	echo ""
+	echo "Copying ${CANDIDATE} ${VERSION} to ${LOCAL_FOLDER}"
+	cp -rf "${LOCAL_FOLDER}" "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}"
 }
 
 # install candidate from remote repository
@@ -63,15 +76,4 @@ function __jenvtool_install_candidate_version {
 	mkdir -p "${JENV_DIR}/candidates/${CANDIDATE}"
 	unzip -oq "${JENV_DIR}/archives/${CANDIDATE}-${VERSION}.zip" -d "${JENV_DIR}/tmp/"
 	mv ${JENV_DIR}/tmp/*-${VERSION} "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}"
-    # set default by confirm
-	echo -n "Do you want ${CANDIDATE} ${VERSION} to be set as default? (Y/n): "
-	read USE
-	if [[ -z "${USE}" || "${USE}" == "y" || "${USE}" == "Y" ]]; then
-		echo ""
-		echo "Setting ${CANDIDATE} ${VERSION} as default."
-		__gvmtool_link_candidate_version "${CANDIDATE}" "${VERSION}"
-	fi
-	# done message
-	echo "Done installing!"
-	echo ""
 }
