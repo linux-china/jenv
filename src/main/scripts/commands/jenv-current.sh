@@ -20,7 +20,7 @@
 # @param $1 candidate name
 function __jenvtool_current {
 	if [ -n "$1" ]; then
-		CANDIDATE="$1"
+		CANDIDATE=`echo "$1" | tr '[:upper:]' '[:lower:]'`
 		__jenvtool_determine_current_version "${CANDIDATE}"
 		if [ -n "${CURRENT}" ]; then
 			echo "Using ${CANDIDATE} version ${CURRENT}"
