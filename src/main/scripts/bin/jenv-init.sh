@@ -76,6 +76,8 @@ function __jenvtool_init {
            export "${UPPER_CANDIDATE}_HOME"="${JENV_DIR}/candidates/${CANDIDATE}/current"
            if [ -d "${JENV_DIR}/candidates/${CANDIDATE}/current/bin" ]; then
                PATH="${JENV_DIR}/candidates/${CANDIDATE}/current/bin:$PATH"
+           elif [ -d "${JENV_DIR}/candidates/${CANDIDATE}/current/tools" ]; then
+                PATH="${JENV_DIR}/candidates/${CANDIDATE}/current/tools:$PATH"
            else
                PATH="${JENV_DIR}/candidates/${CANDIDATE}/current:$PATH"
            fi
