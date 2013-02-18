@@ -81,12 +81,12 @@ function __jenvtool_build_version_csv {
 function __jenvtool_determine_current_version {
 	CANDIDATE="$1"
 	CURRENT=$(echo $PATH | sed -E "s|.jenv/candidates/${CANDIDATE}/([^/]+)/bin|!!\1!!|1" | sed -E "s|^.*!!(.+)!!.*$|\1|g")
-	if [[ "${CURRENT}" == "current" ]]; then
+	if [[ "${CURRENT}" == "current" || "${CURRENT}" == "$PATH" ]]; then
 	    unset CURRENT
 	fi
 
 	if [[ -z ${CURRENT} ]]; then
-		CURRENT=$(readlink "${JENV_DIR}/candidates/${CANDIDATE}/current" | sed -e "s!${JENV_DIR}/${CANDIDATE}/!!g")
+		CURRENT=$(readlink "${JENV_DIR}/candidates/${CANDIDATE}/current" | sed -e "s!${JENV_DIR}/candidates/${CANDIDATE}/!!g")
 	fi
 }
 
