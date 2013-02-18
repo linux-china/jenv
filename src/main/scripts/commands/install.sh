@@ -28,7 +28,7 @@ jenv_bash_profile="${HOME}/.bash_profile"
 jenv_profile="${HOME}/.profile"
 jenv_bashrc="${HOME}/.bashrc"
 jenv_zshrc="${HOME}/.zshrc"
-jenv_platform=$(uname -o)
+jenv_platform=$(uname)
 
 jenv_init_snippet=$( cat << EOF
 #THIS MUST BE AT THE END OF THE FILE FOR JENV TO WORK!!!
