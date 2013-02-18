@@ -39,3 +39,6 @@ In your terminal, input mvn --version to check the installation.
   * use: Use the candidate with the version, such as jenv use maven 3.0.4
   * default: Make the version as default, such as jenv default maven 3.0.4
   * cd: change directory to candidate install directory, such as jenv cd groovy
+
+## How to update jenv
+Please use jenv selfupdate to get last version and candidate repository.
