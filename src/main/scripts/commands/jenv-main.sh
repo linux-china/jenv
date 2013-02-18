@@ -65,9 +65,12 @@ function jenv {
 	fi
 
 	# Check whether the candidate exists
-	if [[ -n "$2" && -z $(echo ${JENV_CANDIDATES[@]} | grep -w "$2") ]]; then
-		echo -e "\nStop! $2 is not a valid candidate."
-		return 1
+    if [[ -n "$2" ]]; then
+        CANDIDATE=`echo "$2" | tr '[:upper:]' '[:lower:]'`
+        if [[ -z $(echo ${JENV_CANDIDATES[@]} | grep -w "${CANDIDATE}") ]]; then
+            echo -e "\nStop! ${CANDIDATE} is not a valid candidate."
+            return 1
+        fi
 	fi
 
 	# Execute the requested command
