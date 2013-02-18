@@ -23,3 +23,9 @@ To make your local jenv installation work with your local server, run the follow
 	$ source ~/.jenv/bin/jenv-init.sh
 
 
+## Publish
+Publish install.sh and zip file to website.
+
+      ./gradlew -Penv=prod clean syncToSite
+
+
