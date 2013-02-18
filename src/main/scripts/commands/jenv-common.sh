@@ -102,6 +102,21 @@ function __jenvtool_download {
 		echo "Downloading: ${CANDIDATE} ${VERSION}"
 		echo ""
 		DOWNLOAD_URL="${JENV_SERVICE}/download/${CANDIDATE}/${CANDIDATE}-${VERSION}.zip?platform=${JENV_PLATFORM}"
+		# java candidate logic
+		if [ "${CANDIDATE}" == "java" ]; then
+		   suffix=""
+		   if [ "$darwin" = "true" ] ; then
+		      suffix="-darwin"
+		    else
+		      if [ "${JENV_MACHINE_PLATFORM}" == "x86_64" ]; then
+		          suffix="-x64"
+		      fi
+		      if [ "$cygwin" = "true" ] ; then
+		          suffix="${suffix}-win"
+		      fi
+		   fi
+		   DOWNLOAD_URL="${JENV_SERVICE}/download/${CANDIDATE}/${CANDIDATE}-${VERSION}${suffix}.zip"
+		fi
 		ZIP_ARCHIVE="${JENV_DIR}/archives/${CANDIDATE}-${VERSION}.zip"
 		curl -L "${DOWNLOAD_URL}" > "${ZIP_ARCHIVE}"
 		__jenvtool_validate_zip "${ZIP_ARCHIVE}" || return 1
