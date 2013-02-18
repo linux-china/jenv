@@ -20,7 +20,7 @@
 # @param $1 candidate name
 # @param $2 candidate version
 function __jenvtool_use {
-	CANDIDATE="$1"
+	CANDIDATE=`echo "$1" | tr '[:upper:]' '[:lower:]'`
 	__jenvtool_check_candidate_present "${CANDIDATE}" || return 1
 	__jenvtool_determine_version "$2" || return 1
 
