@@ -41,3 +41,5 @@ Roo
    Spring Roo: rapid application development tool for Java developers
 GAE
    Google App Engine Java SDK
+Clojure
+   Clojure is a dynamic programming language with dialect of Lisp in JVM
