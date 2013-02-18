@@ -21,7 +21,7 @@
 # @param $2 candidate version
 # @param $3 local install folder for candidate with the version. optional
 function __jenvtool_install {
-	CANDIDATE="$1"
+	CANDIDATE=`echo "$1" | tr '[:upper:]' '[:lower:]'`
 	LOCAL_FOLDER="$3"
 	__jenvtool_check_candidate_present "${CANDIDATE}" || return 1
 	__jenvtool_determine_version "$2" "$3" || return 1
