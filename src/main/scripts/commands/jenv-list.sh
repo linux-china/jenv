@@ -19,7 +19,7 @@
 # list candidate versions
 # @param $1 candidate name
 function __jenvtool_list {
-	CANDIDATE="$1"
+	CANDIDATE=`echo "$1" | tr '[:upper:]' '[:lower:]'`
 	__jenvtool_check_candidate_present "${CANDIDATE}" || return 1
 	__jenvtool_build_version_csv "${CANDIDATE}"
 	__jenvtool_determine_current_version "${CANDIDATE}"
