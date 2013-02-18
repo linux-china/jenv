@@ -11,6 +11,7 @@ Please report any bugs and feature request on the [GitHub Issue Tracker](https:/
    * Easy to manager candidate version. Install new version and uninstall the old one.
    * Directory is standard, and friendly to IDE
    * Easy to extend. You can setup your own jenv on your company to manage development environment.
+   * Easy to backup your env.
 
 ## Installat jenv
 
