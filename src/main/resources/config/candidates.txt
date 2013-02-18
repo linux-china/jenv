@@ -33,3 +33,5 @@ Jetty
    Java Web Server
 Luke
    Lucene GUI Tool
+Cassandra
+   NoSQL Product with Big Column Support
