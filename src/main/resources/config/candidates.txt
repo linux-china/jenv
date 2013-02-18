@@ -1,11 +1,25 @@
-Java
-  JDK
-
+Ant
+   Java Build Tool
+Maven
+   Java Project Management and Comprehension Tool
 Groovy
-  Groovy Script Language
-
+   Agile and Dynamic Language for JVM
+Gant
+   Groovy Ant Scripting
 Gradle
-   Groovy build tool
-
-JRuby
-   Ruby on JVM
+   Build Tool with Groovy in JVM
+Grails
+   Grails is an Open Source, full stack, web application framework for the JVM
+Griffon
+   Griffon is an application framework for developing desktop applications in the JVM
+Vertx
+   Effortless asynchronous application development for the modern web and enterprise
+Play
+   The High Velocity Web Framework For Java and Scala
+Jruby
+   The Ruby Programming Language on the JVM
+Scala
+   Scala is a general purpose programming language designed to express common programming patterns
+   in a concise, elegant, and type-safe way
+Jython
+   Python for the Java Platform
