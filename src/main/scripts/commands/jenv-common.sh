@@ -103,7 +103,7 @@ function __jenvtool_download {
 		echo ""
 		DOWNLOAD_URL="${JENV_SERVICE}/download/${CANDIDATE}/${CANDIDATE}-${VERSION}.zip?platform=${JENV_PLATFORM}"
 		# java candidate logic
-		if [ "${CANDIDATE}" == "java" ]; then
+		if [[ "${CANDIDATE}" == "java" || "${CANDIDATE}" == "android" ]]; then
 		   suffix=""
 		   if [ "$darwin" = "true" ] ; then
 		      suffix="-darwin"
