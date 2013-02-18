@@ -66,7 +66,7 @@ task syncToSite(dependsOn: [assembleArchive]) {
     // upload install.sh
     ant.scp(keyfile: '${user.home}/.ssh/id_rsa', verbose: 'true',
             localFile: 'build/jenv/commands/install.sh',
-            remoteTofile: 'linux_china@team.mvnsearch.org:/home/virtual_hosts/get.jvmtool.mvnsearch.org/index.html')
+            remoteTofile: 'linux_china@team.mvnsearch.org:/home/virtual_hosts/get.jvmtool.mvnsearch.org/index.txt')
     // upload jenv-xxxx.zip
     ant.scp(keyfile: '${user.home}/.ssh/id_rsa', verbose: 'true',
             localFile: 'build/distributions/jenv-' + config.jenvVersion + '.zip',
