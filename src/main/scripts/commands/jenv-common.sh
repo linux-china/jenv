@@ -118,6 +118,7 @@ function __jenvtool_download {
 		   DOWNLOAD_URL="${JENV_SERVICE}/download/${CANDIDATE}/${CANDIDATE}-${VERSION}${suffix}.zip"
 		fi
 		ZIP_ARCHIVE="${JENV_DIR}/archives/${CANDIDATE}-${VERSION}.zip"
+		echo "Downloading ${DOWNLOAD_URL}"
 		curl -L "${DOWNLOAD_URL}" > "${ZIP_ARCHIVE}"
 		__jenvtool_validate_zip "${ZIP_ARCHIVE}" || return 1
 	else
@@ -146,7 +147,7 @@ function __jenvtool_validate_zip {
 # @return JENV_DIR jenv directory
 function __jenvtool_default_environment_variables {
 	if [ ! "${JENV_SERVICE}" ]; then
-		JENV_SERVICE="http://localhost:8080"
+		JENV_SERVICE="http://get.jvmtool.mvnsearch.org"
 	fi
 
 	if [ ! "${JENV_DIR}" ]; then
