@@ -3,7 +3,7 @@ import org.apache.tools.ant.filters.*
 apply plugin: 'groovy'
 apply plugin: 'idea'
 
-defaultTasks 'clean', 'prepareResources', 'prepareCommands', 'prepareJenvCommands', 'assembleArchive', 'test'
+defaultTasks 'clean', 'prepareResources', 'prepareCommands', 'prepareJenvCommands', 'assembleArchive'
 
 ext.installDir = "${System.getProperty('user.home')}/.jenv"
 
@@ -76,7 +76,7 @@ task cleanJenvDir(type: Delete) {
   delete installDir
 }
 
-task installJenv(type: Copy, dependsOn: [cleanJenvDir, prepareJenvCommands]) {
+task installJenv(type: Copy, dependsOn: [prepareJenvCommands]) {
   from "build/jenv"
   into installDir
 }
