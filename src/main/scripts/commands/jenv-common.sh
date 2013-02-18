@@ -108,7 +108,7 @@ function __jenvtool_download {
 		   if [ "$darwin" = "true" ] ; then
 		      suffix="-darwin"
 		    else
-		      if [ "${JENV_MACHINE_PLATFORM}" == "x86_64" ]; then
+		      if [[ "${JENV_MACHINE_PLATFORM}" == "x86_64" && "${CANDIDATE}" == "java" ]]; then
 		          suffix="-x64"
 		      fi
 		      if [ "$cygwin" = "true" ] ; then
