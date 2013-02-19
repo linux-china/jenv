@@ -60,7 +60,7 @@ function __jenvtool_install_local_version {
 	VERSION="$2"
 	LOCAL_FOLDER="$3"
 	mkdir -p "${JENV_DIR}/candidates/${CANDIDATE}"
-	echo "Copying ${CANDIDATE} ${VERSION} to ${LOCAL_FOLDER}"
+	echo "Copying ${CANDIDATE} ${VERSION} from ${LOCAL_FOLDER}"
 	cp -rf "${LOCAL_FOLDER}" "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}"
 }
 
