@@ -25,6 +25,11 @@ function __jenvtool_install {
 	LOCAL_FOLDER="$3"
 	__jenvtool_check_candidate_present "${CANDIDATE}" || return 1
 	__jenvtool_determine_version "$2" "$3" || return 1
+	# if version absent, use first one in version list
+    if [[ -z "$2" ]]; then
+        CANDIDATE_VERSIONS=($(cat "${JENV_DIR}/db/${CANDIDATE}.txt"))
+        VERSION="${CANDIDATE_VERSIONS[0]}"
+    fi
     # validate installed?
 	if [[ -d "${JENV_DIR}/${CANDIDATE}/${VERSION}" || -h "${JENV_DIR}/${CANDIDATE}/${VERSION}" ]]; then
 		echo ""
