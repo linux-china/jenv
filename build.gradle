@@ -23,6 +23,7 @@ dependencies {
   sshAntTask 'org.apache.ant:ant-jsch:1.8.4'
 }
 
+@SuppressWarnings("GroovyAssignabilityCheck")
 def loadConfiguration() {
   def environment = hasProperty('env') ? env : 'dev'
   ext.environment = environment
@@ -73,10 +74,3 @@ task syncToSite(dependsOn: [assembleArchive]) {
             remoteTodir: 'linux_china@team.mvnsearch.org:/home/virtual_hosts/get.jvmtool.mvnsearch.org/')
   }
 }
-
-task installJenv(type: Copy, dependsOn: [prepareJenvCommands]) {
-  from "build/jenv"
-  into installDir
-}
-
-task install(dependsOn: [clean, installJenv])
