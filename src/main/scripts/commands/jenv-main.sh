@@ -60,7 +60,7 @@ function jenv {
 
 	# couldn't find the command
 	if [[ -z "${CMD_FOUND}" ]]; then
-		echo "Invalid command: $1"
+		__jenvtool_echo_red "Invalid command: $1"
 		__jenvtool_help
 	fi
 
@@ -68,7 +68,7 @@ function jenv {
     if [[ -n "$2" ]]; then
         CANDIDATE=`echo "$2" | tr '[:upper:]' '[:lower:]'`
         if [[ -z $(echo ${JENV_CANDIDATES[@]} | grep -w "${CANDIDATE}") ]]; then
-            echo -e "\nStop! ${CANDIDATE} is not a valid candidate."
+            __jenvtool_echo_red "Stop! ${CANDIDATE} is not a valid candidate."
             return 1
         fi
 	fi
