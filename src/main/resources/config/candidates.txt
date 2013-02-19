@@ -60,3 +60,8 @@ ActiveMQ
    Open source messaging and Integration Patterns server with Java
 GCViewer
    GCViewer is a little tool that visualizes verbose GC output https://github.com/chewiebug/GCViewer
+GWT
+   Google Web Toolkit
+SquirreLSQL
+   Universal SQL Client writtern with Java
+
