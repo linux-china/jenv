@@ -25,7 +25,7 @@
 # @param $1 candidate name
 function __jenvtool_check_candidate_present {
 	if [ -z "$1" ]; then
-		echo -e "\nNo candidate provided."
+		__jenvtool_echo_red "No candidate provided."
 		__jenvtool_help
 		return 1
 	fi
@@ -35,7 +35,7 @@ function __jenvtool_check_candidate_present {
 # @param $1 candidate version
 function __jenvtool_check_version_present {
 	if [ -z "$1" ]; then
-		echo -e "\nNo candidate version provided."
+		__jenvtool_echo_red "No candidate version provided."
 		__jenvtool_help
 		return 1
 	fi
@@ -58,7 +58,7 @@ function __jenvtool_determine_version {
          fi
     done
     echo ""
-    echo "Stop! $1 is not a valid ${CANDIDATE} version."
+    __jenvtool_echo_red "Stop! $1 is not a valid ${CANDIDATE} version."
     return 1
 }
 
@@ -138,7 +138,7 @@ function __jenvtool_validate_zip {
 	if [ -z "${ZIP_OK}" ]; then
 		rm "${ZIP_ARCHIVE}"
 		echo ""
-		echo "Stop! The archive was corrupt and has been removed! Please try installing again."
+		__jenvtool_echo_red "Stop! The archive was corrupt and has been removed! Please try installing again."
 		return 1
 	fi
 }
