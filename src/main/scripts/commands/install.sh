@@ -32,7 +32,7 @@ jenv_platform=$(uname)
 
 jenv_init_snippet=$( cat << EOF
 #THIS MUST BE AT THE END OF THE FILE FOR JENV TO WORK!!!
-[[ -s "$HOME/.jenv/bin/jenv-init.sh" ]] && source "$HOME/.jenv/bin/jenv-init.sh"
+[[ -s "$HOME/.jenv/bin/jenv-init.sh" ]] && source "$HOME/.jenv/bin/jenv-init.sh" && source "$HOME/.jenv/commands/completion.sh"
 EOF
 )
 
