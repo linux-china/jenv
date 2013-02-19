@@ -32,8 +32,7 @@ function __jenvtool_install {
     fi
     # validate installed?
 	if [[ -d "${JENV_DIR}/${CANDIDATE}/${VERSION}" || -h "${JENV_DIR}/${CANDIDATE}/${VERSION}" ]]; then
-		echo ""
-		echo "Stop! ${CANDIDATE} ${VERSION} is already installed."
+		__jenvtool_echo_red "Stop! ${CANDIDATE} ${VERSION} is already installed."
 		return 1
 	fi
     # installing
@@ -47,13 +46,11 @@ function __jenvtool_install {
 	echo -n "Do you want ${CANDIDATE} ${VERSION} to be set as default? (Y/n): "
 	read USE
 	if [[ -z "${USE}" || "${USE}" == "y" || "${USE}" == "Y" ]]; then
-		echo ""
-		echo "Setting ${CANDIDATE} ${VERSION} as default."
+		__jenvtool_echo_green "Setting ${CANDIDATE} ${VERSION} as default."
 		__jenvtool_link_candidate_version "${CANDIDATE}" "${VERSION}"
 	fi
 	# done message
-	echo "Done installing!"
-	echo ""
+	__jenvtool_echo_green "Done installing!"
 }
 
 # install local installed candidate
