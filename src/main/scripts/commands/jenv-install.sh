@@ -51,7 +51,6 @@ function __jenvtool_install {
 	fi
 	# done message
 	__jenvtool_echo_green "Done installing!"
-	echo ""
 }
 
 # install local installed candidate
