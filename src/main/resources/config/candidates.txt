@@ -49,3 +49,11 @@ JMeter
    Java performance testing tool.
 PlugProxy
    Java tcp proxy gui tool
+Hadoop
+   Open-source software for reliable, scalable, distributed computing with Java
+HBase
+   Hadoop database, a distributed, scalable, big data store
+ZooKeeper
+   Apache ZooKeeper is an effort to develop and maintain an open-source server
+   which enables highly reliable distributed coordination.
+ActiveMQ
