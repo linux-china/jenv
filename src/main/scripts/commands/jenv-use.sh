@@ -51,5 +51,5 @@ function __jenvtool_use {
        	    fi
        	fi
 	fi
-	echo "Using ${CANDIDATE} version ${VERSION} in this shell."
+	__jenvtool_echo_green "Using ${CANDIDATE} version ${VERSION} in this shell."
 }
