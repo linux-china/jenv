@@ -74,10 +74,6 @@ task syncToSite(dependsOn: [assembleArchive]) {
   }
 }
 
-task cleanJenvDir(type: Delete) {
-  delete installDir
-}
-
 task installJenv(type: Copy, dependsOn: [prepareJenvCommands]) {
   from "build/jenv"
   into installDir
