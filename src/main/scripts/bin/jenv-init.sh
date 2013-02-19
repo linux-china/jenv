@@ -22,6 +22,18 @@ export JENV_PLATFORM=$(uname)
 # matchine platform, such as x86_64, i686, i386
 export JENV_MACHINE_PLATFORM=$(uname -m)
 
+
+# echo as red text
+# @param $1 text
+function __jenvtool_echo_red {
+   echo $'\e[31m'"$1"$'\e[00m'
+}
+
+# echo as green text
+# @param $1 text
+function __jenvtool_echo_green {
+   echo $'\e[32m'"$1"$'\e[00m'
+}
 # contains function
 # @param $1 text
 # @param $2 word
