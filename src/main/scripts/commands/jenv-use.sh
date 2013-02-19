@@ -25,8 +25,7 @@ function __jenvtool_use {
 	__jenvtool_determine_version "$2" || return 1
 
 	if [[ ! -d "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}" ]]; then
-		echo ""
-		echo "Stop! ${CANDIDATE} ${VERSION} is not installed."
+		__jenvtool_echo_red "Stop! ${CANDIDATE} ${VERSION} is not installed."
 		echo -n "Do you want to install it now? (Y/n): "
 		read INSTALL
 		if [[ -z "${INSTALL}" || "${INSTALL}" == "y" || "${INSTALL}" == "Y" ]]; then
