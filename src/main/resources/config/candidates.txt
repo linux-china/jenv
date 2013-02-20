@@ -66,3 +66,6 @@ SquirreLSQL
    Universal SQL Client writtern with Java
 sbt
    sbt is a build tool for Scala and Java projects that aims to do the basics well
+Hive
+   Hive is a data warehouse system for Hadoop that facilitates easy data summarization, ad-hoc queries,
+   and the analysis of large datasets stored in Hadoop compatible file systems
