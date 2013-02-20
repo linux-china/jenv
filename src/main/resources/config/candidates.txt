@@ -82,3 +82,5 @@ Antlr
 Mat
    The Eclipse Memory Analyzer is a fast and feature-rich Java heap analyzer that helps you find
    memory leaks and reduce memory consumption.
+Elasticsearch
+   Open Source, Distributed, RESTful, Search Engine
