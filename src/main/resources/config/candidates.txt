@@ -64,4 +64,5 @@ GWT
    Google Web Toolkit
 SquirreLSQL
    Universal SQL Client writtern with Java
-
+sbt
+   sbt is a build tool for Scala and Java projects that aims to do the basics well
