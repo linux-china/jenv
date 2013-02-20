@@ -75,3 +75,7 @@ BTrace
    BTrace is a safe, dynamic tracing tool for the Java platform
 Leiningen
    Automating Clojure projects without setting your hair on fire
+Antlr
+   ANTLR (ANother Tool for Language Recognition) is a powerful parser generator for reading, processing,
+   executing, or translating structured text or binary files. It's widely used to build languages, tools,
+   and frameworks
