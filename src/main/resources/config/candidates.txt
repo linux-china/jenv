@@ -69,3 +69,8 @@ sbt
 Hive
    Hive is a data warehouse system for Hadoop that facilitates easy data summarization, ad-hoc queries,
    and the analysis of large datasets stored in Hadoop compatible file systems
+Storm
+   Distributed and fault-tolerant realtime computation
+
+
+
