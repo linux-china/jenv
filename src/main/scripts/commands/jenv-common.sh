@@ -104,13 +104,15 @@ function __jenvtool_download {
 		echo ""
 		DOWNLOAD_URL="${JENV_SERVICE}/download/${CANDIDATE}/${CANDIDATE}-${VERSION}.zip?platform=${JENV_PLATFORM}"
 		# java candidate logic
-		if [[ "${CANDIDATE}" == "java" || "${CANDIDATE}" == "android" ]]; then
+		if [[ "${CANDIDATE}" == "java" || "${CANDIDATE}" == "android" || "${CANDIDATE}" == "mat" ]]; then
 		   suffix=""
 		   if [ "$darwin" = "true" ] ; then
 		      suffix="-darwin"
 		    else
-		      if [[ "${JENV_MACHINE_PLATFORM}" == "x86_64" && "${CANDIDATE}" == "java" ]]; then
-		          suffix="-x64"
+		      if [[ "${JENV_MACHINE_PLATFORM}" == "x86_64" ]]; then
+		          if [[ "${CANDIDATE}" == "java" || "${CANDIDATE}" == "mat"  ]]; then
+		             suffix="-x64"
+		          fi
 		      fi
 		      if [ "$cygwin" = "true" ] ; then
 		          suffix="${suffix}-win"
