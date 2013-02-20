@@ -71,6 +71,7 @@ Hive
    and the analysis of large datasets stored in Hadoop compatible file systems
 Storm
    Distributed and fault-tolerant realtime computation
-
-
-
+BTrace
+   BTrace is a safe, dynamic tracing tool for the Java platform
+Leiningen
+   Automating Clojure projects without setting your hair on fire
