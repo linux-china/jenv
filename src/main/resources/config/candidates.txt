@@ -79,3 +79,6 @@ Antlr
    ANTLR (ANother Tool for Language Recognition) is a powerful parser generator for reading, processing,
    executing, or translating structured text or binary files. It's widely used to build languages, tools,
    and frameworks
+Mat
+   The Eclipse Memory Analyzer is a fast and feature-rich Java heap analyzer that helps you find
+   memory leaks and reduce memory consumption.
