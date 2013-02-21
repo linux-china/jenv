@@ -50,4 +50,6 @@ I suggest Mac user to use ln to link the java home into jenv as following:
        $ jenv list java
 
 ## How to update jenv
-Please use jenv selfupdate to get last version and candidate repository.
+Please use selfupdate command to get last version and candidate repository.
+
+       $ jenv selfupdate
