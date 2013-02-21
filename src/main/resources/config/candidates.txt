@@ -84,3 +84,5 @@ Mat
    memory leaks and reduce memory consumption.
 Elasticsearch
    Open Source, Distributed, RESTful, Search Engine
+PomViewer
+   Display pom.xml information in a jar file
