@@ -51,6 +51,14 @@ _jenv_install()
    return 0
 }
 
+_jenv_cd()
+{
+   candidates="${JENV_CANDIDATES[@]}"
+   _jenv_comp "$candidates"
+   return 0
+}
+
+
 _jenv_uninstall()
 {
    candidates="${JENV_CANDIDATES[@]}"
@@ -69,6 +77,7 @@ _jenv()
     install)   _jenv_install ;;
     default)   _jenv_default ;;
     current)   _jenv_current ;;
+    cd)        _jenv_cd ;;
     uninstall) _jenv_uninstall ;;
     *)        _jenv_commands ;;
     esac
