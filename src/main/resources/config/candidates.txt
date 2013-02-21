@@ -90,3 +90,5 @@ RestClient
    RESTClient is a Java application to test RESTful webservices
 YUICompressor
    JavaScript compressor
+Jad
+   Java Decompiler
