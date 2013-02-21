@@ -42,5 +42,12 @@ In your terminal, input mvn --version to check the installation.
   * default: Make the version as default, such as jenv default maven 3.0.4
   * cd: change directory to candidate install directory, such as jenv cd groovy
 
+## Mac User
+I suggest Mac user to use ln to link the java home into jenv as following:
+
+       $ mkdir -p $HOME/.jenv/candidates/java
+       $ ln -s /Library/Java/JavaVirtualMachines/jdk1.7.0_13.jdk/Contents/home $HOME/.jenv/candidates/java/1.7.0_13
+       $ jenv list java
+
 ## How to update jenv
 Please use jenv selfupdate to get last version and candidate repository.
