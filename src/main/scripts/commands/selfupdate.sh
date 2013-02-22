@@ -36,7 +36,7 @@ case "`uname`" in
         ;;
 esac
 
-jenv_platform=$(uname -o)
+jenv_platform=$(uname)
 jenv_tmp_zip="${JENV_DIR}/tmp/jenv-${JENV_VERSION}.zip"
 jenv_bin_folder="${JENV_DIR}/bin"
 
