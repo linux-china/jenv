@@ -92,3 +92,5 @@ YUICompressor
    JavaScript compressor
 Jad
    Java Decompiler
+HouseMD
+   Awesome diagnosing tool
