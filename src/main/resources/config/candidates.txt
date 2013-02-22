@@ -94,3 +94,5 @@ Jad
    Java Decompiler
 HouseMD
    Awesome diagnosing tool
+Pig
+   Apache Pig is a platform for analyzing large data sets
