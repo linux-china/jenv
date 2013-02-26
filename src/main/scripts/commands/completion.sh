@@ -87,6 +87,16 @@ _jenv()
         candidate="${prev}"
         if [[ -f "${JENV_DIR}/db/${candidate}.txt" ]]; then
            candidate_versions=($(cat "${JENV_DIR}/db/${candidate}.txt"))
+            INSTALLED_VERSIONS=()
+            # add local unversioned in repository
+            for version in $(ls -1 "${JENV_DIR}/candidates/${CANDIDATE}" 2> /dev/null); do
+                if [ ${version} != 'current' ]; then
+                      INSTALLED_VERSIONS+=("${version}")
+                     if ! __jenvtool_array_contains CANDIDATE_VERSIONS[@] "${version}"; then
+                       CANDIDATE_VERSIONS+=("${version}")
+                     fi
+                fi
+            done
            versions="${candidate_versions[@]}"
            _jenv_comp "${versions}"
            unset versions
