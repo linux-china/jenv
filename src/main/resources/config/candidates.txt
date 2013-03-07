@@ -96,3 +96,8 @@ HouseMD
    Awesome diagnosing tool
 Pig
    Apache Pig is a platform for analyzing large data sets
+TorqueBox
+   TorqueBox is a new kind of Ruby application platform that supports popular technologies such as Ruby on Rails and Sinatra,
+   while extending the footprint of Ruby applications to include built-in support for services such as messaging, scheduling,
+   caching, and daemons.
+
