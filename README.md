@@ -42,6 +42,14 @@ In your terminal, input mvn --version to check the installation.
   * default: Make the version as default, such as jenv default maven 3.0.4
   * cd: change directory to candidate install directory, such as jenv cd groovy
 
+## Setup local candidates
+If you want to add custom candidate into jenv, please create candidates_local under $HOME/.jenv/db/ directory and input candidate name.
+
+    $jenv install candidate_name version git@github.com:linux-china/groovy_scripts.git
+Then you can install candidate from git repository, and you can update candidate by following command:
+
+    $jenv update candidate_name
+
 ## Mac User
 I suggest Mac user to use ln to link the java home into jenv as following:
 
