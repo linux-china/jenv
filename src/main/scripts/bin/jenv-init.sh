@@ -93,6 +93,12 @@ function __jenvtool_init {
     else
         JENV_CANDIDATES=(${JENV_CANDIDATES_DEFAULT[@]})
     fi
+    # custom candidates
+    if [[ -f "${JENV_DIR}/config/candidates_local" ]]; then
+        for candidate_name in $(cat "${JENV_DIR}/config/candidates_local"); do
+               JENV_CANDIDATES+=("${candidate_name}")
+        done
+    fi
     export JENV_CANDIDATES
     # update PATH env
     for CANDIDATE in "${JENV_CANDIDATES[@]}" ; do
