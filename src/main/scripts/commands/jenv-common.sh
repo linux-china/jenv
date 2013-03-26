@@ -45,7 +45,6 @@ function __jenvtool_check_version_present {
 # @param $1 candidate version
 # @return VERSION candidate version
 function __jenvtool_determine_version {
-    CANDIDATE_VERSIONS=($(cat "${JENV_DIR}/db/${CANDIDATE}.txt"))
     #check local installed version
     if [[ -d "${JENV_DIR}/candidates/${CANDIDATE}/$1" ]]; then
        VERSION="$1"
