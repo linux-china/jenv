@@ -23,27 +23,32 @@
 function __jenvtool_install {
 	CANDIDATE=`echo "$1" | tr '[:upper:]' '[:lower:]'`
 	LOCAL_FOLDER="$3"
-	__jenvtool_check_candidate_present "${CANDIDATE}" || return 1
-	# check version if not empty
-    if [[ -n "$2" ]]; then
-	   __jenvtool_determine_version "$2" "$3" || return 1
-	fi
-	# if version absent, use first one in version list
-    if [[ -z "$2" ]]; then
-        CANDIDATE_VERSIONS=($(cat "${JENV_DIR}/db/${CANDIDATE}.txt"))
-        VERSION="${CANDIDATE_VERSIONS[0]}"
-    fi
-    # validate installed?
-	if [[ -d "${JENV_DIR}/${CANDIDATE}/${VERSION}" || -h "${JENV_DIR}/${CANDIDATE}/${VERSION}" ]]; then
-		__jenvtool_echo_red "Stop! ${CANDIDATE} ${VERSION} is already installed."
-		return 1
-	fi
-    # installing
+     # install from local or VCS
     if [[ -n "${LOCAL_FOLDER}" ]]; then
-		__jenvtool_install_local_version "${CANDIDATE}" "${VERSION}" "${LOCAL_FOLDER}" || return 1
-	else
-	    __jenvtool_install_candidate_version "${CANDIDATE}" "${VERSION}" || return 1
-	fi
+       if ! __jenvtool_array_contains "${LOCAL_FOLDER}" "@"; then
+            __jenvtool_install_git_repository "${CANDIDATE}" "${VERSION}" "${LOCAL_FOLDER}" || return 1
+		else
+		    __jenvtool_install_local_version "${CANDIDATE}" "${VERSION}" "${LOCAL_FOLDER}" || return 1
+		fi
+    else # install from center repository
+        __jenvtool_check_candidate_present "${CANDIDATE}" || return 1
+    	# check version if not empty
+        if [[ -n "$2" ]]; then
+    	   __jenvtool_determine_version "$2" "$3" || return 1
+    	fi
+    	# if version absent, use first one in version list
+        if [[ -z "$2" ]]; then
+            CANDIDATE_VERSIONS=($(cat "${JENV_DIR}/db/${CANDIDATE}.txt"))
+            VERSION="${CANDIDATE_VERSIONS[0]}"
+        fi
+        # validate installed?
+    	if [[ -d "${JENV_DIR}/${CANDIDATE}/${VERSION}" || -h "${JENV_DIR}/${CANDIDATE}/${VERSION}" ]]; then
+    		__jenvtool_echo_red "Stop! ${CANDIDATE} ${VERSION} is already installed."
+    		return 1
+    	fi
+
+    	__jenvtool_install_candidate_version "${CANDIDATE}" "${VERSION}" || return 1
+    fi
 
 	# set default by confirm
 	echo -n "Do you want ${CANDIDATE} ${VERSION} to be set as default? (Y/n): "
@@ -67,6 +72,19 @@ function __jenvtool_install_local_version {
 	mkdir -p "${JENV_DIR}/candidates/${CANDIDATE}"
 	echo "Copying ${CANDIDATE} ${VERSION} from ${LOCAL_FOLDER}"
 	cp -rf "${LOCAL_FOLDER}" "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}"
+}
+
+# install git repository
+# @param $1 candidate name
+# @param $2 candidate version
+# @param $3 git repository url
+function __jenvtool_install_git_repository {
+	CANDIDATE="$1"
+	VERSION="$2"
+	LOCAL_FOLDER="$3"
+	mkdir -p "${JENV_DIR}/candidates/${CANDIDATE}"
+	echo "Clone ${CANDIDATE} ${VERSION} from ${LOCAL_FOLDER}"
+	git clone "${LOCAL_FOLDER}" "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}"
 }
 
 # install candidate from remote repository
