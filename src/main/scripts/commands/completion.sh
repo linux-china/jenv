@@ -12,12 +12,19 @@ _jenv_comp()
 
 _jenv_commands()
 {
-   cmds="install uninstall list use current cd version default selfupdate help cd"
+   cmds="canidates update install uninstall list use current cd version default selfupdate help cd"
    _jenv_comp "$cmds"
    return 0
 }
 
 _jenv_use()
+{
+   candidates="${JENV_CANDIDATES[@]}"
+   _jenv_comp "$candidates"
+   return 0
+}
+
+_jenv_update()
 {
    candidates="${JENV_CANDIDATES[@]}"
    _jenv_comp "$candidates"
@@ -73,6 +80,7 @@ _jenv()
 
     case "${prev}" in
     use)       _jenv_use ;;
+    update)    _jenv_update ;;
     list)      _jenv_list ;;
     install)   _jenv_install ;;
     default)   _jenv_default ;;
