@@ -18,7 +18,7 @@ Vertx
    Effortless asynchronous application development for the modern web and enterprise
 Play
    The High Velocity Web Framework For Java and Scala
-Jruby
+JRuby
    The Ruby Programming Language on the JVM
 Scala
    Scala is a general purpose programming language designed to express common programming
