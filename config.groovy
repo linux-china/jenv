@@ -1,4 +1,4 @@
-jenvVersion = '0.0.1'
+jenvVersion = '0.0.2'
 environments {
 	dev {
 		jenvService = 'http://get.jvmtool.mvnsearch.org'
