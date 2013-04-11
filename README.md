@@ -22,7 +22,14 @@ Open your favourite terminal and enter the following:
 
 If the environment needs tweaking for jenv to be installed, the installer will prompt you accordingly and ask you to restart.
 
-## Install tools
+## Install Java
+Because I can not redistribute Java SDK, so you should download it from http://www.oracle.com/technetwork/java/javase/downloads/index.html
+and install. After install please execute following command:
+
+    $ mkdir -p $HOME/.jenv/candidates/java
+    $ ln -s /Library/Java/JavaVirtualMachines/jdk1.7.0_17.jdk/Contents/home $HOME/.jenv/candidates/java/1.7.0_17
+
+## Install canidates
 
 First view all available candidates:
 
@@ -34,7 +41,7 @@ Second list available version for the candidate, such as maven candidate:
 
 Final install the candidate with the version:
 
-    $ jenv install maven 3.0.4
+    $ jenv install maven 3.0.5
 In your terminal, input mvn --version to check the installation.
 
 ## Other Commands
@@ -49,13 +56,6 @@ If you want to add custom candidate into jenv, please create candidates_local un
 Then you can install candidate from git repository, and you can update candidate by following command:
 
     $jenv update candidate_name
-
-## Mac User
-I suggest Mac user to use ln to link the java home into jenv as following:
-
-       $ mkdir -p $HOME/.jenv/candidates/java
-       $ ln -s /Library/Java/JavaVirtualMachines/jdk1.7.0_13.jdk/Contents/home $HOME/.jenv/candidates/java/1.7.0_13
-       $ jenv list java
 
 ## How to update jenv
 Please use selfupdate command to get last version and candidate repository.
