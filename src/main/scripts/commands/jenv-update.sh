@@ -26,10 +26,14 @@ function __jenvtool_update {
        VERSION="current"
     fi
 	if [ -d "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/.git" ]; then
-	  echo "Updating..."
-      (cd "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/" && git pull)
-      __jenvtool_echo_green "${CANDIDATE}'s ${VERSION} has been updated!"
+	    echo "Pulling..."
+        (cd "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/" && git pull)
+        __jenvtool_echo_green "${CANDIDATE}'s ${VERSION} has been updated!"
+     elif [ -d "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/.svn" ]; then
+         echo "Updating..."
+        (cd "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/" && svn update)
+         __jenvtool_echo_green "${CANDIDATE}'s ${VERSION} has been updated!"
      else
-      __jenvtool_echo_red "${CANDIDATE}'s ${VERSION} is not git repository!"
+      __jenvtool_echo_red "${CANDIDATE}'s ${VERSION} is not a Git or Subversion repository!"
 	fi
 }
