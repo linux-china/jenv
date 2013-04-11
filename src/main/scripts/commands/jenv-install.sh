@@ -81,10 +81,23 @@ function __jenvtool_install_local_version {
 function __jenvtool_install_git_repository {
 	CANDIDATE="$1"
 	VERSION="$2"
-	LOCAL_FOLDER="$3"
+	GIT_REPO="$3"
 	mkdir -p "${JENV_DIR}/candidates/${CANDIDATE}"
-	echo "Clone ${CANDIDATE} ${VERSION} from ${LOCAL_FOLDER}"
-	git clone "${LOCAL_FOLDER}" "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}"
+	echo "Clone ${CANDIDATE} ${VERSION} from ${GIT_REPO}"
+	git clone "${GIT_REPO}" "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}"
+}
+
+# install svn repository
+# @param $1 candidate name
+# @param $2 candidate version
+# @param $3 svn repository url
+function __jenvtool_install_svn_repository {
+	CANDIDATE="$1"
+	VERSION="$2"
+	SVN_REPO="$3"
+	mkdir -p "${JENV_DIR}/candidates/${CANDIDATE}"
+	echo "Checkout ${CANDIDATE} ${VERSION} from ${SVN_REPO}"
+	svn checkout "${SVN_REPO}" "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}"
 }
 
 # install candidate from remote repository
