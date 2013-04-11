@@ -28,6 +28,7 @@ and install. After install please execute following command:
 
     $ mkdir -p $HOME/.jenv/candidates/java
     $ ln -s /Library/Java/JavaVirtualMachines/jdk1.7.0_17.jdk/Contents/home $HOME/.jenv/candidates/java/1.7.0_17
+    $ jenv default java 1.7.0_07
 
 ## Install canidates
 
