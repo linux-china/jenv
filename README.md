@@ -56,7 +56,7 @@ If you want to add custom candidate into jenv, please create candidates_local un
     $jenv install spike 0.0.1 git@github.com:linux-china/groovy_scripts.git
 Then you can install candidate from git repository, and you can update candidate by following command:
 
-    $jenv update candidate_name
+    $jenv update spike
 
 ## How to update jenv
 Please use selfupdate command to get last version and candidate repository.
