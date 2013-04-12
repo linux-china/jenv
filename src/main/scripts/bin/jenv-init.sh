@@ -82,6 +82,7 @@ function __jenvtool_init {
         JENV_DIR="$HOME/.jenv"
         if [[ "${cygwin}" == 'true' ]]; then
            JENV_DIR="/cygdrive/c/jenv"
+           export JENV_PLATFORM="Cygwin"
         fi
         export JENV_DIR
     fi
