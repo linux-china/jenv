@@ -109,6 +109,7 @@ function __jenvtool_install_candidate_version {
 	# install from archives directory
     echo "Installing: ${CANDIDATE} ${VERSION}"
     # find install url from jenv.mvnsearch.org
+    echo "Parsing http://jenv.mvnsearch.org/candidate/${CANDIDATE}/download/${VERSION}/${JENV_PLATFORM}/${JENV_MACHINE_PLATFORM}"
 	DOWNLOAD_URL=$(curl -s "http://jenv.mvnsearch.org/candidate/${CANDIDATE}/download/${VERSION}/${JENV_PLATFORM}/${JENV_MACHINE_PLATFORM}")
     if __jenvtool_contains "${DOWNLOAD_URL}" "get.jvmtool.mvnsearch.org"; then
        __jenvtool_download "${CANDIDATE}" "${VERSION}" "${DOWNLOAD_URL}"  || return 1
