@@ -135,10 +135,6 @@ function __jenvtool_default_environment_variables {
 	if [ ! "${JENV_SERVICE}" ]; then
 		JENV_SERVICE="http://get.jvmtool.mvnsearch.org"
 	fi
-
-	if [ ! "${JENV_DIR}" ]; then
-		JENV_DIR="$HOME/.jenv"
-	fi
 }
 
 # check upgrade available
