@@ -79,7 +79,11 @@ function __jenvtool_init {
     JENV_CANDIDATES_DEFAULT=("groovy" "grails" "griffon" "gradle" "vertx")
 
     if [ -z "${JENV_DIR}" ]; then
-        export JENV_DIR="$HOME/.jenv"
+        JENV_DIR="$HOME/.jenv"
+        if [[ "${cygwin}" == 'true' ]]; then
+           JENV_DIR="/cygdrive/c/jenv"
+        fi
+        export JENV_DIR
     fi
     mkdir -p $JENV_DIR/candidates
 
