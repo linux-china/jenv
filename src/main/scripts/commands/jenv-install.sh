@@ -121,5 +121,6 @@ function __jenvtool_install_candidate_version {
        __jenvtool_install_svn_repository "${CANDIDATE}" "${VERSION}" "${DOWNLOAD_URL}" || return 1
     else
        __jenvtool_echo_red "${DOWNLOAD_URL}"
+       return 1
     fi
 }
