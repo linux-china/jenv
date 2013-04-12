@@ -13,6 +13,7 @@ Please report any bugs and feature request on the [GitHub Issue Tracker](https:/
    * Easy to extend. You can setup your own jenv on your company to manage development environment.
    * Easy to backup your env.
    * Bash completion support. Use TAB to complete command name, candidate name and version
+   * Multi OS support, such as Mac, Linux and Windows(Cygwin)
 
 ## Installat jenv
 
