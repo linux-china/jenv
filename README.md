@@ -53,7 +53,7 @@ In your terminal, input mvn --version to check the installation.
 ## Setup local candidates
 If you want to add custom candidate into jenv, please create candidates_local under $HOME/.jenv/db/ directory and input candidate name.
 
-    $jenv install candidate_name version git@github.com:linux-china/groovy_scripts.git
+    $jenv install spike 0.0.1 git@github.com:linux-china/groovy_scripts.git
 Then you can install candidate from git repository, and you can update candidate by following command:
 
     $jenv update candidate_name
