@@ -106,3 +106,5 @@ Nailgun
    by the client (written in C), which handles all I/O.
 Quercus
    Caucho's PHP on the JVM
+JFlex
+   JFlex is a lexical analyzer generator (also known as scanner generator) for Java, written in Java.
