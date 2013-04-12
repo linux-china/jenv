@@ -15,14 +15,6 @@
 #   limitations under the License.
 #
 
-echo ""
-echo "Updating jenv..."
-
-JENV_VERSION="@JENV_VERSION@"
-if [ -z "${JENV_DIR}" ]; then
-	JENV_DIR="$HOME/.jenv"
-fi
-
 # OS specific support (must be 'true' or 'false').
 cygwin=false;
 darwin=false;
@@ -35,6 +27,17 @@ case "`uname`" in
         darwin=true
         ;;
 esac
+
+echo ""
+echo "Updating jenv..."
+
+JENV_VERSION="@JENV_VERSION@"
+if [ -z "${JENV_DIR}" ]; then
+	JENV_DIR="$HOME/.jenv"
+	if [[ "${cygwin}" == 'true' ]]; then
+	   JENV_DIR="/cygdrive/c/jenv"
+	fi
+fi
 
 jenv_platform=$(uname)
 jenv_tmp_zip="${JENV_DIR}/tmp/jenv-${JENV_VERSION}.zip"
