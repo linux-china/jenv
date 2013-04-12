@@ -15,10 +15,26 @@
 #   limitations under the License.
 #
 
+# OS specific support (must be 'true' or 'false').
+cygwin=false;
+darwin=false;
+case "`uname`" in
+    CYGWIN*)
+        cygwin=true
+        ;;
+
+    Darwin*)
+        darwin=true
+        ;;
+esac
+
 # Global variables
 JENV_SERVICE="@JENV_SERVICE@"
 JENV_VERSION="@JENV_VERSION@"
 JENV_DIR="$HOME/.jenv"
+if [[ "${cygwin}" == 'true' ]]; then
+   JENV_DIR="/cygdrive/c/jenv"
+fi
 
 # Local variables
 jenv_tmp_folder="${JENV_DIR}/tmp"
@@ -32,23 +48,9 @@ jenv_platform=$(uname)
 
 jenv_init_snippet=$( cat << EOF
 #THIS MUST BE AT THE END OF THE FILE FOR JENV TO WORK!!!
-[[ -s "$HOME/.jenv/bin/jenv-init.sh" ]] && source "$HOME/.jenv/bin/jenv-init.sh" && source "$HOME/.jenv/commands/completion.sh"
+[[ -s "${JENV_DIR}/bin/jenv-init.sh" ]] && source "${JENV_DIR}/bin/jenv-init.sh" && source "${JENV_DIR}/commands/completion.sh"
 EOF
 )
-
-# OS specific support (must be 'true' or 'false').
-cygwin=false;
-darwin=false;
-case "`uname`" in
-    CYGWIN*)
-        cygwin=true
-        ;;
-        
-    Darwin*)
-        darwin=true
-        ;;
-esac
-
 
 echo '                                                                     '
 echo 'Thanks for using                                                     '
