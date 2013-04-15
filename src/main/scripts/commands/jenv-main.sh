@@ -28,6 +28,12 @@ function jenv {
 
    COMMAND="$1"
 
+   # alias
+   if [[ "${COMMAND}" == "ls" ]]; then
+    	COMMAND="list"
+   elif [[ "${COMMAND}" == "all" ]]; then
+       	COMMAND="candidates"
+   fi
 	# Load the jenv config if it exists.
 	if [ -f "${JENV_DIR}/etc/config" ]; then
 		source "${JENV_DIR}/etc/config"
