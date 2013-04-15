@@ -46,7 +46,7 @@ jenv_bin_folder="${JENV_DIR}/bin"
 echo "Purge existing scripts..."
 
 echo "Download new scripts to: ${jenv_tmp_zip}"
-curl -s "${JENV_SERVICE}/jenv-${JENV_VERSION}.zip?platform=${jenv_platform}&purpose=selfupdate" > "${jenv_tmp_zip}"
+curl -s "${JENV_SERVICE}/jenv-last.zip?platform=${jenv_platform}&purpose=selfupdate" > "${jenv_tmp_zip}"
 
 echo "Extract script archive..."
 if [[ "${cygwin}" == 'true' ]]; then
