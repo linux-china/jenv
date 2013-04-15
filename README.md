@@ -35,11 +35,11 @@ and install. After install please execute following command:
 
 First view all available candidates:
 
-    $ jenv candidates
+    $ jenv all
 
 Second list available version for the candidate, such as maven candidate:
 
-    $ jenv list maven
+    $ jenv ls maven
 
 Final install the candidate with the version:
 
@@ -62,4 +62,4 @@ Then you can install candidate from git repository, and you can update candidate
 ## How to update jenv
 Please use selfupdate command to get last version and candidate repository.
 
-       $ jenv selfupdate
+   $ jenv selfupdate
