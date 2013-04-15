@@ -70,13 +70,13 @@ task syncToSite(dependsOn: [assembleArchive]) {
             remoteTofile: 'linux_china@team.mvnsearch.org:/home/virtual_hosts/get.jvmtool.mvnsearch.org/index.txt')
     // upload jenv-xxxx.zip
     ant.scp(keyfile: '${user.home}/.ssh/id_rsa', verbose: 'true',
-            localFile: 'build/distributions/jenv-last.zip',
-            remoteTodir: 'linux_china@team.mvnsearch.org:/home/virtual_hosts/get.jvmtool.mvnsearch.org/')
+            localFile: 'build/distributions/jenv-' + config.jenvVersion + '.zip',
+            remoteTodir: 'linux_china@team.mvnsearch.org:/home/virtual_hosts/get.jvmtool.mvnsearch.org/jenv-0.0.1.zip')
     ant.scp(keyfile: '${user.home}/.ssh/id_rsa', verbose: 'true',
-            localFile: 'build/distributions/jenv-0.0.1.zip',
-            remoteTodir: 'linux_china@team.mvnsearch.org:/home/virtual_hosts/get.jvmtool.mvnsearch.org/')
+            localFile: 'build/distributions/jenv-' + config.jenvVersion + '.zip',
+            remoteTodir: 'linux_china@team.mvnsearch.org:/home/virtual_hosts/get.jvmtool.mvnsearch.org/jenv-0.0.2.zip')
     ant.scp(keyfile: '${user.home}/.ssh/id_rsa', verbose: 'true',
-            localFile: 'build/distributions/jenv-0.0.2.zip',
-            remoteTodir: 'linux_china@team.mvnsearch.org:/home/virtual_hosts/get.jvmtool.mvnsearch.org/')
+            localFile: 'build/distributions/jenv-' + config.jenvVersion + '.zip',
+            remoteTodir: 'linux_china@team.mvnsearch.org:/home/virtual_hosts/get.jvmtool.mvnsearch.org/jenv-last.zip')
   }
 }
