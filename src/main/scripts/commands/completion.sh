@@ -12,7 +12,7 @@ _jenv_comp()
 
 _jenv_commands()
 {
-   cmds="all ls update install uninstall use current cd version default selfupdate help"
+   cmds="all ls candidates list update install uninstall use current cd version default selfupdate help"
    _jenv_comp "$cmds"
    return 0
 }
