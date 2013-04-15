@@ -82,6 +82,7 @@ _jenv()
     use)       _jenv_use ;;
     update)    _jenv_update ;;
     list)      _jenv_list ;;
+    ls)        _jenv_list ;;
     install)   _jenv_install ;;
     default)   _jenv_default ;;
     current)   _jenv_current ;;
