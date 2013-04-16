@@ -22,12 +22,13 @@
 # @param $3 local install folder for candidate with the version. optional
 function __jenvtool_install {
 	CANDIDATE=`echo "$1" | tr '[:upper:]' '[:lower:]'`
+	VERSION="$2"
 	LOCAL_FOLDER="$3"
      # install from local or VCS
     if [[ -n "${LOCAL_FOLDER}" ]]; then
          if __jenvtool_contains "${LOCAL_FOLDER}" "http://"; then
             __jenvtool_install_candidate_version "${CANDIDATE}" "${VERSION}" "${LOCAL_FOLDER}" || return 1
-        elif  __jenvtool_array_contains "${LOCAL_FOLDER}" "@"; then
+        elif  __jenvtool_contains "${LOCAL_FOLDER}" "@"; then
             __jenvtool_install_git_repository "${CANDIDATE}" "${VERSION}" "${LOCAL_FOLDER}" || return 1
 		else
 		    __jenvtool_install_local_version "${CANDIDATE}" "${VERSION}" "${LOCAL_FOLDER}" || return 1
