@@ -31,6 +31,10 @@ and install. After install please execute following command:
     $ ln -s /Library/Java/JavaVirtualMachines/jdk1.7.0_17.jdk/Contents/home $HOME/.jenv/candidates/java/1.7.0_17
     $ jenv default java 1.7.0_17
 
+You can also install Java by http url:
+
+   $ jenv install java 1.7.0_17  http://xxxx.com/java/java-1.7.0_17-darwin.zip
+
 ## Install canidates
 
 First view all available candidates:
@@ -58,6 +62,9 @@ If you want to add custom candidate into jenv, please create candidates_local un
 Then you can install candidate from git repository, and you can update candidate by following command:
 
     $jenv update spike
+If the candidate is absent, jenv will update all git or svn based candidates.
+    $jenv update
+Update all git or svn based candidates.
 
 ## How to update jenv
 Please use selfupdate command to get last version and candidate repository.
