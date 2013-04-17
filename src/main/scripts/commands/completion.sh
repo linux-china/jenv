@@ -45,6 +45,13 @@ _jenv_default()
   return 0
 }
 
+_jenv_show()
+{
+  candidates="${JENV_CANDIDATES[@]}"
+  _jenv_comp "$candidates"
+  return 0
+}
+
 _jenv_current()
 {
    candidates="${JENV_CANDIDATES[@]}"
@@ -84,6 +91,7 @@ _jenv()
     list)      _jenv_list ;;
     ls)        _jenv_list ;;
     install)   _jenv_install ;;
+    show)      _jenv_show ;;
     default)   _jenv_default ;;
     current)   _jenv_current ;;
     cd)        _jenv_cd ;;
