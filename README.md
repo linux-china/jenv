@@ -54,6 +54,7 @@ In your terminal, input mvn --version to check the installation.
   * use: Use the candidate with the version, such as jenv use maven 3.0.4
   * default: Make the version as default, such as jenv default maven 3.0.4
   * cd: change directory to candidate install directory, such as jenv cd groovy
+  * show: display candidate's detail information
 
 ## Setup local candidates
 If you want to add custom candidate into jenv, please create candidates_local under $HOME/.jenv/db/ directory and input candidate name.
