@@ -15,6 +15,12 @@
 #   limitations under the License.
 #
 
+# echo as green text
+# @param $1 text
+function __jenvtool_echo_green {
+   echo $'\e[32m'"$1"$'\e[00m'
+}
+
 # OS specific support (must be 'true' or 'false').
 cygwin=false;
 darwin=false;
@@ -174,12 +180,12 @@ fi
 
 echo -e "\n\n\nAll done!\n\n"
 
-echo "Please open a new terminal, or run the following in the existing one:"
+__jenvtool_echo_green "Please open a new terminal, or run the following in the existing one:"
 echo ""
-echo "    source \"${JENV_DIR}/bin/jenv-init.sh\""
+__jenvtool_echo_green "    source ${JENV_DIR}/bin/jenv-init.sh "
 echo ""
-echo "Then issue the following command:"
+__jenvtool_echo_green "Then issue the following command:"
 echo ""
-echo "    jenv help"
+__jenvtool_echo_green "    jenv help"
 echo ""
-echo "Enjoy!!!"
+__jenvtool_echo_green "Enjoy!!!"
