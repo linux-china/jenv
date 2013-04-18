@@ -19,6 +19,12 @@
 # list candidate versions
 # @param $1 candidate name
 function __jenvtool_list {
+    #list installed candidates
+    if [[ -z "$1" ]]; then
+      __jenvtool_list_installed_candidates
+      return 0;
+    fi
+    # list candidate versions
 	CANDIDATE=`echo "$1" | tr '[:upper:]' '[:lower:]'`
 	__jenvtool_check_candidate_present "${CANDIDATE}" || return 1
 	__jenvtool_determine_current_version "${CANDIDATE}"
@@ -46,4 +52,35 @@ function __jenvtool_list {
     done
     unset candidate_version
 	unset CANDIDATE_VERSIONS
+}
+
+# list installed candidates
+__jenvtool_list_installed_candidates() {
+ echo "Installed candidates"
+ echo "========================================================="
+ CANDIDATE_COUNT=1
+ BASE_DIR="${JENV_DIR}/candidates"
+ BASE_DIR2="${BASE_DIR}/"
+ for i in "${BASE_DIR}"/*;do
+    if [ -d "$i" ];then
+       CANDIDATE=${i/"${BASE_DIR2}"/''}
+       echo "${CANDIDATE}";
+       CANDIDATE_COUNT=$(( ${CANDIDATE_COUNT} +1 ))
+       __jenvtool_determine_current_version "${CANDIDATE}"
+       for j in "$i"/*;do
+         if ! __jenvtool_contains "$j" "current"; then
+           BASE_DIR3="${i}/"
+           VERSION=${j/"${BASE_DIR3}"/''}
+           if [[ "${VERSION}" != "*" ]]; then
+               if [[ "${VERSION}" == "${CURRENT}" ]]; then
+                   echo "* ${VERSION}"
+               else
+                   echo "  ${VERSION}"
+               fi
+           fi
+         fi
+       done
+    fi
+ done
+ __jenvtool_echo_green "${CANDIDATE_COUNT} candidates installed."
 }
