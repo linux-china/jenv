@@ -56,16 +56,7 @@ else
 	unzip -qo "${jenv_tmp_zip}" -d "${JENV_DIR}"
 fi
 
+source "${JENV_DIR}/bin/jenv-init.sh"
 echo ""
 echo ""
-echo "Successfully upgraded JENV."
-echo ""
-echo "VERY IMPORTANT!!!"
-echo ""
-echo "JENV will stop working in the current shell when upgrading from 0.0.1 to 0.0.x"
-echo ""
-__jenvtool_echo_green "Please open a new terminal, or run the following in the existing one:"
-echo ""
-__jenvtool_echo_green "    source ${JENV_DIR}/bin/jenv-init.sh "
-echo ""
-echo ""
+__jenvtool_echo_green "Successfully upgraded JENV."
