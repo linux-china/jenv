@@ -50,13 +50,17 @@ Final install the candidate with the version:
     $ jenv install maven 3.0.5
 In your terminal, input mvn --version to check the installation.
 
+If you want to list installed candidates, please use:
+
+    $ jenv ls
+
 ## Other Commands
   * use: Use the candidate with the version, such as jenv use maven 3.0.4
   * default: Make the version as default, such as jenv default maven 3.0.4
   * cd: change directory to candidate install directory, such as jenv cd groovy
   * show: display candidate's detail information
 
-## Setup local candidates
+## Install local candidates
 If you want to add custom candidate into jenv, please create candidates_local under $HOME/.jenv/db/ directory and input candidate name.
 
     $jenv install spike 0.0.1 git@github.com:linux-china/groovy_scripts.git
@@ -64,6 +68,7 @@ Then you can install candidate from git repository, and you can update candidate
 
     $jenv update spike
 If the candidate is absent, jenv will update all git or svn based candidates.
+
     $jenv update
 Update all git or svn based candidates.
 
