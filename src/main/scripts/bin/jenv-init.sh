@@ -21,6 +21,10 @@ export JENV_VERSION="@JENV_VERSION@"
 export JENV_PLATFORM=$(uname)
 # matchine platform, such as x86_64, i686, i386
 export JENV_MACHINE_PLATFORM=$(uname -m)
+# auto confirm without prompt
+if [ -z "${JENV_AUTO}" ]; then
+   export JENV_AUTO="false"
+fi
 
 
 # echo as red text
