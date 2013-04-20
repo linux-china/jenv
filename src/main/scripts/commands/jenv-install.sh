@@ -53,10 +53,12 @@ function __jenvtool_install {
     	__jenvtool_install_candidate_version "${CANDIDATE}" "${VERSION}" || return 1
     fi
 
-	# set default by confirm
-	echo -n "Do you want ${CANDIDATE} ${VERSION} to be set as default? (Y/n): "
-	read USE
-	if [[ -z "${USE}" || "${USE}" == "y" || "${USE}" == "Y" ]]; then
+	# confirm by prompt
+	if [[ "${JENV_AUTO}" == "false" ]]; then
+	   echo -n "Do you want ${CANDIDATE} ${VERSION} to be set as default? (Y/n): "
+	   read USE
+	fi
+	if [[ "${JENV_AUTO}" == "true" ||  -z "${USE}" || "${USE}" == "y" || "${USE}" == "Y" ]]; then
 		__jenvtool_echo_green "Setting ${CANDIDATE} ${VERSION} as default."
 		__jenvtool_link_candidate_version "${CANDIDATE}" "${VERSION}"
 	fi
