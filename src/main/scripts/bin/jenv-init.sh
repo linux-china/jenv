@@ -105,7 +105,7 @@ function __jenvtool_init {
     # custom candidates
     if [[ -f "${JENV_DIR}/config/candidates_local" ]]; then
         for candidate_name in $(cat "${JENV_DIR}/config/candidates_local"); do
-               JENV_CANDIDATES+=("${candidate_name}")
+            JENV_CANDIDATES=("${JENV_CANDIDATES[@]}" "${candidate_name}")
         done
     fi
     export JENV_CANDIDATES
