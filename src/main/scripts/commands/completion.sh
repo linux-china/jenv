@@ -7,7 +7,7 @@ _jenv_comp()
 {
   typeset cur
   cur="${COMP_WORDS[COMP_CWORD]}"
-  COMPREPLY=( $(compgen -W "$1" -- "$cur") )
+  COMPREPLY=( $( compgen -W "$1" -- "$cur" ) )
 }
 
 _jenv_commands()
