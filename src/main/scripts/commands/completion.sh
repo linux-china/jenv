@@ -109,7 +109,7 @@ _jenv()
             for version in $(ls -1 "${JENV_DIR}/candidates/${CANDIDATE}" 2> /dev/null); do
                 if [ ${version} != 'current' ]; then
                      if ! __jenvtool_array_contains CANDIDATE_VERSIONS[@] "${version}"; then
-                       candidate_versions+=("${version}")
+                       candidate_versions=("${candidate_versions[@]}" "${version}")
                      fi
                 fi
             done
