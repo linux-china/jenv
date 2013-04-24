@@ -33,6 +33,12 @@ JBoss
    Java Web Server
 Jetty
    Java Web Server
+GlassFish
+   Free community-supported application server, Full Java EE 6 platform support
+Resin
+   Resin is a high-performance, cloud-optimized java application server
+Virgo
+   Virgo from EclipseRT is a completely module-based Java application server
 Luke
    Lucene GUI Tool
 Cassandra
