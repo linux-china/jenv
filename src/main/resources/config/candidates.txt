@@ -27,6 +27,8 @@ Jython
    Python for the Java Platform
 Tomcat
    Java Web Server
+TomEE
+   Apache TomEE is an all-Apache Java EE 6 Web Profile certified stack where Tomcat is top dog
 JBoss
    Java Web Server
 Jetty
