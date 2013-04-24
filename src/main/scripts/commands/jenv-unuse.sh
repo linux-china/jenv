@@ -29,13 +29,9 @@ function __jenvtool_unuse {
     if [ -L "${JENV_DIR}/candidates/${CANDIDATE}/current" ]; then
     	unlink "${JENV_DIR}/candidates/${CANDIDATE}/current"
     fi
-    if ! __jenvtool_contains "$PATH" "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}"; then
-         if [ -e "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/bin" ]; then
-          	__jenvtool_path_remove "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/bin"
-         elif [ -d "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/tools" ]; then
-          	__jenvtool_path_remove "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/tools"
-         else
-          	__jenvtool_path_remove "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}"
-         fi
-    fi
+    #remove from path
+    __jenvtool_path_remove_candidate "${CANDIDATE}" "${VERSION}"
+    #unset home
+    UPPER_CANDIDATE=`echo "${CANDIDATE}" | tr '[:lower:]' '[:upper:]'`
+    unset "${UPPER_CANDIDATE}_HOME"
 }

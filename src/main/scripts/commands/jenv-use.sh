@@ -41,13 +41,7 @@ function __jenvtool_use {
        	UPPER_CANDIDATE=`echo "${CANDIDATE}" | tr '[:lower:]' '[:upper:]'`
        	export "${UPPER_CANDIDATE}_HOME"="${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}"
        	if ! __jenvtool_contains "$PATH" "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}"; then
-       	    if [ -e "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/bin" ]; then
-       	        export PATH="${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/bin:$PATH"
-       	    elif [ -d "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/tools" ]; then
-       	        export PATH="${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/tools:$PATH"
-       	    else
-       	        export PATH="${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}:$PATH"
-       	    fi
+       	    __jenvtool_path_add_candidate "${CANDIDATE}" "${VERSION}"
        	fi
 	fi
 	__jenvtool_echo_green "Using ${CANDIDATE} version ${VERSION} in this shell."

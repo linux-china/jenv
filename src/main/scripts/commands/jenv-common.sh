@@ -162,12 +162,6 @@ function __jenvtool_link_candidate_version {
 	fi
 	ln -s "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}" "${JENV_DIR}/candidates/${CANDIDATE}/current"
     if ! __jenvtool_contains "$PATH" "candidates/$CANDIDATE/current"; then
-         if [ -d "${JENV_DIR}/candidates/${CANDIDATE}/current/bin" ]; then
-               PATH="${JENV_DIR}/candidates/${CANDIDATE}/current/bin:$PATH"
-         elif [ -d "${JENV_DIR}/candidates/${CANDIDATE}/current/tools" ]; then
-               PATH="${JENV_DIR}/candidates/${CANDIDATE}/current/tools:$PATH"
-         else
-               PATH="${JENV_DIR}/candidates/${CANDIDATE}/current:$PATH"
-         fi
+         __jenvtool_path_add_candidate "${CANDIDATE}" "current"
     fi
 }
