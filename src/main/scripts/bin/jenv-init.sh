@@ -60,14 +60,43 @@ function __jenvtool_array_contains {
    return 1
 }
 
-# remove item from path
-# @param $1 path item
-__jenvtool_path_remove ()  {
-     newPATH="${PATH}:"
-     newPATH="${newPATH//$1:/}"
-     export PATH="${newPATH%:}"
-     unset newPATH
+# remove candidate from path
+# @param $1 candidate name
+# @param $2 candidate version
+__jenvtool_path_remove_candidate ()  {
+     CANDIDATE="$1"
+     VERSION="$2"
+     if ! __jenvtool_contains "$PATH" "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}"; then
+        if [ -e "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/bin" ]; then
+           candidatePath="${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/bin"
+        elif [ -d "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/tools" ]; then
+           candidatePath="${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/tools"
+        else
+           candidatePath="${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}"
+        fi
+        newPATH="${PATH}:"
+        newPATH="${newPATH//${candidatePath}:/}"
+        export PATH="${newPATH%:}"
+        unset newPATH
+        unset candidatePath
+     fi
      return 0;
+}
+
+# add candidate into path
+# @param $1 candidate name
+# @param $2 candidate version
+__jenvtool_path_add_candidate() {
+   CANDIDATE="$1"
+   VERSION="$2"
+   if [ -d "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/bin" ]; then
+      PATH="${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/bin:$PATH"
+   elif [ -d "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/tools" ]; then
+      PATH="${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/tools:$PATH"
+   else
+      PATH="${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}:$PATH"
+   fi
+   export PATH
 }
 
 # jenv init function
@@ -124,13 +153,7 @@ function __jenvtool_init {
         if ! __jenvtool_contains "$PATH" "candidates/${CANDIDATE}/current" && [ -e "${JENV_DIR}/candidates/${CANDIDATE}/current" ]; then
            UPPER_CANDIDATE=`echo "${CANDIDATE}" | tr '[:lower:]' '[:upper:]'`
            export "${UPPER_CANDIDATE}_HOME"="${JENV_DIR}/candidates/${CANDIDATE}/current"
-           if [ -d "${JENV_DIR}/candidates/${CANDIDATE}/current/bin" ]; then
-               PATH="${JENV_DIR}/candidates/${CANDIDATE}/current/bin:$PATH"
-           elif [ -d "${JENV_DIR}/candidates/${CANDIDATE}/current/tools" ]; then
-               PATH="${JENV_DIR}/candidates/${CANDIDATE}/current/tools:$PATH"
-           else
-               PATH="${JENV_DIR}/candidates/${CANDIDATE}/current:$PATH"
-           fi
+           __jenvtool_path_add_candidate "${CANDIDATE}" "current"
         fi
     done
 
