@@ -72,6 +72,13 @@ _jenv_cd()
    return 0
 }
 
+_jenv_pause()
+{
+   candidates="${JENV_CANDIDATES[@]}"
+   _jenv_comp "$candidates"
+   return 0
+}
+
 
 _jenv_uninstall()
 {
@@ -94,6 +101,7 @@ _jenv()
     show)      _jenv_show ;;
     default)   _jenv_default ;;
     current)   _jenv_current ;;
+    pause)     _jenv_pause ;;
     cd)        _jenv_cd ;;
     uninstall) _jenv_uninstall ;;
     *)        _jenv_commands ;;
