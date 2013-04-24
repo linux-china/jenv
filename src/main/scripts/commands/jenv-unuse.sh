@@ -25,6 +25,10 @@ function __jenvtool_unuse {
     if [[ -z "$2" ]]; then
        VERSION="current"
     fi
+    #unlink current
+    if [ -L "${JENV_DIR}/candidates/${CANDIDATE}/current" ]; then
+    	unlink "${JENV_DIR}/candidates/${CANDIDATE}/current"
+    fi
     if ! __jenvtool_contains "$PATH" "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}"; then
          if [ -e "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/bin" ]; then
           	__jenvtool_path_remove "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/bin"
