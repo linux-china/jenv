@@ -66,7 +66,7 @@ function __jenvtool_array_contains {
 __jenvtool_path_remove_candidate ()  {
      CANDIDATE="$1"
      VERSION="$2"
-     if ! __jenvtool_contains "$PATH" "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}"; then
+     if __jenvtool_contains "$PATH" "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}"; then
         if [ -e "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/bin" ]; then
            candidatePath="${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/bin"
         elif [ -d "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/tools" ]; then
