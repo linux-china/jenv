@@ -56,6 +56,7 @@ If you want to list installed candidates, please use:
 
 ## Other Commands
   * use: Use the candidate with the version, such as jenv use maven 3.0.4
+  * pause: Pause candidate usage
   * default: Make the version as default, such as jenv default maven 3.0.4
   * cd: change directory to candidate install directory, such as jenv cd groovy
   * show: display candidate's detail information
