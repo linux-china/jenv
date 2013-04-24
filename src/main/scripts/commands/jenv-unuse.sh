@@ -16,10 +16,10 @@
 #   limitations under the License.
 #
 
-# unuse candidate with the version
+# pause candidate with the version
 # @param $1 candidate name
 # @param $2 candidate version
-function __jenvtool_unuse {
+function __jenvtool_pause {
 	CANDIDATE=`echo "$1" | tr '[:upper:]' '[:lower:]'`
 	VERSION="$2"
     if [[ -z "$2" ]]; then
@@ -34,4 +34,5 @@ function __jenvtool_unuse {
     #unset home
     UPPER_CANDIDATE=`echo "${CANDIDATE}" | tr '[:lower:]' '[:upper:]'`
     unset "${UPPER_CANDIDATE}_HOME"
+    echo "${CANDIDATE} paused!"
 }
