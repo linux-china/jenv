@@ -60,6 +60,16 @@ function __jenvtool_array_contains {
    return 1
 }
 
+# remove item from path
+# @param $1 path item
+__jenvtool_path_remove ()  {
+     newPATH="${PATH}:"
+     newPATH="${newPATH//$1:/}"
+     export PATH="${newPATH%:}"
+     unset newPATH
+     return 0;
+}
+
 # jenv init function
 # @return JENV_DIR jenv dir
 # @return JENV_SERVICE jenv service url
