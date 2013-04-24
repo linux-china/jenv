@@ -94,6 +94,7 @@ _jenv()
 
     case "${prev}" in
     use)       _jenv_use ;;
+    pause)     _jenv_pause ;;
     update)    _jenv_update ;;
     list)      _jenv_list ;;
     ls)        _jenv_list ;;
@@ -101,7 +102,6 @@ _jenv()
     show)      _jenv_show ;;
     default)   _jenv_default ;;
     current)   _jenv_current ;;
-    pause)     _jenv_pause ;;
     cd)        _jenv_cd ;;
     uninstall) _jenv_uninstall ;;
     *)        _jenv_commands ;;
