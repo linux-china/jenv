@@ -62,6 +62,13 @@ If you want to list installed candidates, please use:
   * cd: change directory to candidate install directory, such as jenv cd groovy
   * show: display candidate's detail information
 
+## jenvrc support
+jenvrc is file contains candidate and the version as following:
+
+       java=1.6.0_45
+       maven=3.0.5
+After you enter this directory, jenv will setup environment automatically.
+
 ## Install local candidates
 If you want to add custom candidate into jenv, please create candidates_local under $HOME/.jenv/db/ directory and input candidate name.
 
