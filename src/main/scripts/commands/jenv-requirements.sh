@@ -18,9 +18,9 @@
 
 # display jenv version
 function __jenvtool_requirements {
-	echo "jenv requirements"
+	echo "Following commands are required for jenv:"
 	echo "====================================================="
-	for cmdName in complete sed grep tar unzip curl git svn
+	for cmdName in sed tar git svn curl grep unzip complete
 	do
 	   type $cmdName >/dev/null 2>&1
 	   if [ "$?" -eq "0" ] ; then
