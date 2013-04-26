@@ -63,7 +63,7 @@ If you want to list installed candidates, please use:
   * show: display candidate's detail information
 
 ## jenvrc support
-jenvrc is file contains candidate and the version as following:
+jenvrc is jenv setup file which contains candidate and the version as following:
 
        java=1.6.0_45
        maven=3.0.5
