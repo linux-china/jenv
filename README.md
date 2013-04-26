@@ -59,8 +59,9 @@ If you want to list installed candidates, please use:
   * pause: Pause candidate usage
   * exe: Execute script under candidate, such as "jenv execute tomcat startup.sh" or "jenv execute tomee startup.sh"
   * default: Make the version as default, such as jenv default maven 3.0.4
-  * cd: change directory to candidate install directory, such as jenv cd groovy
-  * show: display candidate's detail information
+  * cd: Change directory to candidate install directory, such as jenv cd groovy
+  * show: Display candidate's detail information
+  * requirements: Display jenv requirements
 
 ## jenvrc support
 jenvrc is jenv setup file which contains candidate and the version as following:
