@@ -179,5 +179,19 @@ function __jenvtool_init {
     fi
 }
 
+#jenv tool init
 __jenvtool_init
 
+# change directory with jenvrc support
+cd () {
+  builtin cd "$@"
+  if [[ -f "${PWD}/jenvrc" ]]; then
+     echo "jenv setup"
+     for entry in $(cat "${PWD}/jenvrc")
+     do
+        candidate1=${entry%=*}
+        version1=${entry#*=}
+        __jenvtool_use "${candidate1}" "${version1}"
+     done
+  fi
+}
