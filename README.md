@@ -68,6 +68,7 @@ jenvrc is jenv setup file which contains candidate and the version as following:
        java=1.6.0_45
        maven=3.0.5
 After you enter this directory, jenv will setup environment automatically.
+Now You can use jenvrc to setup Java environment for each of your individual projects.
 
 ## Install local candidates
 If you want to add custom candidate into jenv, please create candidates_local under $HOME/.jenv/db/ directory and input candidate name.
