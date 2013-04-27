@@ -26,7 +26,8 @@ function __jenvtool_help {
 	echo "   candidate  :  $(echo "${JENV_CANDIDATES[@]:-${JENV_CANDIDATES_DEFAULT[@]}}" | sed -E 's/ /, /g')"
 	echo "   version    :  optional, defaults to latest stable if not provided"
 	echo ""
-	echo "eg: jenv candidates"
+	echo "eg: jenv all"
 	echo "eg: jenv install maven 3.0.4"
 	echo "Author: linux_china, @linux_china on weibo and twitter"
+	echo "For more information, please visit http://jenv.mvnsearch.org"
 }
