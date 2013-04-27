@@ -186,7 +186,7 @@ __jenvtool_init
 cd () {
   builtin cd "$@"
   if [[ -f "${PWD}/jenvrc" ]]; then
-     echo "========jenv setup============"
+     echo "==============jenv setup======================"
      for entry in $(cat "${PWD}/jenvrc")
      do
         candidate1=${entry%=*}
