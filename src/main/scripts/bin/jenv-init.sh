@@ -186,12 +186,18 @@ __jenvtool_init
 cd () {
   builtin cd "$@"
   if [[ -f "${PWD}/jenvrc" ]]; then
-     echo "jenv setup"
+     echo "========jenv setup============"
      for entry in $(cat "${PWD}/jenvrc")
      do
         candidate1=${entry%=*}
         version1=${entry#*=}
-        __jenvtool_use "${candidate1}" "${version1}"
+        if [ -d "${JENV_DIR}/candidates/${candidate1}/${version1}" ]; then
+            __jenvtool_use "${candidate1}" "${version1}"
+        else
+           __jenvtool_install "${candidate1}" "${version1}"
+        fi
+        unset candidate1
+        unset version1
      done
   fi
 }
