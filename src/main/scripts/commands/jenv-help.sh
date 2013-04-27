@@ -22,7 +22,7 @@ function __jenvtool_help {
 	echo ""
 	echo "Usage: jenv <command> <candidate> [version]"
 	echo ""
-	echo "   command    :  install, uninstall, list, use, pause, exe, current, cd, version, default, update, selfupdate, requirements or help"
+	echo "   command    :  install, uninstall, list, use, pause, exe, which, cd, version, default, update, selfupdate, requirements or help"
 	echo "   candidate  :  $(echo "${JENV_CANDIDATES[@]:-${JENV_CANDIDATES_DEFAULT[@]}}" | sed -E 's/ /, /g')"
 	echo "   version    :  optional, defaults to latest stable if not provided"
 	echo ""
