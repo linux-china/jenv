@@ -120,3 +120,7 @@ RedLine
    Smalltalk on the Java Virtual Machine
 Liquibase
    An open source library for tracking, managing and applying database changes
+Felix
+   Apache Felix is a community effort to implement the OSGi R4 Service Platform and other interesting OSGi-related technologies
+Equinox
+   Equinox is an implementation of the OSGi R4 core framework specification
