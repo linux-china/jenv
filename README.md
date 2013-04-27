@@ -56,6 +56,7 @@ If you want to list installed candidates, please use:
 
 ## Other Commands
   * use: Use the candidate with the version, such as jenv use maven 3.0.4
+  * which: Which version for candidate
   * pause: Pause candidate usage
   * exe: Execute script under candidate, such as "jenv execute tomcat startup.sh" or "jenv execute tomee startup.sh"
   * default: Make the version as default, such as jenv default maven 3.0.4
