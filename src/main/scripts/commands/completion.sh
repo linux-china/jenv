@@ -12,7 +12,7 @@ _jenv_comp()
 
 _jenv_commands()
 {
-   cmds="all ls candidates list update install uninstall pause execute exe use current cd version default selfupdate help requirements"
+   cmds="all ls candidates list update install uninstall pause execute exe use which cd version default selfupdate help requirements"
    _jenv_comp "$cmds"
    return 0
 }
@@ -52,7 +52,7 @@ _jenv_show()
   return 0
 }
 
-_jenv_current()
+_jenv_which()
 {
    candidates="${JENV_CANDIDATES[@]}"
    _jenv_comp "$candidates"
@@ -110,7 +110,7 @@ _jenv()
     exe)       _jenv_execute ;;
     show)      _jenv_show ;;
     default)   _jenv_default ;;
-    current)   _jenv_current ;;
+    which)     _jenv_which ;;
     cd)        _jenv_cd ;;
     uninstall) _jenv_uninstall ;;
     *)        _jenv_commands ;;
