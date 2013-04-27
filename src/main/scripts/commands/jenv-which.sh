@@ -18,7 +18,7 @@
 
 # display candidate current version
 # @param $1 candidate name
-function __jenvtool_current {
+function __jenvtool_which {
 	if [ -n "$1" ]; then
 		CANDIDATE=`echo "$1" | tr '[:upper:]' '[:lower:]'`
 		__jenvtool_determine_current_version "${CANDIDATE}"
