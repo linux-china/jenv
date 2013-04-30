@@ -124,3 +124,5 @@ Felix
    Apache Felix is a community effort to implement the OSGi R4 Service Platform and other interesting OSGi-related technologies
 Equinox
    Equinox is an implementation of the OSGi R4 core framework specification
+H2
+   H2 is a Java SQL database engine.
