@@ -18,9 +18,8 @@ configurations {
 }
 
 dependencies {
-  groovy group: 'org.codehaus.groovy', name: 'groovy', version: '2.0.5'
-  groovy group: 'org.apache.ant', name: 'ant', version: '1.8.4'
-  sshAntTask 'org.apache.ant:ant-jsch:1.8.4'
+  groovy group: 'org.codehaus.groovy', name: 'groovy', version: '2.0.8'
+  groovy group: 'org.apache.ant', name: 'ant', version: '1.9.0'
 }
 
 @SuppressWarnings("GroovyAssignabilityCheck")
