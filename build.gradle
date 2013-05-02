@@ -58,25 +58,3 @@ task assembleArchive(type: Zip, dependsOn: [prepareJenvCommands]) {
   from "build/jenv"
   include "**/*"
 }
-
-task syncToSite(dependsOn: [assembleArchive]) {
-  // sshAntTask configuration classpath.
-  ant.taskdef(name: 'scp', classname: 'org.apache.tools.ant.taskdefs.optional.ssh.Scp',
-          classpath: configurations.sshAntTask.asPath)
-  if (new File('build/distributions/jenv-' + config.jenvVersion + '.zip').exists()) {
-    // upload install.sh
-    ant.scp(keyfile: '${user.home}/.ssh/id_rsa', verbose: 'true',
-            localFile: 'build/jenv/commands/install.sh',
-            remoteTofile: 'linux_china@team.mvnsearch.org:/home/virtual_hosts/get.jvmtool.mvnsearch.org/index.txt')
-    // upload jenv-xxxx.zip
-    ant.scp(keyfile: '${user.home}/.ssh/id_rsa', verbose: 'true',
-            localFile: 'build/distributions/jenv-' + config.jenvVersion + '.zip',
-            remoteTodir: 'linux_china@team.mvnsearch.org:/home/virtual_hosts/get.jvmtool.mvnsearch.org/jenv-0.0.1.zip')
-    ant.scp(keyfile: '${user.home}/.ssh/id_rsa', verbose: 'true',
-            localFile: 'build/distributions/jenv-' + config.jenvVersion + '.zip',
-            remoteTodir: 'linux_china@team.mvnsearch.org:/home/virtual_hosts/get.jvmtool.mvnsearch.org/jenv-0.0.2.zip')
-    ant.scp(keyfile: '${user.home}/.ssh/id_rsa', verbose: 'true',
-            localFile: 'build/distributions/jenv-' + config.jenvVersion + '.zip',
-            remoteTodir: 'linux_china@team.mvnsearch.org:/home/virtual_hosts/get.jvmtool.mvnsearch.org/jenv-last.zip')
-  }
-}
