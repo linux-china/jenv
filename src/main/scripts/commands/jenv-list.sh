@@ -28,7 +28,21 @@ function __jenvtool_list {
 	CANDIDATE=`echo "$1" | tr '[:upper:]' '[:lower:]'`
 	__jenvtool_check_candidate_present "${CANDIDATE}" || return 1
 	__jenvtool_determine_current_version "${CANDIDATE}"
-    CANDIDATE_VERSIONS=($(cat "${JENV_DIR}/db/${CANDIDATE}.txt"))
+	CANDIDATE_VERSIONS=()
+	# default versions
+	if [[ -f "${JENV_DIR}/db/${CANDIDATE}.txt" ]] ; then
+	   CANDIDATE_VERSIONS=($(cat "${JENV_DIR}/db/${CANDIDATE}.txt"))
+	fi
+	# repository versions
+	for repo in $(ls -1 "${JENV_DIR}/repo" 2> /dev/null); do
+       if [ -f "${JENV_DIR}/repo/${repo}/version/${CANDIDATE}.txt" ]; then
+         for candidate_version in $(cat "${JENV_DIR}/repo/${repo}/version/${CANDIDATE}.txt"); do
+           if ! __jenvtool_array_contains CANDIDATE_VERSIONS[@] "${candidate_version}"; then
+              CANDIDATE_VERSIONS=("${CANDIDATE_VERSIONS[@]}" "${candidate_version}")
+           fi
+         done
+       fi
+    done
     INSTALLED_VERSIONS=()
     # add local unversioned in repository
     for version in $(ls -1 "${JENV_DIR}/candidates/${CANDIDATE}" 2> /dev/null); do
