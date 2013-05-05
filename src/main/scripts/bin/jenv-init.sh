@@ -142,13 +142,11 @@ function __jenvtool_init {
     # repository candidates
     for repo in $(ls -1 "${JENV_DIR}/repo" 2> /dev/null); do
        if [ -f "${JENV_DIR}/repo/${repo}/candidates" ]; then
-         REPO_CANDIDATES=($(cat "${JENV_DIR}/repo/${repo}/candidates"))
          for candidate_name in $(cat "${JENV_DIR}/repo/${repo}/candidates"); do
            if ! __jenvtool_array_contains JENV_CANDIDATES[@] "${candidate_name}"; then
               JENV_CANDIDATES=("${JENV_CANDIDATES[@]}" "${candidate_name}")
            fi
          done
-         unset REPO_CANDIDATES
        fi
     done
     export JENV_CANDIDATES
