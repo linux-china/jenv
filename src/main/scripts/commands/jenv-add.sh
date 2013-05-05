@@ -36,6 +36,8 @@ function __jenvtool_add {
 	   unset CANDIDATES
 	else
 	   echo -n "${CANDIDATE}" > "${candidates_file}"
+	   echo "Local Candidate List" > "${JENV_DIR}/repo/local/candidates.txt"
+	   echo "==================================" >> "${JENV_DIR}/repo/local/candidates.txt"
 	fi
 	unset candidates_file
 	# add version
