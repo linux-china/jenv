@@ -1,0 +1,130 @@
+Candidate List
+======================================================================================
+Ant
+   Java Build Tool
+Maven
+   Java Project Management and Comprehension Tool
+Groovy
+   Agile and Dynamic Language for JVM
+Gant
+   Groovy Ant Scripting
+Gradle
+   Build Tool with Groovy in JVM
+Grails
+   Grails is an Open Source, full stack, web application framework for the JVM
+Griffon
+   Griffon is an application framework for developing desktop applications in the JVM
+Vertx
+   Effortless asynchronous application development for the modern web and enterprise
+Play
+   The High Velocity Web Framework For Java and Scala
+JRuby
+   The Ruby Programming Language on the JVM
+Scala
+   Scala is a general purpose programming language designed to express common programming
+   patterns in a concise, elegant, and type-safe way
+Jython
+   Python for the Java Platform
+Tomcat
+   Java Web Server
+TomEE
+   Apache TomEE is an all-Apache Java EE 6 Web Profile certified stack where Tomcat is top dog
+JBoss
+   Java Web Server
+Jetty
+   Java Web Server
+GlassFish
+   Free community-supported application server, Full Java EE 6 platform support
+Resin
+   Resin is a high-performance, cloud-optimized java application server
+Virgo
+   Virgo from EclipseRT is a completely module-based Java application server
+Luke
+   Lucene GUI Tool
+Cassandra
+   NoSQL Product with Big Column Support
+Android
+   Android SDK
+Roo
+   Spring Roo: rapid application development tool for Java developers
+GAE
+   Google App Engine Java SDK
+Clojure
+   Clojure is a dynamic programming language with dialect of Lisp in JVM
+Kotlin
+   Statically typed programming language that compiles to JVM byte codes and JavaScript
+JMeter
+   Java performance testing tool.
+PlugProxy
+   Java tcp proxy gui tool
+Hadoop
+   Open-source software for reliable, scalable, distributed computing with Java
+HBase
+   Hadoop database, a distributed, scalable, big data store
+ZooKeeper
+   Apache ZooKeeper is an effort to develop and maintain an open-source server
+   which enables highly reliable distributed coordination.
+ActiveMQ
+   Open source messaging and Integration Patterns server with Java
+GCViewer
+   GCViewer is a little tool that visualizes verbose GC output https://github.com/chewiebug/GCViewer
+GWT
+   Google Web Toolkit
+SquirreLSQL
+   Universal SQL Client writtern with Java
+sbt
+   sbt is a build tool for Scala and Java projects that aims to do the basics well
+Hive
+   Hive is a data warehouse system for Hadoop that facilitates easy data summarization, ad-hoc queries,
+   and the analysis of large datasets stored in Hadoop compatible file systems
+Storm
+   Distributed and fault-tolerant realtime computation
+BTrace
+   BTrace is a safe, dynamic tracing tool for the Java platform
+Leiningen
+   Automating Clojure projects without setting your hair on fire
+Antlr
+   ANTLR (ANother Tool for Language Recognition) is a powerful parser generator for reading, processing,
+   executing, or translating structured text or binary files. It's widely used to build languages, tools,
+   and frameworks
+Mat
+   The Eclipse Memory Analyzer is a fast and feature-rich Java heap analyzer that helps you find
+   memory leaks and reduce memory consumption.
+Elasticsearch
+   Open Source, Distributed, RESTful, Search Engine
+PomViewer
+   Display pom.xml information in a jar file
+RestClient
+   RESTClient is a Java application to test RESTful webservices
+YUICompressor
+   JavaScript compressor
+Jad
+   Java Decompiler
+HouseMD
+   Awesome diagnosing tool
+Pig
+   Apache Pig is a platform for analyzing large data sets
+TorqueBox
+   TorqueBox is a new kind of Ruby application platform that supports popular technologies such as Ruby on Rails and Sinatra,
+   while extending the footprint of Ruby applications to include built-in support for services such as messaging, scheduling,
+   caching, and daemons.
+Nailgun
+   Nailgun is a client, protocol, and server for running Java programs from the command line without incurring the JVM
+   startup overhead. Programs run in the server (which is implemented in Java), and are triggered
+   by the client (written in C), which handles all I/O.
+Quercus
+   Caucho's PHP on the JVM
+JFlex
+   JFlex is a lexical analyzer generator (also known as scanner generator) for Java, written in Java.
+RedLine
+   Smalltalk on the Java Virtual Machine
+Liquibase
+   An open source library for tracking, managing and applying database changes
+Felix
+   Apache Felix is a community effort to implement the OSGi R4 Service Platform and other interesting OSGi-related technologies
+Equinox
+   Equinox is an implementation of the OSGi R4 core framework specification
+H2
+   H2 is a Java SQL database engine.
+jHiccup
+   Open Source Tool to Measure Variations in Java Performance
