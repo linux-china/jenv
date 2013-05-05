@@ -135,18 +135,22 @@ function __jenvtool_init {
     export JENV_SERVICE
 
     # check cached candidates first
-    candidate_cache="${JENV_DIR}/config/candidates"
-    if [[ -f "${candidate_cache}" ]]; then
-        JENV_CANDIDATES=($(cat "${candidate_cache}"))
-    else
-        JENV_CANDIDATES=(${JENV_CANDIDATES_DEFAULT[@]})
+    JENV_CANDIDATES=(${JENV_CANDIDATES_DEFAULT[@]})
+    if [[ -f "${JENV_DIR}/config/candidates" ]]; then
+        JENV_CANDIDATES=($(cat "${JENV_DIR}/config/candidates"))
     fi
-    # custom candidates
-    if [[ -f "${JENV_DIR}/config/candidates_local" ]]; then
-        for candidate_name in $(cat "${JENV_DIR}/config/candidates_local"); do
-            JENV_CANDIDATES=("${JENV_CANDIDATES[@]}" "${candidate_name}")
-        done
-    fi
+    # repository candidates
+    for repo in $(ls -1 "${JENV_DIR}/repo" 2> /dev/null); do
+       if [ -f "${JENV_DIR}/repo/${repo}/candidates" ]; then
+         REPO_CANDIDATES=($(cat "${JENV_DIR}/repo/${repo}/candidates"))
+         for candidate_name in $(cat "${JENV_DIR}/repo/${repo}/candidates"); do
+           if ! __jenvtool_array_contains JENV_CANDIDATES[@] "${candidate_name}"; then
+              JENV_CANDIDATES=("${JENV_CANDIDATES[@]}" "${candidate_name}")
+           fi
+         done
+         unset REPO_CANDIDATES
+       fi
+    done
     export JENV_CANDIDATES
     # update PATH env
     for CANDIDATE in "${JENV_CANDIDATES[@]}" ; do
