@@ -73,13 +73,17 @@ function jenv {
 	fi
 
 	# Check whether the candidate exists
-    if [[ -n "$2" ]]; then
-        CANDIDATE=`echo "$2" | tr '[:upper:]' '[:lower:]'`
-        if [[ -z $(echo ${JENV_CANDIDATES[@]} | grep -w "${CANDIDATE}") ]]; then
-            __jenvtool_echo_red "Stop! ${CANDIDATE} is not a valid candidate."
-            return 1
+	candidate_ops=(cd default execute install list pause show uninstall use which)
+	if __jenvtool_array_contains candidate_ops[@] "${COMMAND}" ; then
+        if [[ -n "$2" ]]; then
+            CANDIDATE=`echo "$2" | tr '[:upper:]' '[:lower:]'`
+            if [[ -z $(echo ${JENV_CANDIDATES[@]} | grep -w "${CANDIDATE}") ]]; then
+                __jenvtool_echo_red "Stop! ${CANDIDATE} is not a valid candidate."
+                return 1
+            fi
         fi
 	fi
+	unset candidate_ops
 
 	# Execute the requested command
 	if [ -n "${CMD_FOUND}" ]; then
