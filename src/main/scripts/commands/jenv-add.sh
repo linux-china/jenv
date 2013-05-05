@@ -60,4 +60,5 @@ function __jenvtool_add {
         fi
         unset version_file
 	fi
+	echo "${CANDIDATE} with $2 added!"
 }
