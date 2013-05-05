@@ -45,6 +45,7 @@ fi
 # Local variables
 jenv_tmp_folder="${JENV_DIR}/tmp"
 jenv_zip_file="${jenv_tmp_folder}/jenv-${JENV_VERSION}.zip"
+jenv_central_repo_file="${jenv_tmp_folder}/repo-central.zip"
 jenv_ext_folder="${JENV_DIR}/ext"
 jenv_bash_profile="${HOME}/.bash_profile"
 jenv_profile="${HOME}/.profile"
@@ -134,6 +135,18 @@ if [[ "${cygwin}" == 'true' ]]; then
 else
 	unzip -qo "${jenv_zip_file}" -d "${JENV_DIR}"
 fi
+
+#download central repository
+echo "Download Central repository..."
+mkdir -p "${JENV_DIR}/repo"
+curl -s "${JENV_SERVICE}/central-repo.zip?platform=${jenv_platform}" > "${jenv_central_repo_file}"
+if [[ "${cygwin}" == 'true' ]]; then
+	echo "Cygwin detected - normalizing paths for unzip..."
+	unzip -qo $(cygpath -w "${jenv_central_repo_file}") -d "${JENV_DIR}/repo/central"
+else
+	unzip -qo "${jenv_central_repo_file}" -d "${JENV_DIR}/repo/central"
+fi
+rm -rf "${jenv_central_repo_file}"
 
 echo "Attempt update of bash profiles..."
 if [ ! -f "${jenv_bash_profile}" -a ! -f "${jenv_profile}" ]; then
