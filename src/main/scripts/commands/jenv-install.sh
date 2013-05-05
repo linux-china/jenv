@@ -120,7 +120,7 @@ function __jenvtool_install_candidate_version {
        echo "Parsing http://jenv.mvnsearch.org/candidate/${CANDIDATE}/download/${VERSION}/${JENV_PLATFORM}/${JENV_MACHINE_PLATFORM}"
        DOWNLOAD_URL=$(curl -s "http://jenv.mvnsearch.org/candidate/${CANDIDATE}/download/${VERSION}/${JENV_PLATFORM}/${JENV_MACHINE_PLATFORM}")
     fi
-    if __jenvtool_contains "${DOWNLOAD_URL}" "get.jvmtool.mvnsearch.org"; then
+    if __jenvtool_contains "${DOWNLOAD_URL}" ".mvnsearch.org"; then
        __jenvtool_download "${CANDIDATE}" "${VERSION}" "${DOWNLOAD_URL}"  || return 1
        mkdir -p "${JENV_DIR}/candidates/${CANDIDATE}"
        unzip -oq "${JENV_DIR}/archives/${CANDIDATE}-${VERSION}.zip" -d "${JENV_DIR}/tmp/"
