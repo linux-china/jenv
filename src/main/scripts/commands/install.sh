@@ -50,7 +50,6 @@ jenv_ext_folder="${JENV_DIR}/ext"
 jenv_bash_profile="${HOME}/.bash_profile"
 jenv_profile="${HOME}/.profile"
 jenv_bashrc="${HOME}/.bashrc"
-jenv_zshrc="${HOME}/.zshrc"
 jenv_platform=$(uname)
 
 jenv_init_snippet=$( cat << EOF
@@ -177,17 +176,6 @@ else
 	if [[ -z `grep 'jenv-init.sh' "${jenv_bashrc}"` ]]; then
 		echo -e "\n${jenv_init_snippet}" >> "${jenv_bashrc}"
 		echo "Updated existing ${jenv_bashrc}"
-	fi
-fi
-
-echo "Attempt update of zsh profiles..."
-if [ ! -f "${jenv_zshrc}" ]; then
-	echo "${jenv_init_snippet}" >> "${jenv_zshrc}"
-	echo "Created and initialised ${jenv_zshrc}"
-else
-	if [[ -z `grep 'jenv-init.sh' "${jenv_zshrc}"` ]]; then
-		echo -e "\n${jenv_init_snippet}" >> "${jenv_zshrc}"
-		echo "Updated existing ${jenv_zshrc}"
 	fi
 fi
 
