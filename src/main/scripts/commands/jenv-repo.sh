@@ -22,7 +22,7 @@ function __jenvtool_repo {
 	repo_cmd="$1"
 	if [[ -z "${repo_cmd}" ]]; then # list repositories
 	   BASE_DIR="${JENV_DIR}/repo"
-	   for repo_name in $(ls -1 "${BASE_DIR}"/*) ; do
+	   for repo_name in $(ls -1 "${BASE_DIR}" 2> /dev/null) ; do
 	     repo_url=""
 	     if [[ -f "${JENV_DIR}/repo/${repo_name}/url.txt" ]] ; then
 	        repo_url=$(cat "${JENV_DIR}/repo/${repo_name}/url.txt")
@@ -58,7 +58,7 @@ function __jenvtool_add_repo {
 # update all repositories
 function __jenvtool_update_repositories {
     BASE_DIR="${JENV_DIR}/repo"
-	for repo_name in $(ls -1 "${BASE_DIR}") ; do
+	for repo_name in $(ls -1 "${BASE_DIR}" 2> /dev/null) ; do
 	   repo_url=""
 	   if [[ -f "${JENV_DIR}/repo/${repo_name}/url.txt" ]] ; then
 	        repo_url=$(cat "${JENV_DIR}/repo/${repo_name}/url.txt")
