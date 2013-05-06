@@ -74,17 +74,12 @@ __jenvtool_list_installed_candidates() {
  echo "========================================================="
  CANDIDATE_COUNT=1
  BASE_DIR="${JENV_DIR}/candidates"
- BASE_DIR2="${BASE_DIR}/"
- for i in "${BASE_DIR}"/*;do
-    if [ -d "$i" ];then
-       CANDIDATE=${i/"${BASE_DIR2}"/''}
+ for CANDIDATE in $(ls -1 "${BASE_DIR}") ; do
        echo "${CANDIDATE}";
        CANDIDATE_COUNT=$(( ${CANDIDATE_COUNT} +1 ))
        __jenvtool_determine_current_version "${CANDIDATE}"
-       for j in "$i"/*;do
-         if ! __jenvtool_contains "$j" "current"; then
-           BASE_DIR3="${i}/"
-           VERSION=${j/"${BASE_DIR3}"/''}
+       for VERSION in $(ls -1 "${BASE_DIR}/${CANDIDATE}") ; do
+         if ! __jenvtool_contains "${VERSION}" "current"; then
            if [[ "${VERSION}" != "*" ]]; then
                if [[ "${VERSION}" == "${CURRENT}" ]]; then
                    echo "* ${VERSION}"
@@ -94,7 +89,6 @@ __jenvtool_list_installed_candidates() {
            fi
          fi
        done
-    fi
  done
  __jenvtool_echo_green "${CANDIDATE_COUNT} candidates installed."
 }
