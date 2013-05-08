@@ -40,6 +40,7 @@ function __jenvtool_repo_all {
   echo "${repo_list[@]}"
 }
 
+########## candidate ################
 
 # check candidate present.
 # @param $1 candidate name
@@ -51,9 +52,11 @@ function __jenvtool_candidate_is_present {
 	fi
 }
 
+############## version  ###############
+
 # check candidate version present.
 # @param $1 candidate version
-function __jenvtool_check_version_present {
+function __jenvtool_version_is_present {
 	if [ -z "$1" ]; then
 		__jenvtool_utils_echo_red "No candidate version provided."
 		__jenvtool_help
