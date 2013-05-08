@@ -28,7 +28,7 @@ function __jenvtool_uninstall {
 	CURRENT=$(readlink "${JENV_DIR}/candidates/${CANDIDATE}/current" | sed -e "s|${JENV_DIR}/candidates/${CANDIDATE}/||g")
 	if [[ -h "${JENV_DIR}/candidates/${CANDIDATE}/current" && ( "${VERSION}" == "${CURRENT}" ) ]]; then
 		echo ""
-		echo "Unselecting ${CANDIDATE} ${VERSION}..."
+		echo "Unselecting ${CANDIDATE} ${VERSION}"
 		unlink "${JENV_DIR}/candidates/${CANDIDATE}/current"
 	fi
 	# delete candidate version directory
