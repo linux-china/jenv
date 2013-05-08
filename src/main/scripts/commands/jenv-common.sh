@@ -21,6 +21,17 @@
 # common internal function definitions
 #
 
+################## jenv system ####################
+
+# jenv default enviroment
+# @return JENV_SERVICE jenv service url
+# @return JENV_DIR jenv directory
+function __jenvtool_app_default_environment_variables {
+	if [ ! "${JENV_SERVICE}" ]; then
+		JENV_SERVICE="http://get.jvmtool.mvnsearch.org"
+	fi
+}
+
 ########## repo #############
 
 # fetch repo list, sequence as central, third, local
@@ -168,23 +179,3 @@ function __jenvtool_version_determine {
     return 1
 }
 
-# jenv default enviroment
-# @return JENV_SERVICE jenv service url
-# @return JENV_DIR jenv directory
-function __jenvtool_default_environment_variables {
-	if [ ! "${JENV_SERVICE}" ]; then
-		JENV_SERVICE="http://get.jvmtool.mvnsearch.org"
-	fi
-}
-
-# check upgrade available
-# @param $1 command name
-# @return UPGRADE_AVAILABLE upgrade available mark, "true" or empty
-function __jenvtool_check_upgrade_available {
-    COMMAND="$1"
-	UPGRADE_AVAILABLE=""
-	UPGRADE_NOTICE=$(echo "${BROADCAST_LIVE}" | grep 'Your version of JENV is out of date!')
-	if [[ -n "${UPGRADE_NOTICE}" && ( "${COMMAND}" != 'selfupdate' ) ]]; then
-		UPGRADE_AVAILABLE="true"
-	fi
-}

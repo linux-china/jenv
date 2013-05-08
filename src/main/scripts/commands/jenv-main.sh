@@ -23,7 +23,7 @@
 # @param $4 other param
 function jenv {
 	# Various sanity checks and default settings
-	__jenvtool_default_environment_variables
+	__jenvtool_app_default_environment_variables
 	mkdir -p "${JENV_DIR}"
 
    COMMAND="$1"
