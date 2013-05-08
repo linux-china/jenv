@@ -78,4 +78,4 @@ fi
 
 source "${JENV_DIR}/bin/jenv-init.sh"
 echo ""
-__jenvtool_utils_echo_green "Successfully upgraded JENV."
+__jenvtool_utils_echo_green "jenv upgraded successfully"
