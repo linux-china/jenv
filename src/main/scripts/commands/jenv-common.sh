@@ -42,7 +42,8 @@ function __jenvtool_check_version_present {
 }
 
 # determine candidate version.
-# @param $1 candidate version
+# @param $1 candidate name
+# @param $2 candidate version
 # @return VERSION candidate version
 function __jenvtool_determine_version {
     #check local installed version
@@ -51,14 +52,10 @@ function __jenvtool_determine_version {
        return 0
     fi
     # candidate versions
-    for repo in $(ls -1 "${JENV_DIR}/repo" 2> /dev/null); do
-       if [ -f "${JENV_DIR}/repo/${repo}/version/${CANDIDATE}.txt" ]; then
-          for candidate_version in $(cat "${JENV_DIR}/repo/${repo}/version/${CANDIDATE}.txt"); do
-             if [[ "${candidate_version}" == "$1" ]]; then
-                 VERSION="$1"
-                 return 0
-             fi
-          done
+    for candidate_version in $(__jenvtool_fetch_versions "${CANDIDATE}") ; do
+       if [[ "${candidate_version}" == "$1" ]]; then
+           VERSION="$1"
+           return 0
        fi
     done
     echo ""
