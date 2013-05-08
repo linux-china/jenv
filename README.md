@@ -54,7 +54,13 @@ If you want to list installed candidates, please use:
 
     $ jenv ls
 
+### Update repository
+All canidate versions are maintained on central repository. To keep updated with central repository, please use:
+
+    $ jenv repo update
+
 ## Other Commands
+
   * use: Use the candidate with the version, such as jenv use maven 3.0.4
   * which: Which version for candidate
   * pause: Pause candidate usage
@@ -75,6 +81,7 @@ Now You can use jenvrc to setup Java environment for each of your individual pro
 ## Install local candidates
 If you want to add custom candidate into jenv, please create candidates_local under $HOME/.jenv/db/ directory and input candidate name.
 
+    $jenv add spike 0.0.1
     $jenv install spike 0.0.1 git@github.com:linux-china/groovy_scripts.git
 Then you can install candidate from git repository, and you can update candidate by following command:
 
