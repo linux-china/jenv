@@ -27,7 +27,7 @@ function __jenvtool_install {
      # install from local or VCS
     if [[ -n "${LOCAL_FOLDER}" ]]; then
          if __jenvtool_utils_string_contains "${LOCAL_FOLDER}" "http://"; then
-            __jenvtool_install_candidate_version "${CANDIDATE}" "${VERSION}" "${LOCAL_FOLDER}" || return 1
+            __jenvtool_install_remote_candidate "${CANDIDATE}" "${VERSION}" "${LOCAL_FOLDER}" || return 1
         elif  __jenvtool_utils_string_contains "${LOCAL_FOLDER}" "@"; then
             __jenvtool_install_git_repository "${CANDIDATE}" "${VERSION}" "${LOCAL_FOLDER}" || return 1
 		else
@@ -50,7 +50,7 @@ function __jenvtool_install {
     		return 1
     	fi
 
-    	__jenvtool_install_candidate_version "${CANDIDATE}" "${VERSION}" || return 1
+    	__jenvtool_install_remote_candidate "${CANDIDATE}" "${VERSION}" || return 1
     fi
 
 	# confirm by prompt
@@ -109,7 +109,7 @@ function __jenvtool_install_svn_repository {
 # @param $1 candidate name
 # @param $2 candidate version
 # @param $3 download url
-function __jenvtool_install_candidate_version {
+function __jenvtool_install_remote_candidate {
 	CANDIDATE="$1"
 	VERSION="$2"
 	DOWNLOAD_URL="$3"
