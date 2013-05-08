@@ -66,6 +66,21 @@ function __jenvtool_determine_version {
     return 1
 }
 
+# fetch versions
+# @param $1 candidate names
+function __jenvtool_fetch_versions {
+     CANDIDATE="$1"
+     CANDIDATE_VERSIONS=()
+     for repo in $(ls -1 "${JENV_DIR}/repo" 2> /dev/null); do
+       if [ -f "${JENV_DIR}/repo/${repo}/version/${CANDIDATE}.txt" ]; then
+          for candidate_version in $(cat "${JENV_DIR}/repo/${repo}/version/${CANDIDATE}.txt"); do
+             CANDIDATE_VERSIONS=("${CANDIDATE_VERSIONS[@]}" "${candidate_version}")
+          done
+       fi
+    done
+    echo "${CANDIDATE_VERSIONS[@]}"
+}
+
 # build candidate all version to csv
 # @param $1 candidate name
 # @return CSV candidate version csv
