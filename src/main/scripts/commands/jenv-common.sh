@@ -90,6 +90,31 @@ function __jenvtool_candidate_determine_current_version {
 	fi
 }
 
+# download candidate with version
+# @param $1 candidate name
+# @param $2 candidate version
+# @param $3 download url
+function __jenvtool_candidate_download {
+	CANDIDATE="$1"
+	VERSION="$2"
+	DOWNLOAD_URL="$3"
+	mkdir -p "${JENV_DIR}/archives"
+	if [ ! -f "${JENV_DIR}/archives/${CANDIDATE}-${VERSION}.zip" ]; then
+		echo ""
+		echo "Downloading: ${CANDIDATE} ${VERSION}"
+		echo ""
+		ZIP_ARCHIVE="${JENV_DIR}/archives/${CANDIDATE}-${VERSION}.zip"
+		echo "Downloading ${DOWNLOAD_URL}"
+		curl -L "${DOWNLOAD_URL}" > "${ZIP_ARCHIVE}"
+		__jenvtool_validate_zip "${ZIP_ARCHIVE}" || return 1
+	else
+		echo ""
+		echo "Found a previously downloaded ${CANDIDATE} ${VERSION} archive. Not downloading it again..."
+		__jenvtool_validate_zip "${JENV_DIR}/archives/${CANDIDATE}-${VERSION}.zip" || return 1
+	fi
+	echo ""
+}
+
 ############## version  ###############
 
 # check candidate version present.
@@ -124,29 +149,6 @@ function __jenvtool_version_determine {
     return 1
 }
 
-# download candidate with version
-# @param $1 candidate name
-# @param $2 candidate version
-function __jenvtool_download {
-	CANDIDATE="$1"
-	VERSION="$2"
-	DOWNLOAD_URL="$3"
-	mkdir -p "${JENV_DIR}/archives"
-	if [ ! -f "${JENV_DIR}/archives/${CANDIDATE}-${VERSION}.zip" ]; then
-		echo ""
-		echo "Downloading: ${CANDIDATE} ${VERSION}"
-		echo ""
-		ZIP_ARCHIVE="${JENV_DIR}/archives/${CANDIDATE}-${VERSION}.zip"
-		echo "Downloading ${DOWNLOAD_URL}"
-		curl -L "${DOWNLOAD_URL}" > "${ZIP_ARCHIVE}"
-		__jenvtool_validate_zip "${ZIP_ARCHIVE}" || return 1
-	else
-		echo ""
-		echo "Found a previously downloaded ${CANDIDATE} ${VERSION} archive. Not downloading it again..."
-		__jenvtool_validate_zip "${JENV_DIR}/archives/${CANDIDATE}-${VERSION}.zip" || return 1
-	fi
-	echo ""
-}
 
 # validate zip file
 # @param $1 zip file
