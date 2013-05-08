@@ -41,7 +41,8 @@ function __jenvtool_install {
     	fi
     	# if version absent, use first one in version list
         if [[ -z "$2" ]]; then
-            CANDIDATE_VERSIONS=($(cat "${JENV_DIR}/db/${CANDIDATE}.txt"))
+            # todo adjust to install from other repo
+            CANDIDATE_VERSIONS=($(cat "${JENV_DIR}/repo/central/version/${CANDIDATE}.txt"))
             VERSION="${CANDIDATE_VERSIONS[0]}"
         fi
         # validate installed?
