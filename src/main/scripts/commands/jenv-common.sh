@@ -115,6 +115,25 @@ function __jenvtool_candidate_download {
 	echo ""
 }
 
+
+# link candidate with version to current
+# @param $1 candidate name
+# @param $2 candidate version
+function __jenvtool_candidate_link_version {
+	CANDIDATE="$1"
+	VERSION="$2"
+
+	# Change the 'current' symlink for the candidate, hence affecting all shells.
+	if [ -L "${JENV_DIR}/candidates/${CANDIDATE}/current" ]; then
+		unlink "${JENV_DIR}/candidates/${CANDIDATE}/current"
+	fi
+	ln -s "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}" "${JENV_DIR}/candidates/${CANDIDATE}/current"
+    if ! __jenvtool_utils_string_contains "$PATH" "candidates/$CANDIDATE/current"; then
+         __jenvtool_path_add_candidate "${CANDIDATE}" "current"
+    fi
+}
+
+
 ############## version  ###############
 
 # check candidate version present.
@@ -168,21 +187,4 @@ function __jenvtool_check_upgrade_available {
 	if [[ -n "${UPGRADE_NOTICE}" && ( "${COMMAND}" != 'selfupdate' ) ]]; then
 		UPGRADE_AVAILABLE="true"
 	fi
-}
-
-# link candidate with version to current
-# @param $1 candidate name
-# @param $2 candidate version
-function __jenvtool_link_candidate_version {
-	CANDIDATE="$1"
-	VERSION="$2"
-
-	# Change the 'current' symlink for the candidate, hence affecting all shells.
-	if [ -L "${JENV_DIR}/candidates/${CANDIDATE}/current" ]; then
-		unlink "${JENV_DIR}/candidates/${CANDIDATE}/current"
-	fi
-	ln -s "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}" "${JENV_DIR}/candidates/${CANDIDATE}/current"
-    if ! __jenvtool_utils_string_contains "$PATH" "candidates/$CANDIDATE/current"; then
-         __jenvtool_path_add_candidate "${CANDIDATE}" "current"
-    fi
 }

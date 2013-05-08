@@ -60,7 +60,7 @@ function __jenvtool_install {
 	fi
 	if [[ "${JENV_AUTO}" == "true" ||  -z "${USE}" || "${USE}" == "y" || "${USE}" == "Y" ]]; then
 		__jenvtool_utils_echo_green "Setting ${CANDIDATE} ${VERSION} as default."
-		__jenvtool_link_candidate_version "${CANDIDATE}" "${VERSION}"
+		__jenvtool_candidate_link_version "${CANDIDATE}" "${VERSION}"
 	fi
 	# done message
 	__jenvtool_utils_echo_green "Done installing!"

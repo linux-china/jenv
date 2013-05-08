@@ -29,7 +29,7 @@ function __jenvtool_default {
 		return 1
 	fi
 
-	__jenvtool_link_candidate_version "${CANDIDATE}" "${VERSION}"
+	__jenvtool_candidate_link_version "${CANDIDATE}" "${VERSION}"
 
 	__jenvtool_utils_echo_green "Default ${CANDIDATE} version set to ${VERSION}"
 }
