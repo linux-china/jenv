@@ -136,11 +136,6 @@ function __jenvtool_init {
 
     # check cached candidates first
     JENV_CANDIDATES=(${JENV_CANDIDATES_DEFAULT[@]})
-    if [ ! -d "${JENV_DIR}/repo/central" ]; then
-        if [[ -f "${JENV_DIR}/config/candidates" ]]; then
-            JENV_CANDIDATES=($(cat "${JENV_DIR}/config/candidates"))
-        fi
-    fi
     # repository candidates
     for repo in $(ls -1 "${JENV_DIR}/repo" 2> /dev/null); do
        if [ -f "${JENV_DIR}/repo/${repo}/candidates" ]; then
