@@ -129,7 +129,7 @@ _jenv()
         candidate="${prev}"
         if __jenvtool_utils_array_contains JENV_CANDIDATES[@] "${candidate}"; then
            versions=($(__jenvtool_candidate_versions "${candidate}"))
-           _jenv_comp "${versions}"
+           _jenv_comp "${versions[@]}"
            unset candidate
         fi
     fi
