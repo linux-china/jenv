@@ -21,7 +21,7 @@
 function __jenvtool_candidates {
      for repo in $(ls -1 "${JENV_DIR}/repo" 2> /dev/null); do
          if [ -f "${JENV_DIR}/repo/${repo}/candidates.txt" ]; then
-            cat "${JENV_DIR}/config/candidates.txt"
+            cat "${JENV_DIR}/repo/${repo}/candidates.txt"
          fi
      done
 }
