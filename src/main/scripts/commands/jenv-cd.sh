@@ -25,8 +25,7 @@ function __jenvtool_cd {
 
 	VERSION="$2"
     if [[ -z "$2" ]]; then
-        __jenvtool_candidate_determine_current_version "${CANDIDATE}"
-        VERSION="${CURRENT}"
+        VERSION=$(__jenvtool_candidate_current_version "${CANDIDATE}")
     fi
 
 	if [[ -d "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}" ]]; then

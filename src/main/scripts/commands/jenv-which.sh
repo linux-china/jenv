@@ -21,33 +21,13 @@
 function __jenvtool_which {
 	if [ -n "$1" ]; then
 		CANDIDATE=`echo "$1" | tr '[:upper:]' '[:lower:]'`
-		__jenvtool_candidate_determine_current_version "${CANDIDATE}"
+		CURRENT=$(__jenvtool_candidate_current_version "${CANDIDATE}")
 		if [ -n "${CURRENT}" ]; then
 			echo "Using ${CANDIDATE} version ${CURRENT}"
 		else
 			echo "Not using any version of ${CANDIDATE}"
 		fi
 	else
-		# The candidates are assigned to an array for zsh compliance, a list of words is not iterable
-		# Arrays are the only way, but unfortunately zsh arrays are not backward compatible with bash
-		# In bash arrays are zero index based, in zsh they are 1 based(!)
-		INSTALLED_COUNT=0
-		# Starts at 0 for bash, ends at the candidate array size for zsh
-		for (( i=0; i <= ${#JENV_CANDIDATES}; i++ )); do
-			# Eliminate empty entries due to incompatibility
-			if [[ -n ${JENV_CANDIDATES[${i}]} ]]; then
-				__jenvtool_candidate_determine_current_version "${JENV_CANDIDATES[${i}]}"
-				if [ -n "${CURRENT}" ]; then
-					if [ ${INSTALLED_COUNT} -eq 0 ]; then
-						echo 'Using:'
-					fi
-					echo "${JENV_CANDIDATES[${i}]}: ${CURRENT}"
-					(( INSTALLED_COUNT += 1 ))
-				fi
-			fi
-		done
-		if [ ${INSTALLED_COUNT} -eq 0 ]; then
-			echo 'No candidates are in use'
-		fi
+		__jenvtool_utils_echo_red "Please supply a candidate name!"
 	fi
 }

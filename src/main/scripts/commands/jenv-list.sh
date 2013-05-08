@@ -27,7 +27,7 @@ function __jenvtool_list {
     # list candidate versions
 	CANDIDATE=`echo "$1" | tr '[:upper:]' '[:lower:]'`
 	__jenvtool_candidate_is_present "${CANDIDATE}" || return 1
-	__jenvtool_candidate_determine_current_version "${CANDIDATE}"
+	CURRENT=$(__jenvtool_candidate_current_version "${CANDIDATE}")
 	CANDIDATE_VERSIONS=($(__jenvtool_candidate_versions "${CANDIDATE}"))
     INSTALLED_VERSIONS=()
     # add local unversioned in repository
