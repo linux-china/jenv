@@ -39,9 +39,11 @@ function __jenvtool_repo {
        else
           echo "${repo_name} has been installed!"
        fi
+       __jenvtool_candidate_reload_all
 	elif [[ "${repo_cmd}" == "update" ]] ; then # update all repositories
 	   echo "Updating all repositories"
 	   __jenvtool_update_repositories
+	   __jenvtool_candidate_reload_all
 	   echo "Update done!"
 	fi
 }
