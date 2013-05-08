@@ -29,7 +29,7 @@ function __jenvtool_add {
 	   if [[ ${#CANDIDATES[@]} == 0 ]]; then  # empty file
 	       echo -n "${CANDIDATE}" > "${candidates_file}"
 	   else
-	      if ! __jenvtool_array_contains CANDIDATES[@] "${CANDIDATE}"; then
+	      if ! __jenvtool_utils_array_contains CANDIDATES[@] "${CANDIDATE}"; then
 	      	  echo -n " ${CANDIDATE}" >> "${candidates_file}"
 	      fi
 	   fi
@@ -50,7 +50,7 @@ function __jenvtool_add {
               echo -n "$2" > "${version_file}"
            else
               # append version
-              if ! __jenvtool_array_contains VERSIONS[@] "$2"; then
+              if ! __jenvtool_utils_array_contains VERSIONS[@] "$2"; then
                  echo -n " $2" >> "${version_file}"
               fi
            fi

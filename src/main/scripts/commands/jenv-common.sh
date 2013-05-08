@@ -25,7 +25,7 @@
 # @param $1 candidate name
 function __jenvtool_check_candidate_present {
 	if [ -z "$1" ]; then
-		__jenvtool_echo_red "No candidate provided."
+		__jenvtool_utils_echo_red "No candidate provided."
 		__jenvtool_help
 		return 1
 	fi
@@ -35,7 +35,7 @@ function __jenvtool_check_candidate_present {
 # @param $1 candidate version
 function __jenvtool_check_version_present {
 	if [ -z "$1" ]; then
-		__jenvtool_echo_red "No candidate version provided."
+		__jenvtool_utils_echo_red "No candidate version provided."
 		__jenvtool_help
 		return 1
 	fi
@@ -59,7 +59,7 @@ function __jenvtool_determine_version {
        fi
     done
     echo ""
-    __jenvtool_echo_red "Stop! $1 is not a valid ${CANDIDATE} version."
+    __jenvtool_utils_echo_red "Stop! $1 is not a valid ${CANDIDATE} version."
     return 1
 }
 
@@ -95,7 +95,7 @@ function __jenvtool_fetch_versions {
     # add local unversioned in repository
     for version in $(ls -1 "${JENV_DIR}/candidates/${CANDIDATE}" 2> /dev/null); do
     	if [ "${version}" != 'current' ]; then
-             if ! __jenvtool_array_contains CANDIDATE_VERSIONS[@] "${version}"; then
+             if ! __jenvtool_utils_array_contains CANDIDATE_VERSIONS[@] "${version}"; then
                  CANDIDATE_VERSIONS=("${CANDIDATE_VERSIONS[@]}" "${version}")
              fi
         fi
@@ -164,7 +164,7 @@ function __jenvtool_validate_zip {
 	if [ -z "${ZIP_OK}" ]; then
 		rm "${ZIP_ARCHIVE}"
 		echo ""
-		__jenvtool_echo_red "Stop! The archive was corrupt and has been removed! Please try installing again."
+		__jenvtool_utils_echo_red "Stop! The archive was corrupt and has been removed! Please try installing again."
 		return 1
 	fi
 }
@@ -202,7 +202,7 @@ function __jenvtool_link_candidate_version {
 		unlink "${JENV_DIR}/candidates/${CANDIDATE}/current"
 	fi
 	ln -s "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}" "${JENV_DIR}/candidates/${CANDIDATE}/current"
-    if ! __jenvtool_contains "$PATH" "candidates/$CANDIDATE/current"; then
+    if ! __jenvtool_utils_string_contains "$PATH" "candidates/$CANDIDATE/current"; then
          __jenvtool_path_add_candidate "${CANDIDATE}" "current"
     fi
 }

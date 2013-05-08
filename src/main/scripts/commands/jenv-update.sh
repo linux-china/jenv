@@ -25,15 +25,15 @@ function __jenvtool_update {
         for i in "$HOME/.jenv/candidates"/*;do
             if [ -d "$i" ];then
                for j in "$i"/*;do
-                 if ! __jenvtool_contains "$j" "current"; then
+                 if ! __jenvtool_utils_string_contains "$j" "current"; then
                    if [ -d "$j/.git" ];then
                         echo "Pulling..."
                         (cd "${j}" && git pull)
-                        __jenvtool_echo_green "${j} has been updated!"
+                        __jenvtool_utils_echo_green "${j} has been updated!"
                    elif [ -d "$j/.svn" ];then
                         echo "Updating..."
                         (cd "${j}" && svn update)
-                        __jenvtool_echo_green "${j} has been updated!"
+                        __jenvtool_utils_echo_green "${j} has been updated!"
                    fi
                  fi
                 done
@@ -50,12 +50,12 @@ function __jenvtool_update {
 	if [ -d "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/.git" ]; then
 	    echo "Git pulling ${CANDIDATE}..."
         (cd "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/" && git pull)
-        __jenvtool_echo_green "${CANDIDATE}'s ${VERSION} has been updated!"
+        __jenvtool_utils_echo_green "${CANDIDATE}'s ${VERSION} has been updated!"
      elif [ -d "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/.svn" ]; then
         echo "Subversion updating ${CANDIDATE}..."
         (cd "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/" && svn update)
-         __jenvtool_echo_green "${CANDIDATE}'s ${VERSION} has been updated!"
+         __jenvtool_utils_echo_green "${CANDIDATE}'s ${VERSION} has been updated!"
      else
-      __jenvtool_echo_red "${CANDIDATE}'s ${VERSION} is not a Git or Subversion repository!"
+      __jenvtool_utils_echo_red "${CANDIDATE}'s ${VERSION} is not a Git or Subversion repository!"
 	fi
 }

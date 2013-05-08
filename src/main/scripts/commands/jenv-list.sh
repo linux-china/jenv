@@ -34,7 +34,7 @@ function __jenvtool_list {
     for version in $(ls -1 "${JENV_DIR}/candidates/${CANDIDATE}" 2> /dev/null); do
     	if [ "${version}" != 'current' ]; then
     	     INSTALLED_VERSIONS=("${INSTALLED_VERSIONS[@]}" "${version}")
-             if ! __jenvtool_array_contains CANDIDATE_VERSIONS[@] "${version}"; then
+             if ! __jenvtool_utils_array_contains CANDIDATE_VERSIONS[@] "${version}"; then
                  CANDIDATE_VERSIONS=("${CANDIDATE_VERSIONS[@]}" "${version}")
              fi
         fi
@@ -44,7 +44,7 @@ function __jenvtool_list {
     for candidate_version in "${CANDIDATE_VERSIONS[@]}" ; do
      if [[ "${candidate_version}" == "${CURRENT}" ]]; then
           echo ">* ${candidate_version}"
-     elif __jenvtool_array_contains INSTALLED_VERSIONS[@] "${candidate_version}"; then
+     elif __jenvtool_utils_array_contains INSTALLED_VERSIONS[@] "${candidate_version}"; then
           echo " * ${candidate_version}"
      else
           echo "   ${candidate_version}"
@@ -65,7 +65,7 @@ __jenvtool_list_installed_candidates() {
        CANDIDATE_COUNT=$(( ${CANDIDATE_COUNT} +1 ))
        __jenvtool_determine_current_version "${CANDIDATE}"
        for VERSION in $(ls -1 "${BASE_DIR}/${CANDIDATE}") ; do
-         if ! __jenvtool_contains "${VERSION}" "current"; then
+         if ! __jenvtool_utils_string_contains "${VERSION}" "current"; then
            if [[ "${VERSION}" != "*" ]]; then
                if [[ "${VERSION}" == "${CURRENT}" ]]; then
                    echo "* ${VERSION}"
@@ -76,5 +76,5 @@ __jenvtool_list_installed_candidates() {
          fi
        done
  done
- __jenvtool_echo_green "${CANDIDATE_COUNT} candidates installed."
+ __jenvtool_utils_echo_green "${CANDIDATE_COUNT} candidates installed."
 }

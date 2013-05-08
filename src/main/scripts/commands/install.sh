@@ -17,7 +17,7 @@
 
 # echo as green text
 # @param $1 text
-function __jenvtool_echo_green {
+function __jenvtool_utils_echo_green {
    echo $'\e[32m'"$1"$'\e[00m'
 }
 
@@ -181,12 +181,12 @@ fi
 
 echo -e "\n\n\nAll done!\n\n"
 
-__jenvtool_echo_green "Please open a new terminal, or run the following in the existing one:"
+__jenvtool_utils_echo_green "Please open a new terminal, or run the following in the existing one:"
 echo ""
-__jenvtool_echo_green "    source ${JENV_DIR}/bin/jenv-init.sh "
+__jenvtool_utils_echo_green "    source ${JENV_DIR}/bin/jenv-init.sh "
 echo ""
-__jenvtool_echo_green "Then issue the following command:"
+__jenvtool_utils_echo_green "Then issue the following command:"
 echo ""
-__jenvtool_echo_green "    jenv help"
+__jenvtool_utils_echo_green "    jenv help"
 echo ""
-__jenvtool_echo_green "Enjoy!!!"
+__jenvtool_utils_echo_green "Enjoy!!!"

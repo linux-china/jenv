@@ -25,7 +25,7 @@ function __jenvtool_use {
 	__jenvtool_determine_version "$2" || return 1
 
 	if [[ ! -d "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}" ]]; then
-		__jenvtool_echo_red "Stop! ${CANDIDATE} ${VERSION} is not installed."
+		__jenvtool_utils_echo_red "Stop! ${CANDIDATE} ${VERSION} is not installed."
 		echo -n "Do you want to install it now? (Y/n): "
 		read INSTALL
 		if [[ -z "${INSTALL}" || "${INSTALL}" == "y" || "${INSTALL}" == "Y" ]]; then
@@ -40,9 +40,9 @@ function __jenvtool_use {
         # Just update the *_HOME and PATH for this shell.
        	UPPER_CANDIDATE=`echo "${CANDIDATE}" | tr '[:lower:]' '[:upper:]'`
        	export "${UPPER_CANDIDATE}_HOME"="${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}"
-       	if ! __jenvtool_contains "$PATH" "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}"; then
+       	if ! __jenvtool_utils_string_contains "$PATH" "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}"; then
        	    __jenvtool_path_add_candidate "${CANDIDATE}" "${VERSION}"
        	fi
 	fi
-	__jenvtool_echo_green "Using ${CANDIDATE} version ${VERSION} in this shell."
+	__jenvtool_utils_echo_green "Using ${CANDIDATE} version ${VERSION} in this shell."
 }

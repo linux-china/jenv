@@ -36,8 +36,8 @@ function __jenvtool_uninstall {
 		echo "Uninstalling ${CANDIDATE} ${VERSION}..."
 		rm -rf "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}"
 		rm -rf "${JENV_DIR}/archives/${CANDIDATE}-${VERSION}.zip"
-		__jenvtool_echo_green "Done uninstalling!"
+		__jenvtool_utils_echo_green "Done uninstalling!"
 	else
-		__jenvtool_echo_red "${CANDIDATE} ${VERSION} is not installed."
+		__jenvtool_utils_echo_red "${CANDIDATE} ${VERSION} is not installed."
 	fi
 }

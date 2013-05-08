@@ -25,11 +25,11 @@ function __jenvtool_default {
 	__jenvtool_determine_version "$2" || return 1
 
 	if [ ! -d "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}" ]; then
-		__jenvtool_echo_red "Stop! ${CANDIDATE} ${VERSION} is not installed."
+		__jenvtool_utils_echo_red "Stop! ${CANDIDATE} ${VERSION} is not installed."
 		return 1
 	fi
 
 	__jenvtool_link_candidate_version "${CANDIDATE}" "${VERSION}"
 
-	__jenvtool_echo_green "Default ${CANDIDATE} version set to ${VERSION}"
+	__jenvtool_utils_echo_green "Default ${CANDIDATE} version set to ${VERSION}"
 }

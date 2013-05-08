@@ -26,47 +26,13 @@ if [ -z "${JENV_AUTO}" ]; then
    export JENV_AUTO="false"
 fi
 
-
-# echo as red text
-# @param $1 text
-function __jenvtool_echo_red {
-   echo $'\e[31m'"$1"$'\e[00m'
-}
-
-# echo as green text
-# @param $1 text
-function __jenvtool_echo_green {
-   echo $'\e[32m'"$1"$'\e[00m'
-}
-# contains function
-# @param $1 text
-# @param $2 word
-# @return contained test condition
-function __jenvtool_contains {
-    replaced=$(echo "$1" | sed -e s,"$2",,g)
-    [ "$replaced" != "$1" ]
-}
-
-# arrays contains item
-# @param $1 array such as array[@]
-# @param $2 item value
-function __jenvtool_array_contains {
-   argAry1=("${!1}")
-   for i in ${argAry1[@]}; do
-     if [ "$i" = "$2" ]; then
-       return 0
-     fi
-   done
-   return 1
-}
-
 # remove candidate from path
 # @param $1 candidate name
 # @param $2 candidate version
 __jenvtool_path_remove_candidate ()  {
      CANDIDATE="$1"
      VERSION="$2"
-     if __jenvtool_contains "$PATH" "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}"; then
+     if __jenvtool_utils_string_contains "$PATH" "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}"; then
         if [ -e "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/bin" ]; then
            candidatePath="${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/bin"
         elif [ -d "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/tools" ]; then
@@ -152,7 +118,7 @@ function __jenvtool_init {
     for repo in $(ls -1 "${JENV_DIR}/repo" 2> /dev/null); do
        if [ -f "${JENV_DIR}/repo/${repo}/candidates" ]; then
          for candidate_name in $(cat "${JENV_DIR}/repo/${repo}/candidates"); do
-           if ! __jenvtool_array_contains JENV_CANDIDATES[@] "${candidate_name}"; then
+           if ! __jenvtool_utils_array_contains JENV_CANDIDATES[@] "${candidate_name}"; then
               JENV_CANDIDATES=("${JENV_CANDIDATES[@]}" "${candidate_name}")
            fi
          done
@@ -161,14 +127,14 @@ function __jenvtool_init {
     export JENV_CANDIDATES
     # update PATH env
     for CANDIDATE in "${JENV_CANDIDATES[@]}" ; do
-        if ! __jenvtool_contains "$PATH" "candidates/${CANDIDATE}/current" && [ -e "${JENV_DIR}/candidates/${CANDIDATE}/current" ]; then
+        if ! __jenvtool_utils_string_contains "$PATH" "candidates/${CANDIDATE}/current" && [ -e "${JENV_DIR}/candidates/${CANDIDATE}/current" ]; then
            UPPER_CANDIDATE=`echo "${CANDIDATE}" | tr '[:lower:]' '[:upper:]'`
            export "${UPPER_CANDIDATE}_HOME"="${JENV_DIR}/candidates/${CANDIDATE}/current"
            __jenvtool_path_add_candidate "${CANDIDATE}" "current"
         fi
     done
 
-    if ! __jenvtool_contains "$PATH" "JENV_DIR"; then
+    if ! __jenvtool_utils_string_contains "$PATH" "JENV_DIR"; then
         PATH="${JENV_DIR}/bin:$PATH"
     fi
 

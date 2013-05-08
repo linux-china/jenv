@@ -34,5 +34,5 @@ function __jenvtool_pause {
     #unset home
     UPPER_CANDIDATE=`echo "${CANDIDATE}" | tr '[:lower:]' '[:upper:]'`
     unset "${UPPER_CANDIDATE}_HOME"
-    __jenvtool_echo_green "${CANDIDATE} paused!"
+    __jenvtool_utils_echo_green "${CANDIDATE} paused!"
 }

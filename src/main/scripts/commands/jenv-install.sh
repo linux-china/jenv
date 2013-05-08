@@ -26,9 +26,9 @@ function __jenvtool_install {
 	LOCAL_FOLDER="$3"
      # install from local or VCS
     if [[ -n "${LOCAL_FOLDER}" ]]; then
-         if __jenvtool_contains "${LOCAL_FOLDER}" "http://"; then
+         if __jenvtool_utils_string_contains "${LOCAL_FOLDER}" "http://"; then
             __jenvtool_install_candidate_version "${CANDIDATE}" "${VERSION}" "${LOCAL_FOLDER}" || return 1
-        elif  __jenvtool_contains "${LOCAL_FOLDER}" "@"; then
+        elif  __jenvtool_utils_string_contains "${LOCAL_FOLDER}" "@"; then
             __jenvtool_install_git_repository "${CANDIDATE}" "${VERSION}" "${LOCAL_FOLDER}" || return 1
 		else
 		    __jenvtool_install_local_version "${CANDIDATE}" "${VERSION}" "${LOCAL_FOLDER}" || return 1
@@ -46,7 +46,7 @@ function __jenvtool_install {
         fi
         # validate installed?
     	if [[ -d "${JENV_DIR}/${CANDIDATE}/${VERSION}" || -h "${JENV_DIR}/${CANDIDATE}/${VERSION}" ]]; then
-    		__jenvtool_echo_red "Stop! ${CANDIDATE} ${VERSION} is already installed."
+    		__jenvtool_utils_echo_red "Stop! ${CANDIDATE} ${VERSION} is already installed."
     		return 1
     	fi
 
@@ -59,11 +59,11 @@ function __jenvtool_install {
 	   read USE
 	fi
 	if [[ "${JENV_AUTO}" == "true" ||  -z "${USE}" || "${USE}" == "y" || "${USE}" == "Y" ]]; then
-		__jenvtool_echo_green "Setting ${CANDIDATE} ${VERSION} as default."
+		__jenvtool_utils_echo_green "Setting ${CANDIDATE} ${VERSION} as default."
 		__jenvtool_link_candidate_version "${CANDIDATE}" "${VERSION}"
 	fi
 	# done message
-	__jenvtool_echo_green "Done installing!"
+	__jenvtool_utils_echo_green "Done installing!"
 }
 
 # install local installed candidate
@@ -120,17 +120,17 @@ function __jenvtool_install_candidate_version {
        echo "Parsing http://jenv.mvnsearch.org/candidate/${CANDIDATE}/download/${VERSION}/${JENV_PLATFORM}/${JENV_MACHINE_PLATFORM}"
        DOWNLOAD_URL=$(curl -s "http://jenv.mvnsearch.org/candidate/${CANDIDATE}/download/${VERSION}/${JENV_PLATFORM}/${JENV_MACHINE_PLATFORM}")
     fi
-    if __jenvtool_contains "${DOWNLOAD_URL}" "http://" && __jenvtool_contains "${DOWNLOAD_URL}" ".zip" ; then
+    if __jenvtool_utils_string_contains "${DOWNLOAD_URL}" "http://" && __jenvtool_utils_string_contains "${DOWNLOAD_URL}" ".zip" ; then
        __jenvtool_download "${CANDIDATE}" "${VERSION}" "${DOWNLOAD_URL}"  || return 1
        mkdir -p "${JENV_DIR}/candidates/${CANDIDATE}"
        unzip -oq "${JENV_DIR}/archives/${CANDIDATE}-${VERSION}.zip" -d "${JENV_DIR}/tmp/"
        mv ${JENV_DIR}/tmp/*-${VERSION} "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}"
-    elif __jenvtool_contains "${DOWNLOAD_URL}" "git"; then
+    elif __jenvtool_utils_string_contains "${DOWNLOAD_URL}" "git"; then
        __jenvtool_install_git_repository "${CANDIDATE}" "${VERSION}" "${DOWNLOAD_URL}" || return 1
-    elif __jenvtool_contains "${DOWNLOAD_URL}" "svn"; then
+    elif __jenvtool_utils_string_contains "${DOWNLOAD_URL}" "svn"; then
        __jenvtool_install_svn_repository "${CANDIDATE}" "${VERSION}" "${DOWNLOAD_URL}" || return 1
     else
-       __jenvtool_echo_red "${DOWNLOAD_URL}"
+       __jenvtool_utils_echo_red "${DOWNLOAD_URL}"
        return 1
     fi
 }

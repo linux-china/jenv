@@ -39,7 +39,7 @@ function __jenvtool_execute {
     elif [ -f "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/tools/${SCRIPT_NAME}" ]; then
       SCRIPT_PATH="${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/tools/${SCRIPT_NAME}"
     else
-       __jenvtool_echo_red "${SCRIPT_NAME} not found under ${CANDIDATE}"
+       __jenvtool_utils_echo_red "${SCRIPT_NAME} not found under ${CANDIDATE}"
     fi
     #execute
     if [[ ! -z "${SCRIPT_PATH}" ]]; then
