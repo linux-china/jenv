@@ -124,20 +124,6 @@ function __jenvtool_version_determine {
     return 1
 }
 
-# build candidate all version to csv
-# @param $1 candidate name
-# @return CSV candidate version csv
-function __jenvtool_build_version_csv {
-	CANDIDATE="$1"
-	CSV=""
-	for version in $(ls -1 "${JENV_DIR}/candidates/${CANDIDATE}" 2> /dev/null); do
-		if [ ${version} != 'current' ]; then
-			CSV="${version},${CSV}"
-		fi
-	done
-	CSV=${CSV%?}
-}
-
 # download candidate with version
 # @param $1 candidate name
 # @param $2 candidate version
