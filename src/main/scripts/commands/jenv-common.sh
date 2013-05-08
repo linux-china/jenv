@@ -48,7 +48,7 @@ function __jenvtool_repo_all {
   if [ -d "${JENV_DIR}/repo/local" ] ; then
     repo_list=("${repo_list[@]}" "local")
   fi
-  echo "${repo_list[@]}"
+  echo -n "${repo_list[@]}"
 }
 
 ########## candidate ################
@@ -83,7 +83,7 @@ function __jenvtool_candidate_versions {
              fi
         fi
     done
-    echo "${CANDIDATE_VERSIONS[@]}"
+    echo -n "${CANDIDATE_VERSIONS[@]}"
 }
 
 # fetch candidate installed versions
@@ -96,7 +96,22 @@ function __jenvtool_candidate_installed_versions {
          CANDIDATE_VERSIONS=("${CANDIDATE_VERSIONS[@]}" "${version}")
        fi
     done
-    echo "${CANDIDATE_VERSIONS[@]}"
+    echo -n "${CANDIDATE_VERSIONS[@]}"
+}
+
+# fetch candidate current version
+# @param $1 candidate name
+function __jenvtool_candidate_current_version {
+   CANDIDATE="$1"
+   CURRENT=$(echo $PATH | sed -E "s|.jenv/candidates/${CANDIDATE}/([^/]+)/bin|!!\1!!|1" | sed -E "s|^.*!!(.+)!!.*$|\1|g")
+   if [[ "${CURRENT}" == "current" || "${CURRENT}" == "$PATH" ]]; then
+   	    unset CURRENT
+   fi
+   if [[ -z ${CURRENT} ]]; then
+   		CURRENT=$(readlink "${JENV_DIR}/candidates/${CANDIDATE}/current" | sed -e "s!${JENV_DIR}/candidates/${CANDIDATE}/!!g")
+   		echo -n "${CURRENT}"
+   fi
+   echo -n ""
 }
 
 # determine candidate current version
