@@ -71,7 +71,9 @@ function __jenvtool_candidate_versions {
     for repo in $( __jenvtool_repo_all ); do
        if [ -f "${JENV_DIR}/repo/${repo}/version/${CANDIDATE}.txt" ]; then
           for candidate_version in $(cat "${JENV_DIR}/repo/${repo}/version/${CANDIDATE}.txt"); do
-             CANDIDATE_VERSIONS=("${CANDIDATE_VERSIONS[@]}" "${candidate_version}")
+             if ! __jenvtool_utils_array_contains CANDIDATE_VERSIONS[@] "${candidate_version}"; then
+                CANDIDATE_VERSIONS=("${CANDIDATE_VERSIONS[@]}" "${candidate_version}")
+             fi
           done
        fi
     done
