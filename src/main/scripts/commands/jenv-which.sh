@@ -21,7 +21,7 @@
 function __jenvtool_which {
 	if [ -n "$1" ]; then
 		CANDIDATE=`echo "$1" | tr '[:upper:]' '[:lower:]'`
-		__jenvtool_determine_current_version "${CANDIDATE}"
+		__jenvtool_candidate_determine_current_version "${CANDIDATE}"
 		if [ -n "${CURRENT}" ]; then
 			echo "Using ${CANDIDATE} version ${CURRENT}"
 		else
@@ -36,7 +36,7 @@ function __jenvtool_which {
 		for (( i=0; i <= ${#JENV_CANDIDATES}; i++ )); do
 			# Eliminate empty entries due to incompatibility
 			if [[ -n ${JENV_CANDIDATES[${i}]} ]]; then
-				__jenvtool_determine_current_version "${JENV_CANDIDATES[${i}]}"
+				__jenvtool_candidate_determine_current_version "${JENV_CANDIDATES[${i}]}"
 				if [ -n "${CURRENT}" ]; then
 					if [ ${INSTALLED_COUNT} -eq 0 ]; then
 						echo 'Using:'

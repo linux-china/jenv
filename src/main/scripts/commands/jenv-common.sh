@@ -75,6 +75,21 @@ function __jenvtool_candidate_versions {
     echo "${CANDIDATE_VERSIONS[@]}"
 }
 
+# determine candidate current version
+# @param $1 candidate name
+# @return CURRENT candidate current version number
+function __jenvtool_candidate_determine_current_version {
+	CANDIDATE="$1"
+	CURRENT=$(echo $PATH | sed -E "s|.jenv/candidates/${CANDIDATE}/([^/]+)/bin|!!\1!!|1" | sed -E "s|^.*!!(.+)!!.*$|\1|g")
+	if [[ "${CURRENT}" == "current" || "${CURRENT}" == "$PATH" ]]; then
+	    unset CURRENT
+	fi
+
+	if [[ -z ${CURRENT} ]]; then
+		CURRENT=$(readlink "${JENV_DIR}/candidates/${CANDIDATE}/current" | sed -e "s!${JENV_DIR}/candidates/${CANDIDATE}/!!g")
+	fi
+}
+
 ############## version  ###############
 
 # check candidate version present.
@@ -121,21 +136,6 @@ function __jenvtool_build_version_csv {
 		fi
 	done
 	CSV=${CSV%?}
-}
-
-# determine candidate current version
-# @param $1 candidate name
-# @return CURRENT candidate current version number
-function __jenvtool_determine_current_version {
-	CANDIDATE="$1"
-	CURRENT=$(echo $PATH | sed -E "s|.jenv/candidates/${CANDIDATE}/([^/]+)/bin|!!\1!!|1" | sed -E "s|^.*!!(.+)!!.*$|\1|g")
-	if [[ "${CURRENT}" == "current" || "${CURRENT}" == "$PATH" ]]; then
-	    unset CURRENT
-	fi
-
-	if [[ -z ${CURRENT} ]]; then
-		CURRENT=$(readlink "${JENV_DIR}/candidates/${CANDIDATE}/current" | sed -e "s!${JENV_DIR}/candidates/${CANDIDATE}/!!g")
-	fi
 }
 
 # download candidate with version
