@@ -21,6 +21,26 @@
 # common internal function definitions
 #
 
+########## repo #############
+
+# fetch repo list, sequence as central, third, local
+function __jenvtool_repo_all {
+  repo_list=()
+  if [ -d "${JENV_DIR}/repo/central" ] ; then
+      repo_list=("${repo_list[@]}" "central")
+  fi
+  for repo in $(ls -1 "${JENV_DIR}/repo" 2> /dev/null); do
+     if [[ "${repo}" != "central" && "${repo}" != "local" ]] ; then
+          repo_list=("${repo_list[@]}" "${repo}")
+     fi
+  done
+  if [ -d "${JENV_DIR}/repo/local" ] ; then
+    repo_list=("${repo_list[@]}" "local")
+  fi
+  echo "${repo_list[@]}"
+}
+
+
 # check candidate present.
 # @param $1 candidate name
 function __jenvtool_candidate_is_present {
@@ -63,29 +83,12 @@ function __jenvtool_determine_version {
     return 1
 }
 
-# fetch repo list, sequence as central, third, local
-function __jenvtool_fetch_repo_list {
-  repo_list=()
-  if [ -d "${JENV_DIR}/repo/central" ] ; then
-      repo_list=("${repo_list[@]}" "central")
-  fi
-  for repo in $(ls -1 "${JENV_DIR}/repo" 2> /dev/null); do
-     if [[ "${repo}" != "central" && "${repo}" != "local" ]] ; then
-          repo_list=("${repo_list[@]}" "${repo}")
-     fi
-  done
-  if [ -d "${JENV_DIR}/repo/local" ] ; then
-    repo_list=("${repo_list[@]}" "local")
-  fi
-  echo "${repo_list[@]}"
-}
-
 # fetch versions
 # @param $1 candidate names
 function __jenvtool_fetch_versions {
     CANDIDATE="$1"
     CANDIDATE_VERSIONS=()
-    for repo in $( __jenvtool_fetch_repo_list ); do
+    for repo in $( __jenvtool_repo_all ); do
        if [ -f "${JENV_DIR}/repo/${repo}/version/${CANDIDATE}.txt" ]; then
           for candidate_version in $(cat "${JENV_DIR}/repo/${repo}/version/${CANDIDATE}.txt"); do
              CANDIDATE_VERSIONS=("${CANDIDATE_VERSIONS[@]}" "${candidate_version}")
