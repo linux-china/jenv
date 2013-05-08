@@ -125,7 +125,7 @@ echo "Installing jenv scripts..."
 
 mkdir -p "${jenv_tmp_folder}"
 echo "Download script archive..."
-curl -s "${JENV_SERVICE}/jenv-${JENV_VERSION}.zip?platform=${jenv_platform}&purpose=install" > "${jenv_zip_file}"
+curl -s "${JENV_SERVICE}/jenv-last.zip?platform=${jenv_platform}&purpose=install" > "${jenv_zip_file}"
 
 echo "Extract script archive..."
 if [[ "${cygwin}" == 'true' ]]; then
