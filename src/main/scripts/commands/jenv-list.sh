@@ -35,7 +35,7 @@ function __jenvtool_list {
            CANDIDATE_VERSIONS=($(cat "${JENV_DIR}/db/${CANDIDATE}.txt"))
         fi
 	fi
-	# repository versions
+	# candidate versions
 	for repo in $(ls -1 "${JENV_DIR}/repo" 2> /dev/null); do
        if [ -f "${JENV_DIR}/repo/${repo}/version/${CANDIDATE}.txt" ]; then
          for candidate_version in $(cat "${JENV_DIR}/repo/${repo}/version/${CANDIDATE}.txt"); do
