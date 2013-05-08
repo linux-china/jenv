@@ -4,6 +4,9 @@ Ant
    Java Build Tool
 Maven
    Java Project Management and Comprehension Tool
+Buildr
+   Buildr is a build system for Java-based applications, including support for Scala,
+   Groovy and a growing number of JVM languages and tools
 Groovy
    Agile and Dynamic Language for JVM
 Gant
