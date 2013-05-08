@@ -58,7 +58,7 @@ function __jenvtool_list {
 __jenvtool_list_installed_candidates() {
  echo "Installed candidates"
  echo "========================================================="
- CANDIDATE_COUNT=1
+ CANDIDATE_COUNT=0
  BASE_DIR="${JENV_DIR}/candidates"
  for CANDIDATE in $(ls -1 "${BASE_DIR}" 2> /dev/null) ; do
        echo "${CANDIDATE}";
