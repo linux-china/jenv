@@ -56,6 +56,21 @@ else
 	unzip -qo "${jenv_tmp_zip}" -d "${JENV_DIR}"
 fi
 
+#download central repository
+if [ ! -d "${JENV_DIR}/repo/central" ] ; then
+    echo "Download Central repository..."
+    jenv_central_repo_file="${JENV_DIR}/tmp/repo-central.zip"
+    mkdir -p "${JENV_DIR}/repo"
+    curl -s "${JENV_SERVICE}/central-repo.zip?platform=${jenv_platform}" > "${jenv_central_repo_file}"
+    if [[ "${cygwin}" == 'true' ]]; then
+        echo "Cygwin detected - normalizing paths for unzip..."
+        unzip -qo $(cygpath -w "${jenv_central_repo_file}") -d "${JENV_DIR}/repo/central"
+    else
+        unzip -qo "${jenv_central_repo_file}" -d "${JENV_DIR}/repo/central"
+    fi
+    rm -rf "${jenv_central_repo_file}"
+fi
+
 source "${JENV_DIR}/bin/jenv-init.sh"
 echo ""
 __jenvtool_echo_green "Successfully upgraded JENV."
