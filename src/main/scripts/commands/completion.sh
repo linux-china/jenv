@@ -121,11 +121,11 @@ _jenv()
     # completion for candidate version
     if [[ "$COMP_CWORD" == "3" ]]; then
         candidate="${prev}"
-         if ! __jenvtool_array_contains JENV_CANDIDATES[@] "${candidate}"; then
-             versions=($(__jenvtool_fetch_versions "${candidate}"))
-             _jenv_comp "${versions}"
-             unset candidate
-         fi
+        if __jenvtool_array_contains JENV_CANDIDATES[@] "${candidate}"; then
+           versions=($(__jenvtool_fetch_versions "${candidate}"))
+           _jenv_comp "${versions}"
+           unset candidate
+        fi
     fi
 
      return 0
