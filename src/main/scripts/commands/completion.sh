@@ -128,10 +128,11 @@ _jenv()
     if [[ "$COMP_CWORD" == "3" ]]; then
         candidate="${prev}"
         if __jenvtool_utils_array_contains JENV_CANDIDATES[@] "${candidate}"; then
-           versions=($(__jenvtool_candidate_versions "${candidate}"))
-           _jenv_comp "${versions[@]}"
-           unset candidate
+           versions=$(__jenvtool_candidate_versions "${candidate}")
+           _jenv_comp "${versions}"
+           unset versions
         fi
+        unset candidate
     fi
 
      return 0
