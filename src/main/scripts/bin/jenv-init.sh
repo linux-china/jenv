@@ -100,6 +100,9 @@ function __jenvtool_init {
     JENV_SERVICE="${JENV_SERVICE_DEFAULT}"
     export JENV_SERVICE
 
+    # load utils functions
+    source "${JENV_DIR}/commands/jenv-utils.sh"
+
     #download central repository
     if [ ! -d "${JENV_DIR}/repo/central" ] ; then
         jenv_central_repo_file="${JENV_DIR}/tmp/repo-central.zip"
