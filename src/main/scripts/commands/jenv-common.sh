@@ -23,7 +23,7 @@
 
 # check candidate present.
 # @param $1 candidate name
-function __jenvtool_check_candidate_present {
+function __jenvtool_candidate_is_present {
 	if [ -z "$1" ]; then
 		__jenvtool_utils_echo_red "No candidate provided."
 		__jenvtool_help
