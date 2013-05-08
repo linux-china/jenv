@@ -29,12 +29,6 @@ function __jenvtool_list {
 	__jenvtool_check_candidate_present "${CANDIDATE}" || return 1
 	__jenvtool_determine_current_version "${CANDIDATE}"
 	CANDIDATE_VERSIONS=()
-	# default versions
-	if [ ! -d "${JENV_DIR}/repo/central" ] ; then
-        if [[ -f "${JENV_DIR}/db/${CANDIDATE}.txt" ]] ; then
-           CANDIDATE_VERSIONS=($(cat "${JENV_DIR}/db/${CANDIDATE}.txt"))
-        fi
-	fi
 	# candidate versions
 	for repo in $(ls -1 "${JENV_DIR}/repo" 2> /dev/null); do
        if [ -f "${JENV_DIR}/repo/${repo}/version/${CANDIDATE}.txt" ]; then
