@@ -31,7 +31,6 @@ function __jenvtool_uninstall {
 		echo "Unselecting ${CANDIDATE} ${VERSION}..."
 		unlink "${JENV_DIR}/candidates/${CANDIDATE}/current"
 	fi
-	echo ""
 	# delete candidate version directory
 	if [ -d "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}" ]; then
 		echo "Uninstalling ${CANDIDATE} ${VERSION}..."
