@@ -70,6 +70,11 @@ if [ ! -d "${JENV_DIR}/repo/central" ] ; then
     fi
     rm -rf "${jenv_central_repo_file}"
 fi
+# remove old files
+if [ -d "${JENV_DIR}/repo/central" ] ; then
+   rm -rf "${JENV_DIR}/config"
+   rm -rf "${JENV_DIR}/db"
+fi
 
 source "${JENV_DIR}/bin/jenv-init.sh"
 echo ""
