@@ -34,7 +34,7 @@ function __jenvtool_install {
 		    __jenvtool_install_local_version "${CANDIDATE}" "${VERSION}" "${LOCAL_FOLDER}" || return 1
 		fi
     else # install from center repository
-        __jenvtool_check_candidate_present "${CANDIDATE}" || return 1
+        __jenvtool_candidate_is_present "${CANDIDATE}" || return 1
     	# check version if not empty
         if [[ -n "$2" ]]; then
     	   __jenvtool_determine_version "$2" "$3" || return 1

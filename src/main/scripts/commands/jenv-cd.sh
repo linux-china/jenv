@@ -21,7 +21,7 @@
 # @param $2 candidate version
 function __jenvtool_cd {
 	CANDIDATE=`echo "$1" | tr '[:upper:]' '[:lower:]'`
-	__jenvtool_check_candidate_present "${CANDIDATE}" || return 1
+	__jenvtool_candidate_is_present "${CANDIDATE}" || return 1
 
 	VERSION="$2"
     if [[ -z "$2" ]]; then

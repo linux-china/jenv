@@ -21,7 +21,7 @@
 # @param $2 candidate version
 function __jenvtool_default {
 	CANDIDATE=`echo "$1" | tr '[:upper:]' '[:lower:]'`
-	__jenvtool_check_candidate_present "${CANDIDATE}" || return 1
+	__jenvtool_candidate_is_present "${CANDIDATE}" || return 1
 	__jenvtool_determine_version "$2" || return 1
 
 	if [ ! -d "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}" ]; then

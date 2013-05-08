@@ -26,7 +26,7 @@ function __jenvtool_list {
     fi
     # list candidate versions
 	CANDIDATE=`echo "$1" | tr '[:upper:]' '[:lower:]'`
-	__jenvtool_check_candidate_present "${CANDIDATE}" || return 1
+	__jenvtool_candidate_is_present "${CANDIDATE}" || return 1
 	__jenvtool_determine_current_version "${CANDIDATE}"
 	CANDIDATE_VERSIONS=($(__jenvtool_fetch_versions "${CANDIDATE}"))
     INSTALLED_VERSIONS=()
