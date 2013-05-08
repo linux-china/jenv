@@ -94,6 +94,12 @@ _jenv_uninstall()
    return 0
 }
 
+_jenv_repo()
+{
+   _jenv_comp "add update"
+   return 0
+}
+
 _jenv()
 {
     typeset prev
@@ -114,7 +120,7 @@ _jenv()
     cd)        _jenv_cd ;;
     uninstall) _jenv_uninstall ;;
     add)       return 0 ;;
-    repo)       return 0 ;;
+    repo)      _jenv_repo ;;
     *)        _jenv_commands ;;
     esac
 
