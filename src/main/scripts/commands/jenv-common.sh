@@ -52,6 +52,29 @@ function __jenvtool_candidate_is_present {
 	fi
 }
 
+# fetch candidate versions
+# @param $1 candidate names
+function __jenvtool_candidate_versions {
+    CANDIDATE="$1"
+    CANDIDATE_VERSIONS=()
+    for repo in $( __jenvtool_repo_all ); do
+       if [ -f "${JENV_DIR}/repo/${repo}/version/${CANDIDATE}.txt" ]; then
+          for candidate_version in $(cat "${JENV_DIR}/repo/${repo}/version/${CANDIDATE}.txt"); do
+             CANDIDATE_VERSIONS=("${CANDIDATE_VERSIONS[@]}" "${candidate_version}")
+          done
+       fi
+    done
+    # add local unversioned in repository
+    for version in $(ls -1 "${JENV_DIR}/candidates/${CANDIDATE}" 2> /dev/null); do
+    	if [ "${version}" != 'current' ]; then
+             if ! __jenvtool_utils_array_contains CANDIDATE_VERSIONS[@] "${version}"; then
+                 CANDIDATE_VERSIONS=("${CANDIDATE_VERSIONS[@]}" "${version}")
+             fi
+        fi
+    done
+    echo "${CANDIDATE_VERSIONS[@]}"
+}
+
 ############## version  ###############
 
 # check candidate version present.
@@ -75,7 +98,7 @@ function __jenvtool_version_determine {
        return 0
     fi
     # candidate versions
-    for candidate_version in $(__jenvtool_fetch_versions "${CANDIDATE}") ; do
+    for candidate_version in $(__jenvtool_candidate_versions "${CANDIDATE}") ; do
        if [[ "${candidate_version}" == "$1" ]]; then
            VERSION="$1"
            return 0
@@ -84,29 +107,6 @@ function __jenvtool_version_determine {
     echo ""
     __jenvtool_utils_echo_red "Stop! $1 is not a valid ${CANDIDATE} version."
     return 1
-}
-
-# fetch versions
-# @param $1 candidate names
-function __jenvtool_fetch_versions {
-    CANDIDATE="$1"
-    CANDIDATE_VERSIONS=()
-    for repo in $( __jenvtool_repo_all ); do
-       if [ -f "${JENV_DIR}/repo/${repo}/version/${CANDIDATE}.txt" ]; then
-          for candidate_version in $(cat "${JENV_DIR}/repo/${repo}/version/${CANDIDATE}.txt"); do
-             CANDIDATE_VERSIONS=("${CANDIDATE_VERSIONS[@]}" "${candidate_version}")
-          done
-       fi
-    done
-    # add local unversioned in repository
-    for version in $(ls -1 "${JENV_DIR}/candidates/${CANDIDATE}" 2> /dev/null); do
-    	if [ "${version}" != 'current' ]; then
-             if ! __jenvtool_utils_array_contains CANDIDATE_VERSIONS[@] "${version}"; then
-                 CANDIDATE_VERSIONS=("${CANDIDATE_VERSIONS[@]}" "${version}")
-             fi
-        fi
-    done
-    echo "${CANDIDATE_VERSIONS[@]}"
 }
 
 # build candidate all version to csv

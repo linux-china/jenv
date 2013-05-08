@@ -41,7 +41,7 @@ function __jenvtool_install {
     	fi
     	# if version absent, use first one in version list
         if [[ -z "$2" ]]; then
-            CANDIDATE_VERSIONS=($(__jenvtool_fetch_versions "${CANDIDATE}"))
+            CANDIDATE_VERSIONS=($(__jenvtool_candidate_versions "${CANDIDATE}"))
             VERSION="${CANDIDATE_VERSIONS[0]}"
         fi
         # validate installed?
