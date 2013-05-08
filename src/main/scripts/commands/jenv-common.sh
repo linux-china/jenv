@@ -106,11 +106,11 @@ function __jenvtool_candidate_download {
 		ZIP_ARCHIVE="${JENV_DIR}/archives/${CANDIDATE}-${VERSION}.zip"
 		echo "Downloading ${DOWNLOAD_URL}"
 		curl -L "${DOWNLOAD_URL}" > "${ZIP_ARCHIVE}"
-		__jenvtool_validate_zip "${ZIP_ARCHIVE}" || return 1
+		__jenvtool_utils_zip_validate "${ZIP_ARCHIVE}" || return 1
 	else
 		echo ""
 		echo "Found a previously downloaded ${CANDIDATE} ${VERSION} archive. Not downloading it again..."
-		__jenvtool_validate_zip "${JENV_DIR}/archives/${CANDIDATE}-${VERSION}.zip" || return 1
+		__jenvtool_utils_zip_validate "${JENV_DIR}/archives/${CANDIDATE}-${VERSION}.zip" || return 1
 	fi
 	echo ""
 }
@@ -147,20 +147,6 @@ function __jenvtool_version_determine {
     echo ""
     __jenvtool_utils_echo_red "Stop! $1 is not a valid ${CANDIDATE} version."
     return 1
-}
-
-
-# validate zip file
-# @param $1 zip file
-function __jenvtool_validate_zip {
-	ZIP_ARCHIVE="$1"
-	ZIP_OK=$(unzip -t "${ZIP_ARCHIVE}" | grep 'No errors detected in compressed data')
-	if [ -z "${ZIP_OK}" ]; then
-		rm "${ZIP_ARCHIVE}"
-		echo ""
-		__jenvtool_utils_echo_red "Stop! The archive was corrupt and has been removed! Please try installing again."
-		return 1
-	fi
 }
 
 # jenv default enviroment

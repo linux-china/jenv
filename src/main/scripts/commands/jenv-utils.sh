@@ -33,3 +33,16 @@ function __jenvtool_utils_array_contains {
    done
    return 1
 }
+
+# validate zip file
+# @param $1 zip file
+function __jenvtool_utils_zip_validate {
+	ZIP_ARCHIVE="$1"
+	ZIP_OK=$(unzip -t "${ZIP_ARCHIVE}" | grep 'No errors detected in compressed data')
+	if [ -z "${ZIP_OK}" ]; then
+		rm "${ZIP_ARCHIVE}"
+		echo ""
+		__jenvtool_utils_echo_red "Stop! The archive was corrupt and has been removed! Please try installing again."
+		return 1
+	fi
+}
