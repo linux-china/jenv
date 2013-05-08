@@ -50,12 +50,25 @@ function __jenvtool_determine_version {
        VERSION="$1"
        return 0
     fi
-    CANDIDATE_VERSIONS=($(cat "${JENV_DIR}/db/${CANDIDATE}.txt"))
-    for candidate_version in "${CANDIDATE_VERSIONS[@]}" ; do
-         if [[ "${candidate_version}" == "$1" ]]; then
-             VERSION="$1"
-             return 0
-         fi
+    if [ ! -d "${JENV_DIR}/repo/central" ] ; then
+        CANDIDATE_VERSIONS=($(cat "${JENV_DIR}/db/${CANDIDATE}.txt"))
+        for candidate_version in "${CANDIDATE_VERSIONS[@]}" ; do
+             if [[ "${candidate_version}" == "$1" ]]; then
+                 VERSION="$1"
+                 return 0
+             fi
+        done
+    fi
+    # candidate versions
+    for repo in $(ls -1 "${JENV_DIR}/repo" 2> /dev/null); do
+       if [ -f "${JENV_DIR}/repo/${repo}/version/${CANDIDATE}.txt" ]; then
+          for candidate_version in $(cat "${JENV_DIR}/repo/${repo}/version/${CANDIDATE}.txt"); do
+             if [[ "${candidate_version}" == "$1" ]]; then
+                 VERSION="$1"
+                 return 0
+             fi
+          done
+       fi
     done
     echo ""
     __jenvtool_echo_red "Stop! $1 is not a valid ${CANDIDATE} version."
