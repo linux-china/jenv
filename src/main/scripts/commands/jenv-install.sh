@@ -37,7 +37,7 @@ function __jenvtool_install {
         __jenvtool_candidate_is_present "${CANDIDATE}" || return 1
     	# check version if not empty
         if [[ -n "$2" ]]; then
-    	   __jenvtool_determine_version "$2" "$3" || return 1
+    	   __jenvtool_version_determine "$2" "$3" || return 1
     	fi
     	# if version absent, use first one in version list
         if [[ -z "$2" ]]; then

@@ -68,7 +68,7 @@ function __jenvtool_version_is_present {
 # @param $1 candidate name
 # @param $2 candidate version
 # @return VERSION candidate version
-function __jenvtool_determine_version {
+function __jenvtool_version_determine {
     #check local installed version
     if [[ -d "${JENV_DIR}/candidates/${CANDIDATE}/$1" ]]; then
        VERSION="$1"
