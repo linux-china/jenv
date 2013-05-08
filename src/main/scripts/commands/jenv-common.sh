@@ -28,7 +28,7 @@
 # @return JENV_DIR jenv directory
 function __jenvtool_app_default_environment_variables {
 	if [ ! "${JENV_SERVICE}" ]; then
-		JENV_SERVICE="http://get.jvmtool.mvnsearch.org"
+		JENV_SERVICE="http://get.jenv.mvnsearch.org/"
 	fi
 }
 
