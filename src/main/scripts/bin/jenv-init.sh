@@ -134,6 +134,18 @@ function __jenvtool_init {
     JENV_SERVICE="${JENV_SERVICE_DEFAULT}"
     export JENV_SERVICE
 
+    #download central repository
+    if [ ! -d "${JENV_DIR}/repo/central" ] ; then
+        jenv_central_repo_file="${JENV_DIR}/tmp/repo-central.zip"
+        mkdir -p "${JENV_DIR}/repo"
+        curl -s "${JENV_SERVICE}/central-repo.zip?platform=${JENV_PLATFORM}" > "${jenv_central_repo_file}"
+        if [[ "${cygwin}" == 'true' ]]; then
+            unzip -qo $(cygpath -w "${jenv_central_repo_file}") -d "${JENV_DIR}/repo/central"
+        else
+            unzip -qo "${jenv_central_repo_file}" -d "${JENV_DIR}/repo/central"
+        fi
+        rm -rf "${jenv_central_repo_file}"
+    fi
     # check cached candidates first
     JENV_CANDIDATES=(${JENV_CANDIDATES_DEFAULT[@]})
     # repository candidates
