@@ -131,3 +131,5 @@ H2
    H2 is a Java SQL database engine.
 jHiccup
    Open Source Tool to Measure Variations in Java Performance
+OFBiz
+   Apache OFBiz is an open source enterprise automation software project
