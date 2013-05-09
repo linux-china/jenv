@@ -51,6 +51,29 @@ function __jenvtool_repo_all {
   echo -n "${repo_list[@]}"
 }
 
+# locate repo for candidate and version
+# @param $1 candidate name
+# @param $2 candidate version
+function __jenvtool_repo_locate {
+    CANDIDATE="$1"
+    VERSION="$2"
+    for repo in $( __jenvtool_repo_all ); do
+       if [ -f "${JENV_DIR}/repo/${repo}/candidates" ]; then
+            CANDIDATES=($(cat "${JENV_DIR}/repo/${repo}/candidates"))
+            if __jenvtool_utils_array_contains CANDIDATES[@] "${CANDIDATE}"; then
+               if [ -f "${JENV_DIR}/repo/${repo}/version/${CANDIDATE}.txt" ] ; then
+                 VERSIONS=($(cat "${JENV_DIR}/repo/${repo}/version/${CANDIDATE}.txt"))
+                 if __jenvtool_utils_array_contains VERSIONS[@] "${VERSION}"; then
+                    echo -n "${repo}"
+                    return 0
+                 fi
+               fi
+            fi
+       fi
+    done
+    echo -n ""
+}
+
 ########## candidate ################
 
 # reload candidates and export into env
