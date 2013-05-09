@@ -50,7 +50,7 @@ Final install the candidate with the version:
     $ jenv install maven 3.0.5
 In your terminal, input mvn --version to check the installation.
 
-If you want to list installed candidates, please use:
+If you want to list all installed candidates, please use following command.
 
     $ jenv ls
 
