@@ -133,3 +133,5 @@ jHiccup
    Open Source Tool to Measure Variations in Java Performance
 OFBiz
    Apache OFBiz is an open source enterprise automation software project
+Neo4j
+   Neo4j is an open-source, high-performance, enterprise-grade NOSQL graph database.
