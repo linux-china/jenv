@@ -117,8 +117,15 @@ function __jenvtool_install_remote_candidate {
     echo "Installing: ${CANDIDATE} ${VERSION}"
     # find install url from jenv.mvnsearch.org
     if [[ -z "${DOWNLOAD_URL}" ]]; then
-       echo "Parsing http://jenv.mvnsearch.org/candidate/${CANDIDATE}/download/${VERSION}/${JENV_PLATFORM}/${JENV_MACHINE_PLATFORM}"
-       DOWNLOAD_URL=$(curl -s "http://jenv.mvnsearch.org/candidate/${CANDIDATE}/download/${VERSION}/${JENV_PLATFORM}/${JENV_MACHINE_PLATFORM}")
+       repo=$(__jenvtool_repo_locate "${CANDIDATE}" "${VERSION}")
+       if [ -f "${JENV_DIR}/repo/${repo}/url.txt" ] ; then
+          repo_url=$(cat "${JENV_DIR}/repo/${repo}/url.txt")
+          echo "Parsing http://jenv.mvnsearch.org/candidate/${CANDIDATE}/download/${VERSION}/${JENV_PLATFORM}/${JENV_MACHINE_PLATFORM}"
+          DOWNLOAD_URL=$(curl -s "http://jenv.mvnsearch.org/candidate/${CANDIDATE}/download/${VERSION}/${JENV_PLATFORM}/${JENV_MACHINE_PLATFORM}")
+       else
+          echo "${repo} url is not available"
+          return 1
+       fi
     fi
     if __jenvtool_utils_string_contains "${DOWNLOAD_URL}" "http://" && __jenvtool_utils_string_contains "${DOWNLOAD_URL}" ".zip" ; then
        __jenvtool_candidate_download "${CANDIDATE}" "${VERSION}" "${DOWNLOAD_URL}"  || return 1
