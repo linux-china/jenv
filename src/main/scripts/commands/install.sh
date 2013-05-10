@@ -50,7 +50,8 @@ jenv_ext_folder="${JENV_DIR}/ext"
 jenv_bash_profile="${HOME}/.bash_profile"
 jenv_profile="${HOME}/.profile"
 jenv_bashrc="${HOME}/.bashrc"
-jenv_platform=$(uname)
+jenv_os_name=$(uname)
+jenv_machine_platform=$(uname -m)
 
 jenv_init_snippet=$( cat << EOF
 #THIS MUST BE AT THE END OF THE FILE FOR JENV TO WORK!!!
@@ -125,7 +126,7 @@ echo "Installing jenv scripts..."
 
 mkdir -p "${jenv_tmp_folder}"
 echo "Download script archive..."
-curl -s "${JENV_SERVICE}/jenv-last.zip?platform=${jenv_platform}&purpose=install" > "${jenv_zip_file}"
+curl -s "${JENV_SERVICE}/jenv-last.zip?osName=${jenv_os_name}&platform=${jenv_machine_platform}&purpose=install" > "${jenv_zip_file}"
 
 echo "Extract script archive..."
 if [[ "${cygwin}" == 'true' ]]; then
@@ -138,7 +139,7 @@ fi
 #download central repository
 echo "Download Central repository..."
 mkdir -p "${JENV_DIR}/repo"
-curl -s "${JENV_SERVICE}/central-repo.zip?platform=${jenv_platform}" > "${jenv_central_repo_file}"
+curl -s "${JENV_SERVICE}/central-repo.zip?osName=${jenv_os_name}&platform=${jenv_machine_platform}" > "${jenv_central_repo_file}"
 if [[ "${cygwin}" == 'true' ]]; then
 	echo "Cygwin detected - normalizing paths for unzip..."
 	unzip -qo $(cygpath -w "${jenv_central_repo_file}") -d "${JENV_DIR}/repo/central"
