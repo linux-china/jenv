@@ -18,7 +18,7 @@
 # jenv version
 export JENV_VERSION="@JENV_VERSION@"
 # platform, such as Linux, Unix, Darwin or CYGWIN etc
-export JENV_PLATFORM=$(uname)
+export JENV_OS_NAME=$(uname)
 # matchine platform, such as x86_64, i686, i386
 export JENV_MACHINE_PLATFORM=$(uname -m)
 # auto confirm without prompt
@@ -91,7 +91,7 @@ function __jenvtool_init {
         JENV_DIR="$HOME/.jenv"
         if [[ "${cygwin}" == 'true' ]]; then
            JENV_DIR="/cygdrive/c/jenv"
-           export JENV_PLATFORM="Cygwin"
+           export JENV_OS_NAME="Cygwin"
         fi
         export JENV_DIR
     fi
@@ -107,7 +107,7 @@ function __jenvtool_init {
     if [ ! -d "${JENV_DIR}/repo/central" ] ; then
         jenv_central_repo_file="${JENV_DIR}/tmp/repo-central.zip"
         mkdir -p "${JENV_DIR}/repo"
-        curl -s "${JENV_SERVICE}/central-repo.zip?platform=${JENV_PLATFORM}" > "${jenv_central_repo_file}"
+        curl -s "${JENV_SERVICE}/central-repo.zip?osName=${JENV_OS_NAME}&platform=${JENV_MACHINE_PLATFORM}" > "${jenv_central_repo_file}"
         if [[ "${cygwin}" == 'true' ]]; then
             unzip -qo $(cygpath -w "${jenv_central_repo_file}") -d "${JENV_DIR}/repo/central"
         else

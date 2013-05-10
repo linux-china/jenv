@@ -120,8 +120,8 @@ function __jenvtool_install_remote_candidate {
        repo=$(__jenvtool_repo_locate "${CANDIDATE}" "${VERSION}")
        if [ -f "${JENV_DIR}/repo/${repo}/url.txt" ] ; then
           repo_url=$(cat "${JENV_DIR}/repo/${repo}/url.txt")
-          echo "Parsing http://jenv.mvnsearch.org/candidate/${CANDIDATE}/download/${VERSION}/${JENV_PLATFORM}/${JENV_MACHINE_PLATFORM}"
-          DOWNLOAD_URL=$(curl -s "http://jenv.mvnsearch.org/candidate/${CANDIDATE}/download/${VERSION}/${JENV_PLATFORM}/${JENV_MACHINE_PLATFORM}")
+          echo "Parsing http://jenv.mvnsearch.org/candidate/${CANDIDATE}/download/${VERSION}/${JENV_OS_NAME}/${JENV_MACHINE_PLATFORM}"
+          DOWNLOAD_URL=$(curl -s "http://jenv.mvnsearch.org/candidate/${CANDIDATE}/download/${VERSION}/${JENV_OS_NAME}/${JENV_MACHINE_PLATFORM}")
        else
           echo "${repo} url is not available"
           return 1

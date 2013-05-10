@@ -82,12 +82,12 @@ function __jenv_update_repository {
   repo_url="${2}"
   jenv_tmp_zip="${JENV_DIR}/tmp/repo-${repo_name}.zip"
   mkdir -p "${JENV_DIR}/tmp"
-  curl -s "${repo_url}/info.zip?os=${JENV_PLATFORM}&platform=${JENV_MACHINE_PLATFORM}" > "${jenv_tmp_zip}"
+  curl -s "${repo_url}/info.zip?osName=${JENV_OS_NAME}&platform=${JENV_MACHINE_PLATFORM}" > "${jenv_tmp_zip}"
   mkdir -p "${JENV_DIR}/repo"
   if [[ -d "${JENV_DIR}/repo/${repo_name}"  ]] ; then
       rm -rf "${JENV_DIR}/repo/${repo_name}"
   fi
-  if [[ "${JENV_PLATFORM}" == 'Cygwin' ]]; then
+  if [[ "${JENV_OS_NAME}" == 'Cygwin' ]]; then
   	unzip -qo $(cygpath -w "${jenv_tmp_zip}") -d "${JENV_DIR}/repo/${repo_name}"
   else
   	unzip -qo "${jenv_tmp_zip}" -d "${JENV_DIR}/repo/${repo_name}"
