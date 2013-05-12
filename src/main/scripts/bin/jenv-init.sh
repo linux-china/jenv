@@ -69,7 +69,7 @@ __jenvtool_path_add_candidate() {
 # @return JENV_DIR jenv dir
 # @return JENV_SERVICE jenv service url
 # @return JENV_CANDIDATES jenv candidate array
-function __jenvtool_init {
+__jenvtool_init() {
 
     # OS specific support (must be 'true' or 'false').
     cygwin=false;
