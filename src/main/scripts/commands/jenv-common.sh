@@ -145,7 +145,7 @@ function __jenvtool_candidate_installed_versions {
 function __jenvtool_candidate_current_version {
    CANDIDATE="$1"
    CURRENT=$(echo $PATH | sed -E "s|jenv/candidates/${CANDIDATE}/([^/]+)|!!\1!!|1" | sed -E "s|^.*!!(.+)!!.*$|\1|g")
-   if [[ "${CURRENT}" == "current" ]]; then
+   if [[ "${CURRENT}" == "current" || "${CURRENT}" == "current:" ]]; then
    	   CURRENT=$(readlink "${JENV_DIR}/candidates/${CANDIDATE}/current" | sed -e "s!${JENV_DIR}/candidates/${CANDIDATE}/!!g")
    	   echo -n "${CURRENT}"
    elif [[ ! -z "${CURRENT}"  ]] ; then
