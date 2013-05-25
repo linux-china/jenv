@@ -29,7 +29,7 @@ function __jenvtool_use {
 		echo -n "Do you want to install it now? (Y/n): "
 		read INSTALL
 		if [[ -z "${INSTALL}" || "${INSTALL}" == "y" || "${INSTALL}" == "Y" ]]; then
-			__jenvtool_install_candidate_version "${CANDIDATE}" "${VERSION}"
+			__jenvtool_install "${CANDIDATE}" "${VERSION}"
 		else
 			return 1
 		fi
