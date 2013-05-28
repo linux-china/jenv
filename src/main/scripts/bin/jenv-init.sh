@@ -118,7 +118,7 @@ __jenvtool_init() {
     # check cached candidates first
     JENV_CANDIDATES=(${JENV_CANDIDATES_DEFAULT[@]})
     # repository candidates
-    for repo in $(ls -1 "${JENV_DIR}/repo" 2> /dev/null); do
+    for repo in $(ls -1 --color=never "${JENV_DIR}/repo" 2> /dev/null); do
        if [ -f "${JENV_DIR}/repo/${repo}/candidates" ]; then
          for candidate_name in $(cat "${JENV_DIR}/repo/${repo}/candidates"); do
            if ! __jenvtool_utils_array_contains JENV_CANDIDATES[@] "${candidate_name}"; then
