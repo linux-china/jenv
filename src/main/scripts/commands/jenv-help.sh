@@ -27,7 +27,7 @@ function __jenvtool_help {
 	echo "   version    :  optional, defaults to latest stable if not provided"
 	echo ""
 	echo "eg: jenv all"
-	echo "eg: jenv install maven 3.0.4"
+	echo "eg: jenv install maven 3.0.5"
 	echo "Author: linux_china, @linux_china on weibo and twitter"
 	echo "For more information, please visit http://jenv.mvnsearch.org"
 }
