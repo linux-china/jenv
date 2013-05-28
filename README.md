@@ -19,7 +19,7 @@ Please report any bugs and feature request on the [GitHub Issue Tracker](https:/
 
 Open your favourite terminal and enter the following:
 
-    $ curl -s get.jvmtool.mvnsearch.org | bash
+    $ curl -s get.jenv.mvnsearch.org | bash
 
 If the environment needs tweaking for jenv to be installed, the installer will prompt you accordingly and ask you to restart.
 
