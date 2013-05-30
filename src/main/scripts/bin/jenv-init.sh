@@ -25,14 +25,13 @@ export JENV_MACHINE_PLATFORM=$(uname -m)
 if [ -z "${JENV_AUTO}" ]; then
    export JENV_AUTO="false"
 fi
+
 # detect shell: bash or zsh.
 if [ "$1" = "zsh" ]; then
     export JENV_SHELL_VERSION="zsh"
 else
     export JENV_SHELL_VERSION="bash"
 fi
-
-echo $JENV_SHELL_VERSION
 
 # remove candidate from path
 # @param $1 candidate name
