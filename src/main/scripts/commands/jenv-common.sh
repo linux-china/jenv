@@ -60,10 +60,10 @@ function __jenvtool_repo_locate {
     for repo in $( __jenvtool_repo_all ); do
        if [ -f "${JENV_DIR}/repo/${repo}/candidates" ]; then
             CANDIDATES=($(cat "${JENV_DIR}/repo/${repo}/candidates"))
-            if __jenvtool_utils_array_contains CANDIDATES[@] "${CANDIDATE}"; then
+            if __jenvtool_utils_array_contains "CANDIDATES[@]" "${CANDIDATE}"; then
                if [ -f "${JENV_DIR}/repo/${repo}/version/${CANDIDATE}.txt" ] ; then
                  VERSIONS=($(cat "${JENV_DIR}/repo/${repo}/version/${CANDIDATE}.txt"))
-                 if __jenvtool_utils_array_contains VERSIONS[@] "${VERSION}"; then
+                 if __jenvtool_utils_array_contains "VERSIONS[@]" "${VERSION}"; then
                     echo -n "${repo}"
                     return 0
                  fi
@@ -83,7 +83,7 @@ function __jenvtool_candidate_reload_all {
 	for repo in $(ls -1 "${JENV_DIR}/repo" 2> /dev/null); do
 	   if [ -f "${JENV_DIR}/repo/${repo}/candidates" ]; then
 	     for candidate_name in $(cat "${JENV_DIR}/repo/${repo}/candidates"); do
-	        if ! __jenvtool_utils_array_contains JENV_CANDIDATES[@] "${candidate_name}"; then
+	        if ! __jenvtool_utils_array_contains "JENV_CANDIDATES[@]" "${candidate_name}"; then
 	           JENV_CANDIDATES=("${JENV_CANDIDATES[@]}" "${candidate_name}")
 	        fi
 	     done
@@ -110,7 +110,7 @@ function __jenvtool_candidate_versions {
     for repo in $( __jenvtool_repo_all ); do
        if [ -f "${JENV_DIR}/repo/${repo}/version/${CANDIDATE}.txt" ]; then
           for candidate_version in $(cat "${JENV_DIR}/repo/${repo}/version/${CANDIDATE}.txt"); do
-             if ! __jenvtool_utils_array_contains CANDIDATE_VERSIONS[@] "${candidate_version}"; then
+             if ! __jenvtool_utils_array_contains "CANDIDATE_VERSIONS[@]" "${candidate_version}"; then
                 CANDIDATE_VERSIONS=("${CANDIDATE_VERSIONS[@]}" "${candidate_version}")
              fi
           done
@@ -119,7 +119,7 @@ function __jenvtool_candidate_versions {
     # add local unversioned in repository
     for version in $(ls -1 "${JENV_DIR}/candidates/${CANDIDATE}" 2> /dev/null); do
     	if [ "${version}" != 'current' ]; then
-             if ! __jenvtool_utils_array_contains CANDIDATE_VERSIONS[@] "${version}"; then
+             if ! __jenvtool_utils_array_contains "CANDIDATE_VERSIONS[@]" "${version}"; then
                  CANDIDATE_VERSIONS=("${CANDIDATE_VERSIONS[@]}" "${version}")
              fi
         fi
