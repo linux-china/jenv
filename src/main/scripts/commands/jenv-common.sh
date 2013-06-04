@@ -57,6 +57,7 @@ function __jenvtool_repo_all {
 function __jenvtool_repo_locate {
     CANDIDATE="$1"
     VERSION="$2"
+
     for repo in $( __jenvtool_repo_all ); do
        if [ -f "${JENV_DIR}/repo/${repo}/candidates" ]; then
             CANDIDATES=($(cat "${JENV_DIR}/repo/${repo}/candidates"))
