@@ -45,7 +45,7 @@ jenv_bin_folder="${JENV_DIR}/bin"
 echo "Purge existing scripts..."
 
 echo "Download new scripts to: ${jenv_tmp_zip}"
-curl -s "${JENV_SERVICE}/jenv-last.zip?osName=${JENV_OS_NAME}&platform=${JENV_MACHINE_PLATFORM}&purpose=selfupdate" > "${jenv_tmp_zip}"
+curl -L -s "${JENV_SERVICE}/jenv-last.zip?osName=${JENV_OS_NAME}&platform=${JENV_MACHINE_PLATFORM}&purpose=selfupdate" > "${jenv_tmp_zip}"
 
 echo "Extract script archive..."
 if [[ "${cygwin}" == 'true' ]]; then
@@ -60,7 +60,7 @@ if [ ! -d "${JENV_DIR}/repo/central" ] ; then
     echo "Download Central repository..."
     jenv_central_repo_file="${JENV_DIR}/tmp/repo-central.zip"
     mkdir -p "${JENV_DIR}/repo"
-    curl -s "${JENV_SERVICE}/central-repo.zip?osName=${JENV_OS_NAME}&platform=${JENV_MACHINE_PLATFORM}" > "${jenv_central_repo_file}"
+    curl -L -s "${JENV_SERVICE}/central-repo.zip?osName=${JENV_OS_NAME}&platform=${JENV_MACHINE_PLATFORM}" > "${jenv_central_repo_file}"
     if [[ "${cygwin}" == 'true' ]]; then
         echo "Cygwin detected - normalizing paths for unzip..."
         unzip -qo $(cygpath -w "${jenv_central_repo_file}") -d "${JENV_DIR}/repo/central"
