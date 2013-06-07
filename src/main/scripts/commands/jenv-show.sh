@@ -20,6 +20,6 @@
 # @param $1 candidate name
 function __jenvtool_show {
 	CANDIDATE=`echo "$1" | tr '[:upper:]' '[:lower:]'`
-	CANIDATE_INFO=$(curl -s "http://jenv.mvnsearch.org/candidate/${CANDIDATE}?format=txt")
+	CANIDATE_INFO=$(curl -L -s "http://jenv.mvnsearch.org/candidate/${CANDIDATE}?format=txt")
 	echo "${CANIDATE_INFO}"
 }
