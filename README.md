@@ -8,7 +8,7 @@ Please report any bugs and feature request on the [GitHub Issue Tracker](https:/
 ## Why jenv
    * Easy to manage Java version, such as 1.6, 1.7 and 1.8
    * Easy to install java related tools, such as ant, maven, tomcat etc.
-   * Easy to manager candidate version. Install new version and uninstall the old one.
+   * Easy to manager candidate version. Install new version, reinstall or uninstall the old one.
    * Directory is standard, and friendly to IDE
    * Easy to extend. You can setup your own jenv on your company to manage development environment.
    * Easy to backup your env.
@@ -33,7 +33,7 @@ and install. After install please execute following command:
 
 You can also install Java by http url:
 
-   $ jenv install java 1.7.0_17  http://xxxx.com/java/java-1.7.0_17-darwin.zip
+   $ jenv install java 1.7.0_17  http://xxxx.com/java/java-1.7.0_17.zip
 
 ## Install canidates
 
@@ -61,6 +61,8 @@ All canidate versions are maintained on central repository. To keep updated with
 
 ## Other Commands
 
+  * uninstall: Uninstall the candidate with the version, such as jenv uninstall maven 3.0.4
+  * reinstall: Reinstall the candidate with the version, such as jenv reinstall maven 3.0.5
   * use: Use the candidate with the version, such as jenv use maven 3.0.4
   * which: Which version for candidate
   * pause: Pause candidate usage
