@@ -3,8 +3,6 @@ jenv: the Java enVironment Manager
 jenv is a tool for managing parallel Versions of Java Development Kits on any Unix based system.
 It provides a convenient command line interface for installing, switching, removing and listing Candidates.
 
-Please report any bugs and feature request on the [GitHub Issue Tracker](https://github.com/linux-china/jenv/issues).
-
 ## Why jenv
    * Easy to manage Java version, such as 1.6, 1.7 and 1.8
    * Easy to install java related tools, such as ant, maven, tomcat etc.
