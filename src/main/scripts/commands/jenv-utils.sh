@@ -25,7 +25,7 @@ function __jenvtool_utils_string_contains {
 # @param $1 array such as array[@]
 # @param $2 item value
 function __jenvtool_utils_array_contains {
-    if [ $JENV_SHELL_VERSION = 'bash' ];then
+    if [ $JENV_SHELL = 'bash' ];then
         eval 'argAry1=("${!1}")
               for i in ${argAry1[@]}; do
                   if [ "$i" = "$2" ]; then

@@ -28,9 +28,9 @@ fi
 
 # detect shell: bash or zsh.
 if [ "$1" = "zsh" ]; then
-    export JENV_SHELL_VERSION="zsh"
+    export JENV_SHELL="zsh"
 else
-    export JENV_SHELL_VERSION="bash"
+    export JENV_SHELL="bash"
 fi
 
 # remove candidate from path
