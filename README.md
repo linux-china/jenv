@@ -21,12 +21,6 @@ Open your favourite terminal and enter the following:
 
 If the environment needs tweaking for jenv to be installed, the installer will prompt you accordingly and ask you to restart.
 
-**To ZSH users**
-
-ZSH users should run the following command to make jenv work under zsh:
-
-    echo '[[ -s "$HOME/.jenv/bin/jenv-init.sh" ]] && source "$HOME/.jenv/bin/jenv-init.sh" zsh && source "$HOME/.jenv/commands/jenv-zsh-completion.zsh"' >> ~/.zshrc
-
 ## Install Java
 Because I can not redistribute Java SDK, so you should download it from http://www.oracle.com/technetwork/java/javase/downloads/index.html
 and install. After install please execute following command:

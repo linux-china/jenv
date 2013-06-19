@@ -50,14 +50,9 @@ jenv_ext_folder="${JENV_DIR}/ext"
 jenv_bash_profile="${HOME}/.bash_profile"
 jenv_profile="${HOME}/.profile"
 jenv_bashrc="${HOME}/.bashrc"
+jenv_zshrc="${HOME}/.zshrc"
 jenv_os_name=$(uname)
 jenv_machine_platform=$(uname -m)
-
-jenv_init_snippet=$( cat << EOF
-#THIS MUST BE AT THE END OF THE FILE FOR JENV TO WORK!!!
-[[ -s "${JENV_DIR}/bin/jenv-init.sh" ]] && source "${JENV_DIR}/bin/jenv-init.sh" && source "${JENV_DIR}/commands/completion.sh"
-EOF
-)
 
 echo '                                                                     '
 echo 'Thanks for using                                                     '
@@ -148,36 +143,52 @@ else
 fi
 rm -rf "${jenv_central_repo_file}"
 
-echo "Attempt update of bash profiles..."
-if [ ! -f "${jenv_bash_profile}" -a ! -f "${jenv_profile}" ]; then
-	echo "#!/bin/bash" > "${jenv_bash_profile}"
-	echo "${jenv_init_snippet}" >> "${jenv_bash_profile}"
-	echo "Created and initialised ${jenv_bash_profile}"
-else
-	if [ -f "${jenv_bash_profile}" ]; then
-		if [[ -z `grep 'jenv-init.sh' "${jenv_bash_profile}"` ]]; then
-			echo -e "\n${jenv_init_snippet}" >> "${jenv_bash_profile}"
-			echo "Updated existing ${jenv_bash_profile}"
-		fi
-	fi
+until [[ "${JENV_SHELL_ENV}" == "bash" || "${JENV_SHELL_ENV}" == "zsh" ]]; do
+    echo -n "Which shell do you use, bash or zsh? (bash/zsh): "
+    read JENV_SHELL_ENV
+done
 
-	if [ -f "${jenv_profile}" ]; then
-		if [[ -z `grep 'jenv-init.sh' "${jenv_profile}"` ]]; then
-			echo -e "\n${jenv_init_snippet}" >> "${jenv_profile}"
-			echo "Updated existing ${jenv_profile}"
-		fi
-	fi
-fi
+jenv_init_snippet=$( cat << EOF
+#THIS MUST BE AT THE END OF THE FILE FOR JENV TO WORK!!!
+[[ -s "${JENV_DIR}/bin/jenv-init.sh" ]] && source "${JENV_DIR}/bin/jenv-init.sh" ${JENV_SHELL} && source "${JENV_DIR}/commands/${JENV_SHELL}-completion.sh"
+EOF
+)
 
-if [ ! -f "${jenv_bashrc}" ]; then
-	echo "#!/bin/bash" > "${jenv_bashrc}"
-	echo "${jenv_init_snippet}" >> "${jenv_bashrc}"
-	echo "Created and initialised ${jenv_bashrc}"
+if [[ "${JENV_SHELL_ENV}" == "bash" ]]; then
+    echo "Attempt update of bash profiles..."
+    if [ ! -f "${jenv_bash_profile}" -a ! -f "${jenv_profile}" ]; then
+        echo "#!/bin/bash" > "${jenv_bash_profile}"
+        echo "${jenv_init_snippet}" >> "${jenv_bash_profile}"
+        echo "Created and initialised ${jenv_bash_profile}"
+    else
+        if [ -f "${jenv_bash_profile}" ]; then
+            if [[ -z `grep 'jenv-init.sh' "${jenv_bash_profile}"` ]]; then
+                echo -e "\n${jenv_init_snippet}" >> "${jenv_bash_profile}"
+                echo "Updated existing ${jenv_bash_profile}"
+            fi
+        fi
+
+        if [ -f "${jenv_profile}" ]; then
+            if [[ -z `grep 'jenv-init.sh' "${jenv_profile}"` ]]; then
+                echo -e "\n${jenv_init_snippet}" >> "${jenv_profile}"
+                echo "Updated existing ${jenv_profile}"
+            fi
+        fi
+    fi
+
+    if [ ! -f "${jenv_bashrc}" ]; then
+        echo "#!/bin/bash" > "${jenv_bashrc}"
+        echo "${jenv_init_snippet}" >> "${jenv_bashrc}"
+        echo "Created and initialised ${jenv_bashrc}"
+    else
+        if [[ -z `grep 'jenv-init.sh' "${jenv_bashrc}"` ]]; then
+            echo -e "\n${jenv_init_snippet}" >> "${jenv_bashrc}"
+            echo "Updated existing ${jenv_bashrc}"
+        fi
+    fi
 else
-	if [[ -z `grep 'jenv-init.sh' "${jenv_bashrc}"` ]]; then
-		echo -e "\n${jenv_init_snippet}" >> "${jenv_bashrc}"
-		echo "Updated existing ${jenv_bashrc}"
-	fi
+    echo "Attempt update of zsh profiles..."
+    echo "${jenv_init_snippet}" >> "${jenv_zshrc}"
 fi
 
 echo -e "\n\n\nAll done!\n\n"
