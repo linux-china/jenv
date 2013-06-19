@@ -42,7 +42,11 @@ function __jenvtool_install {
     	# if version absent, use first one in version list
         if [[ -z "$2" ]]; then
             CANDIDATE_VERSIONS=($(__jenvtool_candidate_versions "${CANDIDATE}"))
-            VERSION="${CANDIDATE_VERSIONS[0]}"
+            if [[ "${JENV_SHELL}" == "bash" ]]; then
+                VERSION="${CANDIDATE_VERSIONS[0]}"
+            else
+                VERSION="${CANDIDATE_VERSIONS[1]}"
+            fi
         fi
         # validate installed?
     	if [[ -d "${JENV_DIR}/${CANDIDATE}/${VERSION}" || -h "${JENV_DIR}/${CANDIDATE}/${VERSION}" ]]; then

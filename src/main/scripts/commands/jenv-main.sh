@@ -74,7 +74,7 @@ function jenv {
 
 	# Check whether the candidate exists
 	candidate_ops=(cd default execute install list pause show uninstall use which)
-	if __jenvtool_utils_array_contains candidate_ops[@] "${COMMAND}" ; then
+	if __jenvtool_utils_array_contains "candidate_ops[@]" "${COMMAND}" ; then
         if [[ -n "$2" ]]; then
             CANDIDATE=`echo "$2" | tr '[:upper:]' '[:lower:]'`
             if [[ -z $(echo ${JENV_CANDIDATES[@]} | grep -w "${CANDIDATE}") ]]; then

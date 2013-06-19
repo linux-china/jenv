@@ -25,13 +25,24 @@ function __jenvtool_utils_string_contains {
 # @param $1 array such as array[@]
 # @param $2 item value
 function __jenvtool_utils_array_contains {
-   argAry1=("${!1}")
-   for i in ${argAry1[@]}; do
-     if [ "$i" = "$2" ]; then
-       return 0
-     fi
-   done
-   return 1
+    if [ $JENV_SHELL = 'bash' ];then
+        eval 'argAry1=("${!1}")
+              for i in ${argAry1[@]}; do
+                  if [ "$i" = "$2" ]; then
+                      return 0
+                  fi
+              done
+              return 1'
+    else
+        local array_name=$1
+        local item_value=$2
+        eval 'for i in ${(P)${array_name}}; do
+                  if [ "$i" = "$item_value" ]; then
+                      return 0
+                  fi
+              done
+              return 1'
+    fi
 }
 
 # validate zip file

@@ -26,6 +26,13 @@ if [ -z "${JENV_AUTO}" ]; then
    export JENV_AUTO="false"
 fi
 
+# detect shell: bash or zsh.
+if [ "$1" = "zsh" ]; then
+    export JENV_SHELL="zsh"
+else
+    export JENV_SHELL="bash"
+fi
+
 # remove candidate from path
 # @param $1 candidate name
 # @param $2 candidate version
@@ -121,7 +128,7 @@ __jenvtool_init() {
     for repo in $(ls -1 "${JENV_DIR}/repo" 2> /dev/null); do
        if [ -f "${JENV_DIR}/repo/${repo}/candidates" ]; then
          for candidate_name in $(cat "${JENV_DIR}/repo/${repo}/candidates"); do
-           if ! __jenvtool_utils_array_contains JENV_CANDIDATES[@] "${candidate_name}"; then
+           if ! __jenvtool_utils_array_contains "JENV_CANDIDATES[@]" "${candidate_name}"; then
               JENV_CANDIDATES=("${JENV_CANDIDATES[@]}" "${candidate_name}")
            fi
          done
