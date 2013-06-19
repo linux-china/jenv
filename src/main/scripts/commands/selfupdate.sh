@@ -76,4 +76,4 @@ if [ -d "${JENV_DIR}/repo/central" ] ; then
 fi
 
 echo ""
-__jenvtool_utils_echo_green "jenv upgraded successfully"
+__jenvtool_utils_echo_green "jenv upgraded successfully!"
