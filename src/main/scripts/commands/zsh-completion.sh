@@ -6,7 +6,7 @@ compctl -K _jenv jenv
 
 _jenv_commands()
 {
-    cmds=(all ls candidates list update install uninstall pause execute exe use which cd version default add repo selfupdate help requirements)
+    cmds=(all ls candidates list update install uninstall pause execute exe use which cd version default add repo selfupdate help requirements reinstall)
 	for cmd in ${cmds}
 	do
 	    echo $cmd
@@ -50,8 +50,9 @@ _jenv() {
         which)      completions="$(_jenv_candidates)";;
         cd)         completions="$(_jenv_candidates)";;
         uninstall)  completions="$(_jenv_candidates)";;
+        reinstall)  completions="$(_jenv_candidates)";;
         repo)       completions="$(_jenv_repo)";;
-        *) completions=();;
+        *)          completions=();;
         esac
     fi
     reply=("${(ps:\n:)completions}")
