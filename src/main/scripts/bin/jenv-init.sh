@@ -176,8 +176,8 @@ cd () {
      echo "==============jenv setup======================"
      for entry in $(cat "${PWD}/jenvrc")
      do
-        candidate1=${entry%=*}
-        version1=${entry#*=}
+        candidate1=`echo ${entry} | sed 's/=.*//g'`
+        version1=`echo ${entry} | sed 's/.*=//g'`
         if [ -d "${JENV_DIR}/candidates/${candidate1}/${version1}" ]; then
             __jenvtool_use "${candidate1}" "${version1}"
         else
