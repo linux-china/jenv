@@ -19,7 +19,7 @@
 # jenv init
 function __jenvtool_init {
     if [ -e "./jenvrc" ]; then
-        echo "#java=1.7.0_25" > "./jenvrc"
+        echo "maven=3.0.5" > "./jenvrc"
         __jenvtool_utils_echo_green "jenvrc file generated!"
     else
     	__jenvtool_utils_echo_red "jenvrc file existed!"
