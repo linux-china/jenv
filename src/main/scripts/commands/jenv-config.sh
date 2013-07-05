@@ -50,7 +50,7 @@ function __jenvtool_config {
        if [ -e "${JENV_DIR}/conf/settings" ] ; then
          cat "${JENV_DIR}/conf/settings"
        else
-         echo "JENV_AUTO=false"
+         echo "auto=false"
        fi
     fi
 }
