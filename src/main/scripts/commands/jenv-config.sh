@@ -25,14 +25,21 @@ function __jenvtool_config {
     if [[ -n "${conf_name}" ]]; then
        if [ -e "${JENV_DIR}/conf/settings" ] ; then
           echo -n "" > "${JENV_DIR}/conf/settings_new"
+          tmp_exits="false"
           for entry in $(cat "${JENV_DIR}/conf/settings") ; do
             name=${entry%=*}
             value=${entry#*=}
             if [[ "${name}" == "${conf_name}" ]]; then
                value="${conf_value}"
+               tmp_exits="true"
             fi
-            echo "${name}=${value}" >> "${JENV_DIR}/conf/settings_new"
+            if [[ -n "${value}" ]] ; then
+               echo "${name}=${value}" >> "${JENV_DIR}/conf/settings_new"
+            fi
           done
+          if [[ "${tmp_exits}" == "false" ]]; then
+            echo "${conf_name}=${conf_value}" >> "${JENV_DIR}/conf/settings_new"
+          fi
           mv -f "${JENV_DIR}/conf/settings_new" "${JENV_DIR}/conf/settings"
        else
          mkdir -p "${JENV_DIR}/conf"
