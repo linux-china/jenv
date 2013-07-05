@@ -33,7 +33,7 @@ function jenv {
     	COMMAND="list"
    elif [[ "${COMMAND}" == "all" ]]; then
        	COMMAND="candidates"
-   elif [[ "${COMMAND}" == "exe" ]]; then
+   elif [[ "${COMMAND}" == "exec" || "${COMMAND}" == "exe" ]]; then
          	COMMAND="execute"
    fi
 	# Load the jenv config if it exists.
