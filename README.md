@@ -53,7 +53,7 @@ If you want to list all installed candidates, please use following command.
     $ jenv ls
 
 ### Update repository
-All canidate versions are maintained on central repository. To keep updated with central repository, please use:
+The candidate's versions are maintained on the central repository. To keep updated with central repository, please use:
 
     $ jenv repo update
 
