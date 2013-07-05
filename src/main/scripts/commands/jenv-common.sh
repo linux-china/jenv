@@ -248,3 +248,22 @@ function __jenvtool_version_determine {
     return 1
 }
 
+# get conf value
+# @param $1 candidate name
+function __jenvtool_get_conf_value {
+   conf_name="$1"
+   if [[ -n "${conf_name}" ]]; then
+      if [ -e "${JENV_DIR}/conf/settings" ] ; then
+          for entry in $(cat "${JENV_DIR}/conf/settings") ; do
+             name=${entry%=*}
+             value=${entry#*=}
+             if [[ "${name}" == "${conf_name}" ]]; then
+               echo -n "${value}"
+             fi
+          done
+      fi
+   else
+     echo -n ""
+   fi
+}
+
