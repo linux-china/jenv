@@ -77,6 +77,10 @@ jenvrc is jenv setup file which contains candidate and the version as following:
        maven=3.0.5
 After you enter this directory, jenv will setup environment automatically.
 Now You can use jenvrc to setup Java environment for each of your individual projects.
+You can use jenv init to generate jenvrc file.
+
+      $jenv init
+Note:  Line started with # means line comment.
 
 ## autorun.sh
 autorun.sh is a script under candidate home, and jenv will execute the script automatically. In the autorun.sh, you can update LD_LIBRARY_PATH or create alias.
