@@ -54,7 +54,8 @@ function __jenvtool_install {
     fi
 
 	# confirm by prompt
-	if [[ "${JENV_AUTO}" == "false" ]]; then
+	JENV_AUTO=$(__jenvtool_get_conf_value "auto")
+	if [[ "${JENV_AUTO}" != "true" ]]; then
 	   echo -n "Do you want ${CANDIDATE} ${VERSION} to be set as default? (Y/n): "
 	   read USE
 	fi
