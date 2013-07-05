@@ -24,7 +24,8 @@ function __jenvtool_config {
     conf_value="$2"
     if [[ -n "${conf_name}" ]]; then
        if [ -e "${JENV_DIR}/conf/settings" ] ; then
-          for entry in $(cat "${PWD}/jenvrc") ; do
+          echo -n "" > "${JENV_DIR}/conf/settings_new"
+          for entry in $(cat "${JENV_DIR}/conf/settings") ; do
             name=${entry%=*}
             value=${entry#*=}
             if [[ "${name}" == "${conf_name}" ]]; then
@@ -37,6 +38,7 @@ function __jenvtool_config {
          mkdir -p "${JENV_DIR}/conf"
          echo "${conf_name}=${conf_value}" > "${JENV_DIR}/conf/settings"
        fi
+       __jenvtool_utils_echo_green "Config updated successfully!"
     else
        if [ -e "${JENV_DIR}/conf/settings" ] ; then
          cat "${JENV_DIR}/conf/settings"
