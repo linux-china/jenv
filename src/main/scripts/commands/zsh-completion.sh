@@ -6,11 +6,11 @@ compctl -K _jenv jenv
 
 _jenv_commands()
 {
-    cmds=(all ls candidates list update install uninstall pause execute exe use which cd version default add repo selfupdate help requirements reinstall)
-	for cmd in ${cmds}
-	do
-	    echo $cmd
-	done
+    command=($(echo ${JENV_COMMANDS}))
+
+    for cmd in ${command}; do
+        echo ${cmd}
+    done
 }
 
 _jenv_candidates()

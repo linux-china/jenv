@@ -21,17 +21,18 @@ export JENV_VERSION="@JENV_VERSION@"
 export JENV_OS_NAME=$(uname)
 # matchine platform, such as x86_64, i686, i386
 export JENV_MACHINE_PLATFORM=$(uname -m)
+# jenv commands
+export JENV_COMMANDS="all ls candidates list update install reinstall uninstall clean pause execute exec use init config which cd version default add repo selfupdate help requirements"
 # auto confirm without prompt
 if [ -z "${JENV_AUTO}" ]; then
    export JENV_AUTO="false"
 fi
 
-# detect shell: bash or zsh.
-if [ "$1" = "zsh" ]; then
-    export JENV_SHELL="zsh"
-else
-    export JENV_SHELL="bash"
+JENV_SHELL="bash"
+if [ -n "${ZSH_NAME}" ]; then
+   JENV_SHELL="zsh"
 fi
+export JENV_SHELL
 
 # remove candidate from path
 # @param $1 candidate name
@@ -143,6 +144,12 @@ __jenvtool_init() {
            __jenvtool_path_add_candidate "${CANDIDATE}" "current"
         fi
     done
+    # autorun support
+    for CANDIDATE in "${JENV_CANDIDATES[@]}" ; do
+        if [ -f "${JENV_DIR}/candidates/${CANDIDATE}/current/autorun.sh" ]; then
+            source "${JENV_DIR}/candidates/${CANDIDATE}/current/autorun.sh"
+        fi
+    done
 
     if ! __jenvtool_utils_string_contains "$PATH" "JENV_DIR"; then
         PATH="${JENV_DIR}/bin:$PATH"
@@ -176,15 +183,17 @@ cd () {
      echo "==============jenv setup======================"
      for entry in $(cat "${PWD}/jenvrc")
      do
-        candidate1=`echo ${entry} | sed 's/=.*//g'`
-        version1=`echo ${entry} | sed 's/.*=//g'`
-        if [ -d "${JENV_DIR}/candidates/${candidate1}/${version1}" ]; then
-            __jenvtool_use "${candidate1}" "${version1}"
-        else
-           __jenvtool_install "${candidate1}" "${version1}"
+        if ! __jenvtool_utils_string_contains "$entry", "#" ; then
+            candidate1=`echo ${entry} | sed 's/=.*//g'`
+            version1=`echo ${entry} | sed 's/.*=//g'`
+            if [ -d "${JENV_DIR}/candidates/${candidate1}/${version1}" ]; then
+                __jenvtool_use "${candidate1}" "${version1}"
+            else
+               __jenvtool_install "${candidate1}" "${version1}"
+            fi
+            unset candidate1
+            unset version1
         fi
-        unset candidate1
-        unset version1
      done
   fi
 }

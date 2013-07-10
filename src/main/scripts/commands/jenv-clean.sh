@@ -16,18 +16,9 @@
 #   limitations under the License.
 #
 
-# help display
-# @Globals JENV_CANDIDATES JENV_CANDIDATES_DEFAULT
-function __jenvtool_help {
-	echo ""
-	echo "Usage: jenv <command> <candidate> [version]"
-	echo ""
-	echo "   command    :  ${JENV_COMMANDS}"
-	echo "   candidate  :  $(echo "${JENV_CANDIDATES[@]:-${JENV_CANDIDATES_DEFAULT[@]}}" | sed -E 's/ /, /g')"
-	echo "   version    :  optional, defaults to latest stable if not provided"
-	echo ""
-	echo "eg: jenv all"
-	echo "eg: jenv install maven 3.0.5"
-	echo "Author: linux_china, @linux_china on weibo and twitter"
-	echo "For more information, please visit http://jenv.io"
+# clean archives and temp files
+function __jenvtool_clean {
+	rm -rf "${JENV_DIR}/archives/*"
+	rm -rf "${JENV_DIR}/tmp/*"
+	__jenvtool_utils_echo_green "All archives and temp files are cleaned up!"
 }

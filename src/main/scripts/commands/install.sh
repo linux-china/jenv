@@ -41,6 +41,10 @@ JENV_DIR="$HOME/.jenv"
 if [[ "${cygwin}" == 'true' ]]; then
    JENV_DIR="/cygdrive/c/jenv"
 fi
+JENV_SHELL="bash"
+if [ ! -z "${ZSH_NAME}" ]; then
+   JENV_SHELL="zsh"
+fi
 
 # Local variables
 jenv_tmp_folder="${JENV_DIR}/tmp"
@@ -53,6 +57,18 @@ jenv_bashrc="${HOME}/.bashrc"
 jenv_zshrc="${HOME}/.zshrc"
 jenv_os_name=$(uname)
 jenv_machine_platform=$(uname -m)
+
+jenv_init_snippet=$( cat << EOF
+#THIS MUST BE AT THE END OF THE FILE FOR JENV TO WORK!!!
+[[ -s "${JENV_DIR}/bin/jenv-init.sh" ]] && source "${JENV_DIR}/bin/jenv-init.sh" && source "${JENV_DIR}/commands/bash-completion.sh"
+EOF
+)
+
+jenv_init_snippet_zsh=$( cat << EOF
+#THIS MUST BE AT THE END OF THE FILE FOR JENV TO WORK!!!
+[[ -s "${JENV_DIR}/bin/jenv-init.sh" ]] && source "${JENV_DIR}/bin/jenv-init.sh" && source "${JENV_DIR}/commands/zsh-completion.sh"
+EOF
+)
 
 echo '                                                                     '
 echo 'Thanks for using                                                     '
@@ -148,12 +164,6 @@ until [[ "${JENV_SHELL_ENV}" == "bash" || "${JENV_SHELL_ENV}" == "zsh" ]]; do
     read JENV_SHELL_ENV
 done
 
-jenv_init_snippet=$( cat << EOF
-#THIS MUST BE AT THE END OF THE FILE FOR JENV TO WORK!!!
-[[ -s "${JENV_DIR}/bin/jenv-init.sh" ]] && source "${JENV_DIR}/bin/jenv-init.sh" ${JENV_SHELL} && source "${JENV_DIR}/commands/${JENV_SHELL}-completion.sh"
-EOF
-)
-
 if [[ "${JENV_SHELL_ENV}" == "bash" ]]; then
     echo "Attempt update of bash profiles..."
     if [ ! -f "${jenv_bash_profile}" -a ! -f "${jenv_profile}" ]; then
@@ -188,7 +198,7 @@ if [[ "${JENV_SHELL_ENV}" == "bash" ]]; then
     fi
 else
     echo "Attempt update of zsh profiles..."
-    echo "${jenv_init_snippet}" >> "${jenv_zshrc}"
+    echo "${jenv_init_snippet_zsh}" >> "${jenv_zshrc}"
 fi
 
 echo -e "\n\n\nAll done!\n\n"

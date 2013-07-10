@@ -33,13 +33,9 @@ function jenv {
     	COMMAND="list"
    elif [[ "${COMMAND}" == "all" ]]; then
        	COMMAND="candidates"
-   elif [[ "${COMMAND}" == "exe" ]]; then
+   elif [[ "${COMMAND}" == "exec" || "${COMMAND}" == "exe" ]]; then
          	COMMAND="execute"
    fi
-	# Load the jenv config if it exists.
-	if [ -f "${JENV_DIR}/etc/config" ]; then
-		source "${JENV_DIR}/etc/config"
-	fi
 
 	# Check whether the command exists as an internal function...
 	#

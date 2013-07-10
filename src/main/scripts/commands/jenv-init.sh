@@ -16,18 +16,12 @@
 #   limitations under the License.
 #
 
-# help display
-# @Globals JENV_CANDIDATES JENV_CANDIDATES_DEFAULT
-function __jenvtool_help {
-	echo ""
-	echo "Usage: jenv <command> <candidate> [version]"
-	echo ""
-	echo "   command    :  ${JENV_COMMANDS}"
-	echo "   candidate  :  $(echo "${JENV_CANDIDATES[@]:-${JENV_CANDIDATES_DEFAULT[@]}}" | sed -E 's/ /, /g')"
-	echo "   version    :  optional, defaults to latest stable if not provided"
-	echo ""
-	echo "eg: jenv all"
-	echo "eg: jenv install maven 3.0.5"
-	echo "Author: linux_china, @linux_china on weibo and twitter"
-	echo "For more information, please visit http://jenv.io"
+# jenv init
+function __jenvtool_init {
+    if [ ! -e "./jenvrc" ]; then
+        echo "maven=3.0.5" > "./jenvrc"
+        __jenvtool_utils_echo_green "jenvrc file generated!"
+    else
+    	__jenvtool_utils_echo_red "jenvrc file existed!"
+    fi
 }
