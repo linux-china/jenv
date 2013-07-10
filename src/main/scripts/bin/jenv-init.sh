@@ -27,6 +27,11 @@ export JENV_COMMANDS="all ls candidates list update install reinstall uninstall 
 if [ -z "${JENV_AUTO}" ]; then
    export JENV_AUTO="false"
 fi
+JENV_SHELL="bash"
+if [ ! -z "${ZSH_NAME}" ]; then
+   JENV_SHELL="zsh"
+fi
+export JENV_SHELL
 
 # remove candidate from path
 # @param $1 candidate name
