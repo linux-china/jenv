@@ -41,6 +41,10 @@ JENV_DIR="$HOME/.jenv"
 if [[ "${cygwin}" == 'true' ]]; then
    JENV_DIR="/cygdrive/c/jenv"
 fi
+JENV_SHELL="bash"
+if [ ! -z "${ZSH_NAME}" ]; then
+   JENV_SHELL="zsh"
+fi
 
 # Local variables
 jenv_tmp_folder="${JENV_DIR}/tmp"
@@ -54,6 +58,12 @@ jenv_os_name=$(uname)
 jenv_machine_platform=$(uname -m)
 
 jenv_init_snippet=$( cat << EOF
+#THIS MUST BE AT THE END OF THE FILE FOR JENV TO WORK!!!
+[[ -s "${JENV_DIR}/bin/jenv-init.sh" ]] && source "${JENV_DIR}/bin/jenv-init.sh" && source "${JENV_DIR}/commands/completion.sh"
+EOF
+)
+
+jenv_init_snippet_zsh=$( cat << EOF
 #THIS MUST BE AT THE END OF THE FILE FOR JENV TO WORK!!!
 [[ -s "${JENV_DIR}/bin/jenv-init.sh" ]] && source "${JENV_DIR}/bin/jenv-init.sh" && source "${JENV_DIR}/commands/completion.sh"
 EOF
