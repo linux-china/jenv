@@ -28,7 +28,7 @@ if [ -z "${JENV_AUTO}" ]; then
    export JENV_AUTO="false"
 fi
 JENV_SHELL="bash"
-if [ ! -z "${ZSH_NAME}" ]; then
+if [ -n "${ZSH_NAME}" ]; then
    JENV_SHELL="zsh"
 fi
 export JENV_SHELL
