@@ -12,8 +12,7 @@ _jenv_comp()
 
 _jenv_commands()
 {
-   cmds="all ls candidates list update install reinstall uninstall clean pause execute exec use init config which cd version default add repo selfupdate help requirements"
-   _jenv_comp "$cmds"
+   _jenv_comp "${JENV_COMMANDS}"
    return 0
 }
 
