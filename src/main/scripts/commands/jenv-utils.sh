@@ -27,7 +27,7 @@ function __jenvtool_utils_string_contains {
 function __jenvtool_utils_array_contains {
    argAry1=("${!1}")
    for i in ${argAry1[@]}; do
-     if [ "$i" = "$2" ]; then
+     if [[ "$i" == "$2" ]]; then
        return 0
      fi
    done
