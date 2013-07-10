@@ -21,6 +21,8 @@ export JENV_VERSION="@JENV_VERSION@"
 export JENV_OS_NAME=$(uname)
 # matchine platform, such as x86_64, i686, i386
 export JENV_MACHINE_PLATFORM=$(uname -m)
+# jenv commands
+export JENV_COMMANDS="all ls candidates list update install reinstall uninstall clean pause execute exec use init config which cd version default add repo selfupdate help requirements"
 # auto confirm without prompt
 if [ -z "${JENV_AUTO}" ]; then
    export JENV_AUTO="false"
@@ -176,6 +178,7 @@ cd () {
      for entry in $(cat "${PWD}/jenvrc")
      do
         if ! __jenvtool_utils_string_contains "$entry", "#" ; then
+            # todo zsh不兼容
             candidate1=${entry%=*}
             version1=${entry#*=}
             if [ -d "${JENV_DIR}/candidates/${candidate1}/${version1}" ]; then
