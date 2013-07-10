@@ -25,6 +25,7 @@ function __jenvtool_utils_string_contains {
 # @param $1 array such as array[@]
 # @param $2 item value
 function __jenvtool_utils_array_contains {
+   # todo 和zsh不兼容
    argAry1=("${!1}")
    for i in ${argAry1[@]}; do
      if [[ "$i" == "$2" ]]; then
