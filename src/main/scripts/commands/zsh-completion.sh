@@ -27,12 +27,27 @@ _jenv_repo()
     echo "update"
 }
 
+_jenv_candidate_version()
+{
+    if __jenvtool_utils_array_contains "JENV_CANDIDATES[@]" "$1"; then
+        versions=($(echo $(__jenvtool_candidate_versions "$1")))
+
+        for version in ${versions}; do
+            echo ${version}
+        done
+    fi
+}
+
 _jenv() {
     local words completions
     read -cA words
 
     if [ "${#words}" -eq 2 ]; then
         completions="$(_jenv_commands)"
+    elif [ "${#words}" -eq 4 ]; then
+        typeset prev
+        prev=${words[3]}
+        completions="$(_jenv_candidate_version ${prev})"
     else
         typeset prev
         prev=${words[2, -2]}
