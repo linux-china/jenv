@@ -20,7 +20,7 @@
 # @param $1 destination
 function __jenvtool_clone {
 	DEST="$1"
-	tar cf /tmp/jenv.zip ~/.jenv
+	zip -r /tmp/jenv.zip ~/.jenv
 	scp /tmp/jenv.zip "${DEST}:~/tmp/jenv.zip"
 	rm -f /tmp/jenv.zip
 	ssh $DEST "unzip -o -d ~/.jenv /tmp/jenv.zip"
