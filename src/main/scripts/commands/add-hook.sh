@@ -5,6 +5,7 @@ jenv_profile="${HOME}/.profile"
 jenv_bashrc="${HOME}/.bashrc"
 jenv_zshrc="${HOME}/.zshrc"
 
+JENV_DIR="$HOME/.jenv"
 JENV_SHELL="bash"
 if [ ! -z "${ZSH_NAME}" ]; then
    JENV_SHELL="zsh"
@@ -12,7 +13,7 @@ fi
 
 jenv_init_snippet=$( cat << EOF
 #THIS MUST BE AT THE END OF THE FILE FOR JENV TO WORK!!!
-[[ -s "~/.jenv/bin/jenv-init.sh" ]] && source "~/.jenv/bin/jenv-init.sh" && source "~/.jenv/commands/completion.sh"
+[[ -s "${JENV_DIR}/bin/jenv-init.sh" ]] && source "${JENV_DIR}/bin/jenv-init.sh" && source "${JENV_DIR}/commands/completion.sh"
 EOF
 )
 
