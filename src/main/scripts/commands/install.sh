@@ -64,12 +64,6 @@ jenv_init_snippet=$( cat << EOF
 EOF
 )
 
-jenv_init_snippet_zsh=$( cat << EOF
-#THIS MUST BE AT THE END OF THE FILE FOR JENV TO WORK!!!
-[[ -s "${JENV_DIR}/bin/jenv-init.sh" ]] && source "${JENV_DIR}/bin/jenv-init.sh" && source "${JENV_DIR}/commands/completion.sh"
-EOF
-)
-
 echo '                                                                     '
 echo 'Thanks for using                                                     '
 echo '                                                                     '
@@ -193,8 +187,15 @@ else
 fi
 
 # update zsh
-echo "Attempt update of zsh profiles..."
-echo "${jenv_init_snippet_zsh}" >> "${jenv_zshrc}"
+if [ ! -f "${jenv_zshrc}" ]; then
+  echo "Attempt create zsh profiles..."
+  echo "${jenv_init_snippet}" >> "${jenv_zshrc}"
+else
+  if [[ -z `grep 'jenv-init.sh' "${jenv_zshrc}"` ]]; then
+     echo -e "\n${jenv_init_snippet}" >> "${jenv_zshrc}"
+     echo "Updated existing ${jenv_zshrc}"
+  fi
+fi
 
 echo -e "\n\n\nAll done!\n\n"
 
