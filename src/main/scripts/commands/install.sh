@@ -60,13 +60,13 @@ jenv_machine_platform=$(uname -m)
 
 jenv_init_snippet=$( cat << EOF
 #THIS MUST BE AT THE END OF THE FILE FOR JENV TO WORK!!!
-[[ -s "${JENV_DIR}/bin/jenv-init.sh" ]] && source "${JENV_DIR}/bin/jenv-init.sh" && source "${JENV_DIR}/commands/bash-completion.sh"
+[[ -s "${JENV_DIR}/bin/jenv-init.sh" ]] && source "${JENV_DIR}/bin/jenv-init.sh" && source "${JENV_DIR}/commands/completion.sh"
 EOF
 )
 
 jenv_init_snippet_zsh=$( cat << EOF
 #THIS MUST BE AT THE END OF THE FILE FOR JENV TO WORK!!!
-[[ -s "${JENV_DIR}/bin/jenv-init.sh" ]] && source "${JENV_DIR}/bin/jenv-init.sh" && source "${JENV_DIR}/commands/zsh-completion.sh"
+[[ -s "${JENV_DIR}/bin/jenv-init.sh" ]] && source "${JENV_DIR}/bin/jenv-init.sh" && source "${JENV_DIR}/commands/completion.sh"
 EOF
 )
 
