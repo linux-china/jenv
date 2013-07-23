@@ -159,12 +159,7 @@ else
 fi
 rm -rf "${jenv_central_repo_file}"
 
-until [[ "${JENV_SHELL_ENV}" == "bash" || "${JENV_SHELL_ENV}" == "zsh" ]]; do
-    echo -n "Which shell do you use, bash or zsh? (bash/zsh): "
-    read JENV_SHELL_ENV
-done
-
-if [[ "${JENV_SHELL_ENV}" == "bash" ]]; then
+if [[ "${JENV_SHELL}" == "bash" ]]; then
     echo "Attempt update of bash profiles..."
     if [ ! -f "${jenv_bash_profile}" -a ! -f "${jenv_profile}" ]; then
         echo "#!/bin/bash" > "${jenv_bash_profile}"
