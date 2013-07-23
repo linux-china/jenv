@@ -34,6 +34,8 @@ if [ -n "${ZSH_NAME}" ]; then
 fi
 export JENV_SHELL
 
+export JENV_PATH_ORIGINAL="${PATH}"
+
 # remove candidate from path
 # @param $1 candidate name
 # @param $2 candidate version
@@ -77,7 +79,7 @@ __jenvtool_path_add_candidate() {
 # @return JENV_DIR jenv dir
 # @return JENV_SERVICE jenv service url
 # @return JENV_CANDIDATES jenv candidate array
-__jenvtool_init() {
+__jenvtool_initialize() {
 
     # OS specific support (must be 'true' or 'false').
     cygwin=false;
@@ -137,6 +139,7 @@ __jenvtool_init() {
     done
     export JENV_CANDIDATES
     # update PATH env
+    export PATH="${JENV_PATH_ORIGINAL}"
     for CANDIDATE in "${JENV_CANDIDATES[@]}" ; do
         if ! __jenvtool_utils_string_contains "$PATH" "candidates/${CANDIDATE}/current" && [ -e "${JENV_DIR}/candidates/${CANDIDATE}/current" ]; then
            UPPER_CANDIDATE=`echo "${CANDIDATE}" | tr '[:lower:]' '[:upper:]'`
@@ -174,7 +177,7 @@ __jenvtool_init() {
 }
 
 #jenv tool init
-__jenvtool_init
+__jenvtool_initialize
 
 # change directory with jenvrc support
 cd () {
