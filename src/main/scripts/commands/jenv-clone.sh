@@ -20,11 +20,13 @@
 # @param $1 destination
 function __jenvtool_clone {
 	DEST="$1"
-	zip -r /tmp/jenv.zip ~/.jenv
-	scp /tmp/jenv.zip "${DEST}:~/tmp/jenv.zip"
-	rm -f /tmp/jenv.zip
-	ssh $DEST "unzip -o -d ~/.jenv /tmp/jenv.zip"
-	ssh $DEST "rm -f /tmp/jenv.zip"
+	cd
+	tar cf jenv.tar .jenv
+	scp jenv.tar "${DEST}:~/"
+	rm -f jenv.tar
+	ssh $DEST "tar xpf ~/jenv.tar"
+	ssh $DEST "rm -f ~/jenv.tar"
 	# .bash_profile check
 	ssh $DEST "source ~/.jenv/commands/add-hook.sh"
+	cd -
 }
