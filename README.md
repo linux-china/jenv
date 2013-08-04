@@ -13,7 +13,7 @@ It provides a convenient command line interface for installing, switching, remov
    * Bash completion support. Use TAB to complete command name, candidate name and version
    * Multi OS support, such as Mac, Linux and Windows(Cygwin)
 
-## Installat jenv
+## Install jenv
 
 Open your favourite terminal and enter the following:
 
