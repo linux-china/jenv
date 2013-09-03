@@ -41,6 +41,7 @@ function __jenvtool_list {
     done
     echo "Available ${CANDIDATE} Versions"
     echo "========================="
+    CANDIDATE_VERSIONS=($(for a in "${CANDIDATE_VERSIONS[@]}"; do echo "$a"; done | sort -r))
     for candidate_version in "${CANDIDATE_VERSIONS[@]}" ; do
      if [[ "${candidate_version}" == "${CURRENT}" ]]; then
           echo ">* ${candidate_version}"
