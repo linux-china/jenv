@@ -26,13 +26,17 @@ function __jenvtool_install {
 	LOCAL_FOLDER="$3"
      # install from local or VCS
     if [[ -n "${LOCAL_FOLDER}" ]]; then
-         if __jenvtool_utils_string_contains "${LOCAL_FOLDER}" "http://"; then
-            __jenvtool_install_remote_candidate "${CANDIDATE}" "${VERSION}" "${LOCAL_FOLDER}" || return 1
-        elif  __jenvtool_utils_string_contains "${LOCAL_FOLDER}" "@"; then
-            __jenvtool_install_git_repository "${CANDIDATE}" "${VERSION}" "${LOCAL_FOLDER}" || return 1
-		else
-		    __jenvtool_install_local_version "${CANDIDATE}" "${VERSION}" "${LOCAL_FOLDER}" || return 1
-		fi
+         if [[ "${CANDIDATE}" = "java" && "${LOCAL_FOLDER}" = "system" ]]; then
+             __jenvtool_install_from_system "${CANDIDATE}" "${VERSION}"
+         else
+            if __jenvtool_utils_string_contains "${LOCAL_FOLDER}" "http://"; then
+                __jenvtool_install_remote_candidate "${CANDIDATE}" "${VERSION}" "${LOCAL_FOLDER}" || return 1
+            elif  __jenvtool_utils_string_contains "${LOCAL_FOLDER}" "@"; then
+                __jenvtool_install_git_repository "${CANDIDATE}" "${VERSION}" "${LOCAL_FOLDER}" || return 1
+            else
+                __jenvtool_install_local_version "${CANDIDATE}" "${VERSION}" "${LOCAL_FOLDER}" || return 1
+            fi
+         fi
     else # install from center repository
         __jenvtool_candidate_is_present "${CANDIDATE}" || return 1
     	# check version if not empty
@@ -82,6 +86,18 @@ function __jenvtool_install_local_version {
 	mkdir -p "${JENV_DIR}/candidates/${CANDIDATE}"
 	echo "Copying ${CANDIDATE} ${VERSION} from ${LOCAL_FOLDER}"
 	cp -rf "${LOCAL_FOLDER}" "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}"
+}
+
+## install candidate from system, such as java on Mac
+function __jenvtool_install_from_system {
+    candidate="$1"
+    version="$2"
+    if [[ "${JENV_OS_NAME}" = "Darwin" ]]; then
+        local_dir="/Library/Java/JavaVirtualMachines/jdk${version}.jdk/Contents/Home"
+        if [[ -f "${local_dir}" ]]; then
+          ln -s "${local_dir}" "${JENV_DIR}/candidates/java/${version}"
+        fi
+    fi
 }
 
 # install git repository
