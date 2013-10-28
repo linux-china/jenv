@@ -57,6 +57,13 @@ The candidate's versions are maintained on the central repository. To keep updat
 
     $ jenv repo update
 
+### Repeatable Development Environments with jenv
+You can clone your jenv between multi hosts.
+
+* clone your local jenv to remote host: jenv clone user@remote-host
+* clone your local candidate to remote host:  jenv clone candidate version user@remote-host
+* clone candidate from remote host: jenv clone user@remote-host canidate version
+
 ## Other Commands
 
   * uninstall: Uninstall the candidate with the version, such as jenv uninstall maven 3.0.4
