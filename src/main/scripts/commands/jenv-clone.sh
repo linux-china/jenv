@@ -29,27 +29,41 @@ function __jenvtool_clone {
 	   elif [[ -n "$3" ]]; then
           candidate="$2"
           version="$3"
-          rm -rf "~/.jenv/canidates/${candidate}/${version}"
-          scp -r "${dest_host}:~/.jenv/canidates/${candidate}/${version}" "~/.jenv/canidates/${candidate}/${version}"
+          echo "Begin to clone from ${dest_host}..."
+          rm -rf "${JENV_DIR}/candidates/${candidate}/${version}"
+          mkdir -p "${JENV_DIR}/candidates/${candidate}"
+          scp -q -r "${dest_host}:~/.jenv/candidates/${candidate}/${version}" "${JENV_DIR}/candidates/${candidate}/${version}"
+          echo "Clone successfully!"
           # confirm by prompt
-          echo -n "Do you want ${CANDIDATE} ${VERSION} to be set as default? (Y/n): "
+          echo -n "Do you want ${candidate} ${version} to be set as default? (Y/n): "
           read USE
           if [[ -z "${USE}" || "${USE}" == "y" || "${USE}" == "Y" ]]; then
-          	  __jenvtool_utils_echo_green "Setting ${CANDIDATE} ${VERSION} as default."
-          	  __jenvtool_candidate_link_version "${CANDIDATE}" "${VERSION}"
+          	  __jenvtool_utils_echo_green "Setting ${candidate} ${version} as default."
+          	  __jenvtool_candidate_link_version "${candidate}" "${version}"
           fi
           # done message
-          __jenvtool_utils_echo_green "${CANDIDATE}(${VERSION}) has been synced into localhost!"
+          __jenvtool_utils_echo_green "Done! ${candidate}(${version}) has been cloned into local jenv."
        else
-         __jenvtool_utils_echo_red "Sorry, I can't understand."
+         __jenvtool_utils_echo_red "Sorry, I can't understand command."
 	   fi
 	else
-	   if [[ -z "$4" ]]; then ##copy candidate into dest host
-	      dest_host="$4"
+	   if [[ -n "$3" ]]; then ##copy candidate into dest host
+	      candidate="$1"
+          version="$2"
+	      dest_host="$3"
 	      if __jenvtool_utils_string_contains "${dest_host}" "@"; then
-	         scp -r  "~/.jenv/canidates/${candidate}/${version}" "${dest_host}:~/.jenv/canidates/${candidate}/${version}"
+	         echo "Begin to clone..."
+	         ssh "$dest_host" "rm -rf ~/.jenv/candidates/${candidate}/${version}"
+	         ssh "$dest_host" "mkdir -p ~/.jenv/candidates/${candidate}"
+	         scp -q -r  "${JENV_DIR}/candidates/${candidate}/${version}" "${dest_host}:~/.jenv/candidates/${candidate}/${version}"
 	         ## make default on dest host
-	         __jenvtool_utils_echo_green "${CANDIDATE}(${VERSION}) has been synced into ${dest_host}"
+	         current_version=$(__jenvtool_candidate_current_version "${candidate}")
+	         if [[ "${current_version}" == "${version}" ]]; then
+	           link_command="ln -s ~/.jenv/candidates/${candidate}/${version}  ~/.jenv/candidates/${candidate}/current"
+	           ssh "$dest_host" "rm -rf ~/.jenv/candidates/${candidate}/current"
+	           ssh "$dest_host" "${link_command}"
+	         fi
+	         __jenvtool_utils_echo_green "Done! ${candidate}(${version}) has been synced into ${dest_host}"
 	      fi
 	   fi
 	fi
@@ -61,7 +75,7 @@ function __jenvtool_sync_jenv_to_dest {
     dest_host="$1"
     cd
    	tar cf jenv.tar .jenv
-   	scp jenv.tar "${dest_host}:~/"
+   	scp -q jenv.tar "${dest_host}:~/"
    	rm -f jenv.tar
    	ssh "$dest_host" "tar xpf ~/jenv.tar"
    	ssh "$dest_host" "rm -f ~/jenv.tar"
