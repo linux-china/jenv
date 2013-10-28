@@ -65,9 +65,9 @@ __jenvtool_path_remove_candidate ()  {
 __jenvtool_path_add_candidate() {
    CANDIDATE="$1"
    VERSION="$2"
-   if [ -d "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/bin" ]; then
+   if [[ -d "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/bin" ]]; then
       PATH="${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/bin:$PATH"
-   elif [ -d "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/tools" ]; then
+   elif [[ -d "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/tools" ]]; then
       PATH="${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/tools:$PATH"
    else
       PATH="${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}:$PATH"
@@ -97,7 +97,7 @@ __jenvtool_initialize() {
     JENV_SERVICE_DEFAULT="@JENV_SERVICE@"
     JENV_CANDIDATES_DEFAULT=("groovy" "grails" "griffon" "gradle" "vertx")
 
-    if [ -z "${JENV_DIR}" ]; then
+    if [[ -z "${JENV_DIR}" ]]; then
         JENV_DIR="$HOME/.jenv"
         if [[ "${cygwin}" == 'true' ]]; then
            JENV_DIR="/cygdrive/c/jenv"
@@ -114,7 +114,7 @@ __jenvtool_initialize() {
     source "${JENV_DIR}/commands/jenv-utils.sh"
 
     #download central repository
-    if [ ! -d "${JENV_DIR}/repo/central" ] ; then
+    if [[ ! -d "${JENV_DIR}/repo/central" ]] ; then
         jenv_central_repo_file="${JENV_DIR}/tmp/repo-central.zip"
         mkdir -p "${JENV_DIR}/repo"
         curl -s "${JENV_SERVICE}/central-repo.zip?osName=${JENV_OS_NAME}&platform=${JENV_MACHINE_PLATFORM}" > "${jenv_central_repo_file}"
@@ -129,7 +129,7 @@ __jenvtool_initialize() {
     JENV_CANDIDATES=(${JENV_CANDIDATES_DEFAULT[@]})
     # repository candidates
     for repo in $(ls -1 "${JENV_DIR}/repo" 2> /dev/null); do
-       if [ -f "${JENV_DIR}/repo/${repo}/candidates" ]; then
+       if [[ -f "${JENV_DIR}/repo/${repo}/candidates" ]]; then
          for candidate_name in $(cat "${JENV_DIR}/repo/${repo}/candidates"); do
            if ! __jenvtool_utils_array_contains "JENV_CANDIDATES[@]" "${candidate_name}"; then
               JENV_CANDIDATES=("${JENV_CANDIDATES[@]}" "${candidate_name}")
@@ -149,7 +149,7 @@ __jenvtool_initialize() {
     done
     # autorun support
     for CANDIDATE in "${JENV_CANDIDATES[@]}" ; do
-        if [ -f "${JENV_DIR}/candidates/${CANDIDATE}/current/autorun.sh" ]; then
+        if [[ -f "${JENV_DIR}/candidates/${CANDIDATE}/current/autorun.sh" ]]; then
             source "${JENV_DIR}/candidates/${CANDIDATE}/current/autorun.sh"
         fi
     done
