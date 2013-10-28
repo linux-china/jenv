@@ -26,12 +26,17 @@ Because I can not redistribute Java SDK, so you should download it from http://w
 and install. After install please execute following command:
 
     $ mkdir -p $HOME/.jenv/candidates/java
-    $ ln -s /Library/Java/JavaVirtualMachines/jdk1.7.0_17.jdk/Contents/home $HOME/.jenv/candidates/java/1.7.0_17
-    $ jenv default java 1.7.0_17
+    $ ln -s /Library/Java/JavaVirtualMachines/jdk1.7.0_45.jdk/Contents/home $HOME/.jenv/candidates/java/1.7.0_45
+    $ jenv default java 1.7.0_45
+
+for Mac user, after you install JDK from dmg file, please execute:
+
+   $ jenv install java 1.7.0_45 system
+and jenv will link the java version automatically.
 
 You can also install Java by http url:
 
-   $ jenv install java 1.7.0_17  http://xxxx.com/java/java-1.7.0_17.zip
+   $ jenv install java 1.7.0_45  http://xxxx.com/java/java-1.7.0_45.zip
 
 ## Install canidates
 
@@ -45,7 +50,7 @@ Second list available version for the candidate, such as maven candidate:
 
 Final install the candidate with the version:
 
-    $ jenv install maven 3.0.5
+    $ jenv install maven 3.1.1
 In your terminal, input mvn --version to check the installation.
 
 If you want to list all installed candidates, please use following command.
