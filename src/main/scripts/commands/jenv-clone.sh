@@ -52,18 +52,22 @@ function __jenvtool_clone {
           version="$2"
 	      dest_host="$3"
 	      if __jenvtool_utils_string_contains "${dest_host}" "@"; then
-	         echo "Begin to clone..."
-	         ssh "$dest_host" "rm -rf ~/.jenv/candidates/${candidate}/${version}"
-	         ssh "$dest_host" "mkdir -p ~/.jenv/candidates/${candidate}"
-	         scp -q -r  "${JENV_DIR}/candidates/${candidate}/${version}" "${dest_host}:~/.jenv/candidates/${candidate}/${version}"
-	         ## make default on dest host
-	         current_version=$(__jenvtool_candidate_current_version "${candidate}")
-	         if [[ "${current_version}" == "${version}" ]]; then
-	           link_command="ln -s ~/.jenv/candidates/${candidate}/${version}  ~/.jenv/candidates/${candidate}/current"
-	           ssh "$dest_host" "rm -rf ~/.jenv/candidates/${candidate}/current"
-	           ssh "$dest_host" "${link_command}"
+	         if [[ -d "${JENV_DIR}/candidates/${candidate}/${version}" ]]; then
+                 echo "Begin to clone..."
+                 ssh "$dest_host" "rm -rf ~/.jenv/candidates/${candidate}/${version}"
+                 ssh "$dest_host" "mkdir -p ~/.jenv/candidates/${candidate}"
+                 scp -q -r  "${JENV_DIR}/candidates/${candidate}/${version}" "${dest_host}:~/.jenv/candidates/${candidate}/${version}"
+                 ## make default on dest host
+                 current_version=$(__jenvtool_candidate_current_version "${candidate}")
+                 if [[ "${current_version}" == "${version}" ]]; then
+                   link_command="ln -s ~/.jenv/candidates/${candidate}/${version}  ~/.jenv/candidates/${candidate}/current"
+                   ssh "$dest_host" "rm -rf ~/.jenv/candidates/${candidate}/current"
+                   ssh "$dest_host" "${link_command}"
+                 fi
+                 __jenvtool_utils_echo_green "Done! ${candidate}(${version}) has been cloned into ${dest_host}"
+	         else
+	             __jenvtool_utils_echo_red "${candidate}(${version}) not found on local jenv"
 	         fi
-	         __jenvtool_utils_echo_green "Done! ${candidate}(${version}) has been synced into ${dest_host}"
 	      fi
 	   fi
 	fi
