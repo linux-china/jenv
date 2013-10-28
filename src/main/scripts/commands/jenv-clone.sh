@@ -33,6 +33,10 @@ function __jenvtool_clone {
           rm -rf "${JENV_DIR}/candidates/${candidate}/${version}"
           mkdir -p "${JENV_DIR}/candidates/${candidate}"
           scp -q -r "${dest_host}:~/.jenv/candidates/${candidate}/${version}" "${JENV_DIR}/candidates/${candidate}/${version}"
+          if (( $? != 0 )); then
+              __jenvtool_utils_echo_red "${candidate}(${version}) was found on ${dest_host}"
+              return 0;
+          fi
           echo "Clone successfully!"
           # confirm by prompt
           echo -n "Do you want ${candidate} ${version} to be set as default? (Y/n): "
