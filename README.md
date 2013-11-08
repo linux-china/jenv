@@ -118,3 +118,7 @@ Please use selfupdate command to get last version and candidate repository.
 ## jenv IntelliJ IDEA plugin
 With jenv IDEA plugin, you don't need to setup Java SDK, Maven, and so on, and jenv IDEA plugin can scan jenv directory
 and setup the settings in IDEA automatically. Please visit http://plugins.jetbrains.com/plugin/?idea&pluginId=7229
+
+## Reference
+
+* Shell Code Style: http://google-styleguide.googlecode.com/svn/trunk/shell.xml
