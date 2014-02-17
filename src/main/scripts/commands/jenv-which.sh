@@ -23,7 +23,7 @@ function __jenvtool_which {
 		CANDIDATE=`echo "$1" | tr '[:upper:]' '[:lower:]'`
 		CURRENT=$(__jenvtool_candidate_current_version "${CANDIDATE}")
 		if [ -n "${CURRENT}" ]; then
-			echo "Using ${CANDIDATE} with ${CURRENT}"
+			echo "Using ${CANDIDATE} with ${CURRENT} under ${JENV_DIR}/candidates/${CANDIDATE}/${CURRENT}"
 		else
 			echo "Not using any version of ${CANDIDATE}"
 		fi
