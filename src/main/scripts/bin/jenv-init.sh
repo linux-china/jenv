@@ -36,6 +36,8 @@ export JENV_SHELL
 
 export JENV_PATH_ORIGINAL="${PATH}"
 
+alias jenv_regex_sed="sed -r"
+
 # remove candidate from path
 # @param $1 candidate name
 # @param $2 candidate version
@@ -91,6 +93,7 @@ __jenvtool_initialize() {
 
         Darwin*)
             darwin=true
+            alias jenv_regex_sed="sed -E"
             ;;
     esac
 
