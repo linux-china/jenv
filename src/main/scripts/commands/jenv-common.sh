@@ -145,9 +145,9 @@ function __jenvtool_candidate_installed_versions {
 # @param $1 candidate name
 function __jenvtool_candidate_current_version {
    CANDIDATE="$1"
-   CURRENT=$(echo $PATH | sed -E "s|jenv/candidates/${CANDIDATE}/([^/]+)|!!\1!!|1" | sed -E "s|^.*!!(.+)!!.*$|\1|g")
+   CURRENT=$(echo $PATH | jenv_regex_sed "s|jenv/candidates/${CANDIDATE}/([^/]+)|!!\1!!|1" | jenv_regex_sed "s|^.*!!(.+)!!.*$|\1|g")
    if [[ "${CURRENT}" == "current" || "${CURRENT}" == "current:" ]]; then
-   	   CURRENT=$(readlink "${JENV_DIR}/candidates/${CANDIDATE}/current" | sed -e "s!${JENV_DIR}/candidates/${CANDIDATE}/!!g")
+   	   CURRENT=$(readlink "${JENV_DIR}/candidates/${CANDIDATE}/current" | jenv_regex_sed "s!${JENV_DIR}/candidates/${CANDIDATE}/!!g")
    	   echo -n "${CURRENT}"
    elif [[ ! -z "${CURRENT}"  ]] ; then
        echo -n "${CURRENT}"
@@ -161,13 +161,13 @@ function __jenvtool_candidate_current_version {
 # @return CURRENT candidate current version number
 function __jenvtool_candidate_determine_current_version {
 	CANDIDATE="$1"
-	CURRENT=$(echo $PATH | sed -E "s|.jenv/candidates/${CANDIDATE}/([^/]+)/bin|!!\1!!|1" | sed -E "s|^.*!!(.+)!!.*$|\1|g")
+	CURRENT=$(echo $PATH | jenv_regex_sed "s|.jenv/candidates/${CANDIDATE}/([^/]+)/bin|!!\1!!|1" | jenv_regex_sed "s|^.*!!(.+)!!.*$|\1|g")
 	if [[ "${CURRENT}" == "current" || "${CURRENT}" == "$PATH" ]]; then
 	    unset CURRENT
 	fi
 
 	if [[ -z ${CURRENT} ]]; then
-		CURRENT=$(readlink "${JENV_DIR}/candidates/${CANDIDATE}/current" | sed -e "s!${JENV_DIR}/candidates/${CANDIDATE}/!!g")
+		CURRENT=$(readlink "${JENV_DIR}/candidates/${CANDIDATE}/current" | jenv_regex_sed "s!${JENV_DIR}/candidates/${CANDIDATE}/!!g")
 	fi
 }
 
