@@ -17,7 +17,7 @@ function __jenvtool_utils_echo_green {
 # @param $2 word
 # @return contained test condition
 function __jenvtool_utils_string_contains {
-    replaced=$(echo "$1" | sed -e s,"$2",,g)
+    replaced=$(echo "$1" | jenv_regex_sed s,"$2",,g)
     [ "$replaced" != "$1" ]
 }
 

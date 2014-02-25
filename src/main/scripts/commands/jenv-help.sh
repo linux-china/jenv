@@ -23,7 +23,7 @@ function __jenvtool_help {
 	echo "Usage: jenv <command> <candidate> [version]"
 	echo ""
 	echo "   command    :  ${JENV_COMMANDS}"
-	echo "   candidate  :  $(echo "${JENV_CANDIDATES[@]:-${JENV_CANDIDATES_DEFAULT[@]}}" | sed -E 's/ /, /g')"
+	echo "   candidate  :  $(echo "${JENV_CANDIDATES[@]:-${JENV_CANDIDATES_DEFAULT[@]}}" | jenv_regex_sed 's/ /, /g')"
 	echo "   version    :  optional, defaults to latest stable if not provided"
 	echo ""
 	echo "eg: jenv all"
