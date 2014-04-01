@@ -187,19 +187,19 @@ cd () {
   builtin cd "$@"
   if [[ -f "${PWD}/jenvrc" ]]; then
      echo "==============jenv setup======================"
-     for entry in $(cat "${PWD}/jenvrc")
+     while read entry
      do
-        if ! __jenvtool_utils_string_contains "$entry", "#" ; then
+       if ! __jenvtool_utils_string_contains "$entry", "#" ; then
             candidate1=`echo ${entry} | sed 's/=.*//g'`
             version1=`echo ${entry} | sed 's/.*=//g'`
             if [ -d "${JENV_DIR}/candidates/${candidate1}/${version1}" ]; then
                 __jenvtool_use "${candidate1}" "${version1}"
             else
-               __jenvtool_install "${candidate1}" "${version1}"
+                __jenvtool_install "${candidate1}" "${version1}"
             fi
             unset candidate1
             unset version1
-        fi
-     done
+       fi
+     done < "${PWD}/jenvrc"
   fi
 }
