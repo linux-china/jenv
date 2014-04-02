@@ -36,8 +36,7 @@ export JENV_SHELL
 
 export JENV_PATH_ORIGINAL="${PATH}"
 
-#shopt to expand alias
-shopt -s expand_aliases
+# remove candidate from path
 alias jenv_regex_sed="sed -r"
 
 # remove candidate from path
@@ -91,8 +90,12 @@ __jenvtool_initialize() {
     case "`uname`" in
         CYGWIN*)
             cygwin=true
+            alias jenv_regex_sed="sed -r"
             ;;
-
+        Linux*)
+            shopt -s expand_aliases
+            alias jenv_regex_sed="sed -r"
+            ;;
         Darwin*)
             darwin=true
             alias jenv_regex_sed="sed -E"
