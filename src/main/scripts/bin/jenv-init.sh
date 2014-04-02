@@ -30,8 +30,13 @@ fi
 
 JENV_SHELL="bash"
 if [ -n "${ZSH_NAME}" ]; then
+   setopt completealiases
    JENV_SHELL="zsh"
+else
+   shopt -s expand_aliases
 fi
+alias jenv_regex_sed="sed -r"
+
 export JENV_SHELL
 
 export JENV_PATH_ORIGINAL="${PATH}"
@@ -90,11 +95,6 @@ __jenvtool_initialize() {
     case "`uname`" in
         CYGWIN*)
             cygwin=true
-            alias jenv_regex_sed="sed -r"
-            ;;
-        Linux*)
-            shopt -s expand_aliases
-            alias jenv_regex_sed="sed -r"
             ;;
         Darwin*)
             darwin=true
