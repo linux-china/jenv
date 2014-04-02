@@ -28,9 +28,13 @@ function __jenvtool_add {
 	   CANDIDATES=($(cat "${candidates_file}"))
 	   if [[ ${#CANDIDATES[@]} == 0 ]]; then  # empty file
 	       echo -n "${CANDIDATE}" > "${candidates_file}"
+	       JENV_CANDIDATES=("${JENV_CANDIDATES[@]}" "${CANDIDATE}")
+	       export JENV_CANDIDATES
 	   else
 	      if ! __jenvtool_utils_array_contains "CANDIDATES[@]" "${CANDIDATE}"; then
 	      	  echo -n " ${CANDIDATE}" >> "${candidates_file}"
+	      	  JENV_CANDIDATES=("${JENV_CANDIDATES[@]}" "${CANDIDATE}")
+	      	  export JENV_CANDIDATES
 	      fi
 	   fi
 	   unset CANDIDATES
