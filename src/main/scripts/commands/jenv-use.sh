@@ -25,7 +25,7 @@ function __jenvtool_use {
 	__jenvtool_version_determine "$2" || return 1
 
 	if [[ ! -d "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}" ]]; then
-		__jenvtool_utils_echo_red "Stop! ${CANDIDATE} ${VERSION} is not installed."
+		__jenvtool_utils_echo_red "Stop! ${CANDIDATE}(${VERSION}) installed."
 		echo -n "Do you want to install it now? (Y/n): "
 		read INSTALL
 		if [[ -z "${INSTALL}" || "${INSTALL}" == "y" || "${INSTALL}" == "Y" ]]; then
@@ -47,5 +47,5 @@ function __jenvtool_use {
        	   source "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/autorun.sh"
        	fi
 	fi
-	__jenvtool_utils_echo_green "Using ${CANDIDATE} version ${VERSION} in this shell."
+	__jenvtool_utils_echo_green "Using ${CANDIDATE}(${VERSION}) in this shell."
 }
