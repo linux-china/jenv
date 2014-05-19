@@ -1,6 +1,6 @@
 jenv: the Java enVironment Manager
 =======================================
-jenv is a tool for managing parallel Versions of Java Development Kits on any Unix based system.
+jenv is a tool for managing parallel Versions of Java Development Kits on any system, such as Linux, Mac and Windows.
 It provides a convenient command line interface for installing, switching, removing and listing Candidates.
 
 ## Why jenv
@@ -13,13 +13,20 @@ It provides a convenient command line interface for installing, switching, remov
    * Bash completion support. Use TAB to complete command name, candidate name and version
    * Multi OS support, such as Mac, Linux and Windows(Cygwin)
 
-## Installat jenv
-
-Open your favourite terminal and enter the following:
+## Installat jenv on Mac and Linux
+Open your favourite terminal and enter the following command:
 
     $ curl -L -s get.jenv.io | bash
 
 If the environment needs tweaking for jenv to be installed, the installer will prompt you accordingly and ask you to restart.
+
+
+## Installat jenv on Windows
+Open PowerShell and enter the following command: 
+
+   PS &gt;  (new-object Net.WebClient).DownloadString("http://get.jenv.io/GetJenv.ps1") | iex
+
+For more information, please visit https://github.com/linux-china/jenv-ps
 
 ## Install Java
 Because I can not redistribute Java SDK, so you should download it from http://www.oracle.com/technetwork/java/javase/downloads/index.html
