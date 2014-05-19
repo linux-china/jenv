@@ -24,7 +24,7 @@ If the environment needs tweaking for jenv to be installed, the installer will p
 ## Installat jenv on Windows
 Open PowerShell and enter the following command: 
 
-    PS &gt;  (new-object Net.WebClient).DownloadString("http://get.jenv.io/GetJenv.ps1") | iex
+    PS >  (new-object Net.WebClient).DownloadString("http://get.jenv.io/GetJenv.ps1") | iex
 
 For more information, please visit https://github.com/linux-china/jenv-ps
 
