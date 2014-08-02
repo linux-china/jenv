@@ -25,7 +25,7 @@ function __jenvtool_install {
 	VERSION="$2"
 	LOCAL_FOLDER="$3"
      # install from local or VCS
-    if [[ -n "${LOCAL_FOLDER}" || __jenvtool_utils_string_contains "${LOCAL_FOLDER}" "SC$" ]]; then
+    if [[ -n "${LOCAL_FOLDER}" ]] && ! __jenvtool_utils_string_contains "${LOCAL_FOLDER}" "SCSC" ; then
          if [[ "${CANDIDATE}" = "java" && "${LOCAL_FOLDER}" = "system" ]]; then
              __jenvtool_install_from_system "${CANDIDATE}" "${VERSION}"
          else
@@ -137,11 +137,11 @@ function __jenvtool_install_remote_candidate {
 	# install from archives directory
     echo "Installing: ${CANDIDATE} ${VERSION}"
     # find install url from jenv.mvnsearch.org
-    if [[ -z "${DOWNLOAD_URL}" || __jenvtool_utils_string_contains "${DOWNLOAD_URL}" "SC$" ]]; then
+    if [[ -z "${DOWNLOAD_URL}" ]] || __jenvtool_utils_string_contains "${DOWNLOAD_URL}" "SCSC"; then
        repo=$(__jenvtool_repo_locate "${CANDIDATE}" "${VERSION}")
        if [ -f "${JENV_DIR}/repo/${repo}/url.txt" ] ; then
           repo_url=$(cat "${JENV_DIR}/repo/${repo}/url.txt")
-          if [[ __jenvtool_utils_string_contains "${DOWNLOAD_URL}" "SC$"  ]]; then
+          if __jenvtool_utils_string_contains "${DOWNLOAD_URL}" "SCSC"; then
             echo "Parsing http://jenv.mvnsearch.org/candidate/${CANDIDATE}/download/${VERSION}/${JENV_OS_NAME}/${JENV_MACHINE_PLATFORM}?code=${DOWNLOAD_URL}"
             DOWNLOAD_URL=$(curl -L -s "http://jenv.mvnsearch.org/candidate/${CANDIDATE}/download/${VERSION}/${JENV_OS_NAME}/${JENV_MACHINE_PLATFORM}?code=${DOWNLOAD_URL}")
           else
