@@ -66,7 +66,7 @@ function __jenvtool_update_repositories {
 	        repo_url=$(cat "${JENV_DIR}/repo/${repo_name}/url.txt")
 	   fi
 	   if [ ! -z "${repo_url}" ] ; then
-	     echo "Beiging to update ${repo_name}"
+	     echo "Begin to update ${repo_name}"
 	     __jenv_update_repository "${repo_name}" "${repo_url}"
 	     echo "${repo_name} updated!"
 	   fi
