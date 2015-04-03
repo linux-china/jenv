@@ -18,8 +18,8 @@ configurations {
 }
 
 dependencies {
-  groovy group: 'org.codehaus.groovy', name: 'groovy', version: '2.0.8'
-  groovy group: 'org.apache.ant', name: 'ant', version: '1.9.0'
+  compile group: 'org.codehaus.groovy', name: 'groovy', version: '2.4.3'
+  compile group: 'org.apache.ant', name: 'ant', version: '1.9.0'
 }
 
 @SuppressWarnings("GroovyAssignabilityCheck")
