@@ -133,3 +133,7 @@ and setup the settings in IDEA automatically. Please visit http://plugins.jetbra
 ## Reference
 
 * Shell Code Style: http://google-styleguide.googlecode.com/svn/trunk/shell.xml
+
+### todo
+
+* jenv outdated: display outdated candidates
