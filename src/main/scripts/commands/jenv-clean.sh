@@ -18,7 +18,7 @@
 
 # clean archives and temp files
 function __jenvtool_clean {
-	rm -rf "${JENV_DIR}/archives/*"
-	rm -rf "${JENV_DIR}/tmp/*"
+	rm -rf ${JENV_DIR}/archives/*.zip
+	rm -rf ${JENV_DIR}/tmp/*.zip
 	__jenvtool_utils_echo_green "All archives and temp files are cleaned up!"
 }
