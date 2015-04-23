@@ -30,8 +30,11 @@ _jenv_repo()
 _jenv_candidate_version()
 {
     if __jenvtool_utils_array_contains "JENV_CANDIDATES[@]" "$1"; then
-        versions=($(echo $(__jenvtool_candidate_versions "$1")))
-
+        if [[ "$2" == "default"  || "$2" == "uninstall" ]]; then
+           versions=($(echo $(__jenvtool_candidate_installed_versions "$1")))
+        else
+           versions=($(echo $(__jenvtool_candidate_versions "$1")))
+        fi
         for version in ${versions}; do
             echo ${version}
         done
@@ -46,8 +49,10 @@ _jenv() {
         completions="$(_jenv_commands)"
     elif [ "${#words}" -eq 4 ]; then
         typeset prev
+        typeset command
         prev=${words[3]}
-        completions="$(_jenv_candidate_version ${prev})"
+        command=${words[2]}
+        completions="$(_jenv_candidate_version ${prev} ${command})"
     else
         typeset prev
         prev=${words[2, -2]}
