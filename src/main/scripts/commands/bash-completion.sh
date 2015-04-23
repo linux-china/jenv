@@ -126,9 +126,14 @@ _jenv()
 
     # completion for candidate version
     if [[ "$COMP_CWORD" == "3" ]]; then
+        command=${COMP_WORDS[COMP_CWORD-2]}
         candidate="${prev}"
         if __jenvtool_utils_array_contains "JENV_CANDIDATES[@]" "${candidate}"; then
-           versions=$(__jenvtool_candidate_versions "${candidate}")
+           if [[ "$command" == "default" || "$command" == "uninstall" ]]; then
+              versions=$(__jenvtool_candidate_installed_versions "${candidate}")
+           else
+              versions=$(__jenvtool_candidate_versions "${candidate}")
+           fi
            _jenv_comp "${versions}"
            unset versions
         fi
