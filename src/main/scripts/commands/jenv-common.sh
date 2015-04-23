@@ -133,6 +133,22 @@ function __jenvtool_candidate_versions {
 function __jenvtool_candidate_installed_versions {
     CANDIDATE="$1"
     CANDIDATE_VERSIONS=()
+    # add local unversioned in repository
+    for version in $(ls -1 "${JENV_DIR}/candidates/${CANDIDATE}" 2> /dev/null); do
+    	if [ "${version}" != 'current' ]; then
+             if ! __jenvtool_utils_array_contains "CANDIDATE_VERSIONS[@]" "${version}"; then
+                 CANDIDATE_VERSIONS=("${CANDIDATE_VERSIONS[@]}" "${version}")
+             fi
+        fi
+    done
+    echo -n "${CANDIDATE_VERSIONS[@]}"
+}
+
+# fetch candidate installed versions
+# @param $1 candidate name
+function __jenvtool_candidate_installed_versions {
+    CANDIDATE="$1"
+    CANDIDATE_VERSIONS=()
     for version in $(ls -1 "${JENV_DIR}/candidates/${CANDIDATE}") ; do
        if [[ "${version}" != "current" && "${VERSION}" != "*" ]] ; then
          CANDIDATE_VERSIONS=("${CANDIDATE_VERSIONS[@]}" "${version}")
