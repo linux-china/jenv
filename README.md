@@ -13,7 +13,7 @@ It provides a convenient command line interface for installing, switching, remov
    * Bash completion support. Use TAB to complete command name, candidate name and version
    * Multi OS support, such as Mac, Linux and Windows(Cygwin)
 
-## Installat jenv on Mac and Linux
+## Install jenv on Mac and Linux
 Open your favourite terminal and enter the following command:
 
     $ curl -L -s get.jenv.io | bash
@@ -21,7 +21,7 @@ Open your favourite terminal and enter the following command:
 If the environment needs tweaking for jenv to be installed, the installer will prompt you accordingly and ask you to restart.
 
 
-## Installat jenv on Windows
+## Install jenv on Windows
 Open PowerShell and enter the following command: 
 
     PS >  (new-object Net.WebClient).DownloadString("http://get.jenv.io/GetJenv.ps1") | iex
