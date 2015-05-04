@@ -137,3 +137,4 @@ and setup the settings in IDEA automatically. Please visit http://plugins.jetbra
 ### todo
 
 * jenv outdated: display outdated candidates
+* broadcast: broadcast message
