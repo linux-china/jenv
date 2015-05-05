@@ -129,7 +129,7 @@ _jenv()
         command=${COMP_WORDS[COMP_CWORD-2]}
         candidate="${prev}"
         if __jenvtool_utils_array_contains "JENV_CANDIDATES[@]" "${candidate}"; then
-           if [[ "$command" == "default" || "$command" == "uninstall" ]]; then
+           if [[ "$command" == "default" || "$command" == "uninstall" || "$command" == "cd" || "$command" == "use" ]]; then
               versions=$(__jenvtool_candidate_installed_versions "${candidate}")
            else
               versions=$(__jenvtool_candidate_versions "${candidate}")
