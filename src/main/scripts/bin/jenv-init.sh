@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #
-#   Copyright 2013 Jacky Chan
+#   Copyright 2012 Marco Vermeulen, Jacky Chan
 #
 #   Licensed under the Apache License, Version 2.0 (the "License");
 #   you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 #
+
 # jenv version
 export JENV_VERSION="@JENV_VERSION@"
 # platform, such as Linux, Unix, Darwin or CYGWIN etc
