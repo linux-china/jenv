@@ -1,14 +1,14 @@
 jenv: the Java enVironment Manager
 =======================================
-jenv is a tool for managing parallel Versions of Java Development Kits on any Unix based system.
-It provides a convenient command line interface for installing, switching, removing and listing Candidates.
+jenv is a tool for managing parallel Versions of Java Development Kits on any system, such as Linux, Mac and Windows.
+It provides a convenient command line interface for installing, switching, removing and listing candidates.
 
 ## Why jenv
-   * Easy to manage Java version, such as 1.6, 1.7 and 1.8
-   * Easy to install java related tools, such as ant, maven, tomcat etc.
-   * Easy to manager candidate version. Install new version, reinstall or uninstall the old one.
-   * Directory is standard, and friendly to IDE
-   * Easy to extend. You can setup your own jenv on your company to manage development environment.
+   * Easy to manage Java versions, such as 1.6, 1.7 and 1.8
+   * Easy to install Java related tools, such as ant, maven, tomcat etc.
+   * Easy to manage candidate versions. It supports installing new version, reinstalling or uninstalling old ones
+   * Directory is standard and friendly to IDE
+   * Easy to be extended - you can setup your own jenv in your company to manage development environment
    * Easy to backup your env.
    * Bash completion support. Use TAB to complete command name, candidate name and version
    * Multi OS support, such as Mac, Linux and Windows(Cygwin)
@@ -22,53 +22,67 @@ Open your favourite terminal and enter the following:
 If the environment needs tweaking for jenv to be installed, the installer will prompt you accordingly and ask you to restart.
 
 ## Install Java
-Because I can not redistribute Java SDK, so you should download it from http://www.oracle.com/technetwork/java/javase/downloads/index.html
-and install. After install please execute following command:
+Because I cannot redistribute Java SDK, so you should download it from http://www.oracle.com/technetwork/java/javase/downloads/index.html
+and install by yourself. After installation, please execute the following command:
 
     $ mkdir -p $HOME/.jenv/candidates/java
-    $ ln -s /Library/Java/JavaVirtualMachines/jdk1.7.0_17.jdk/Contents/home $HOME/.jenv/candidates/java/1.7.0_17
-    $ jenv default java 1.7.0_17
+    $ ln -s /Library/Java/JavaVirtualMachines/jdk1.7.0_45.jdk/Contents/home $HOME/.jenv/candidates/java/1.7.0_45
+    $ jenv default java 1.7.0_45
+
+for Mac user, after you install JDK from dmg file, please execute:
+
+   $ jenv install java 1.7.0_45 system
+
+and jenv will link the Java version automatically.
 
 You can also install Java by http url:
 
    $ jenv install java 1.7.0_17  http://xxxx.com/java/java-1.7.0_17.zip
 
-## Install canidates
+## Install candidates
 
-First view all available candidates:
+Firstly, view all available candidates:
 
     $ jenv all
 
-Second list available version for the candidate, such as maven candidate:
+Secondly, list available versions for the candidate, such as maven candidate:
 
     $ jenv ls maven
 
-Final install the candidate with the version:
+Finally, install the candidate with the specified version:
 
-    $ jenv install maven 3.0.5
-In your terminal, input mvn --version to check the installation.
+    $ jenv install maven 3.1.1
 
-If you want to list all installed candidates, please use following command.
+In your terminal, type `mvn --version` to check the installation.
+
+If you want to list all installed candidates, use the following command:
 
     $ jenv ls
 
 ### Update repository
-The candidate's versions are maintained on the central repository. To keep updated with central repository, please use:
+The candidate's versions are maintained in the central repository. To keep updated with central repository, please use:
 
     $ jenv repo update
 
+### Clonable development environments with jenv
+You can clone your jenv between multiple hosts.
+
+* clone your local jenv to remote host: `jenv clone user@remote-host`
+* clone your local candidate to remote host:  `jenv clone candidate version user@remote-host`
+* clone candidate from remote host: `jenv clone user@remote-host canidate version`
+
 ## Other Commands
 
-  * uninstall: Uninstall the candidate with the version, such as jenv uninstall maven 3.0.4
-  * reinstall: Reinstall the candidate with the version, such as jenv reinstall maven 3.0.5
-  * use: Use the candidate with the version, such as jenv use maven 3.0.4
-  * which: Which version for candidate
-  * pause: Pause candidate usage
-  * exe: Execute script under candidate, such as "jenv execute tomcat startup.sh" or "jenv execute tomee startup.sh"
-  * default: Make the version as default, such as jenv default maven 3.0.4
-  * cd: Change directory to candidate install directory, such as jenv cd groovy
-  * show: Display candidate's detail information
-  * requirements: Display jenv requirements
+  * `uninstall`: Uninstall the candidate with the version specified, such as `jenv uninstall maven 3.0.4`
+  * `reinstall`: Reinstall the candidate with the version specified, such as `jenv reinstall maven 3.0.5`
+  * `use`: Use the candidate with the version specified, such as `jenv use maven 3.0.4`
+  * `which`: Check which version for candidate
+  * `pause`: Pause candidate usage
+  * `exe`: Execute script under candidate, such as `jenv execute tomcat startup.sh` or `jenv execute tomee startup.sh`
+  * `default`: Make the version as default, such as `jenv default maven 3.0.4`
+  * `cd`: Change directory to candidate install directory, such as `jenv cd groovy`
+  * `show`: Display the candidate's detailed information
+  * `requirements`: Display jenv requirements
 
 ## jenvrc support
 jenvrc is jenv setup file which contains candidate and the version as following:
@@ -106,3 +120,12 @@ Please use selfupdate command to get last version and candidate repository.
 ## jenv IntelliJ IDEA plugin
 With jenv IDEA plugin, you don't need to setup Java SDK, Maven, and so on, and jenv IDEA plugin can scan jenv directory
 and setup the settings in IDEA automatically. Please visit http://plugins.jetbrains.com/plugin/?idea&pluginId=7229
+
+## Reference
+
+* Shell Code Style: http://google-styleguide.googlecode.com/svn/trunk/shell.xml
+
+### TODO
+
+* jenv outdated: display outdated candidates
+* broadcast: broadcast message
