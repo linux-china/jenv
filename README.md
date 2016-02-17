@@ -110,7 +110,7 @@ If you want to add custom candidate into jenv, please add candidate into local r
 
     $jenv add spike 0.0.1
     $jenv install spike 0.0.1 git@github.com:linux-china/groovy_scripts.git
-An example to install MangoDB 2.4.9 as following:
+An example to install MongoDB 2.4.9 as following:
 
     $jenv add mongodb 2.4.9
     $jenv install mongodb 2.4.9 ~/Downloads/mongodb-osx-x86_64-2.4.9
