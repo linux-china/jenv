@@ -193,7 +193,6 @@ __jenvtool_initialize
 cd () {
   builtin cd "$@"
   if [[ -f "${PWD}/jenvrc" ]]; then
-     echo "==============jenv load ======================"
      while read entry
      do
        if ! __jenvtool_utils_string_contains "$entry", "#" ; then
