@@ -14,6 +14,19 @@
 #   limitations under the License.
 #
 
+alias jenv_regex_sed="sed -r"
+alias jenv_ls="-1 --color=never"
+
+# OS specific support (must be 'true' or 'false').
+darwin=false;
+case "`uname`" in
+   Darwin*)
+       darwin=true
+       alias jenv_regex_sed="sed -E"
+       alias jenv_ls="ls -1"
+       ;;
+esac
+
 if [[ ! -o interactive ]]; then
     return
 fi
