@@ -15,7 +15,7 @@
 #
 
 alias jenv_regex_sed="sed -r"
-alias jenv_ls="-1 --color=never"
+alias jenv_ls="ls -1 --color=never"
 
 # OS specific support (must be 'true' or 'false').
 darwin=false;
