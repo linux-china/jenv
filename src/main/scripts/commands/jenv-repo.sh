@@ -44,7 +44,7 @@ function __jenvtool_repo {
 	   echo "Updating all repositories"
 	   __jenvtool_update_repositories
 	   __jenvtool_candidate_reload_all
-	   echo "Update done!"
+	   __jenvtool_utils_echo_green "Repositories upgraded!"
 	fi
 }
 
@@ -71,7 +71,6 @@ function __jenvtool_update_repositories {
 	     echo "${repo_name} updated!"
 	   fi
 	done
-
 }
 
 # update jenv repository
