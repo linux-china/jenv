@@ -20,4 +20,5 @@
 function __jenvtool_selfupdate {
 	source "${JENV_DIR}/commands/selfupdate.sh"
 	source "${JENV_DIR}/bin/jenv-init.sh" ${JENV_SHELL}
+	__jenvtool_repo "update"
 }
