@@ -54,7 +54,7 @@ Secondly, list available versions for the candidate, such as maven candidate:
 
 Finally, install the candidate with the specified version:
 
-    $ jenv install maven 3.1.1
+    $ jenv install maven 3.3.9
 
 In your terminal, type `mvn --version` to check the installation.
 
@@ -62,6 +62,9 @@ If you want to list all installed candidates, use the following command:
 
     $ jenv ls
 
+For Docker user, your can use silent mode in your Dockerfile as following:
+
+    $ JENV_AUTO=true; jenv install maven 3.3.9
 ### Update repository
 The candidate's versions are maintained in the central repository. To keep updated with central repository, please use:
 
