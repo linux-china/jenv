@@ -190,7 +190,7 @@ __jenvtool_initialize() {
 __jenvtool_initialize
 
 # change directory with jenvrc support
-cd () {
+jcd () {
   builtin cd "$@"
   if [[ -f "${PWD}/jenvrc" ]]; then
      while read entry
