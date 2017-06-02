@@ -7,6 +7,7 @@ It provides a convenient command line interface for installing, switching, remov
 If you have any problem, please join gitter room: https://gitter.im/linux-china/jenv 
 
 ## Why jenv
+
    * Easy to manage Java versions, such as 1.6, 1.7 and 1.8
    * Easy to install Java related tools, such as ant, maven, tomcat etc.
    * Easy to manage candidate versions. It supports installing new version, reinstalling or uninstalling old ones
@@ -117,6 +118,25 @@ If the candidate is absent, jenv will update all git or svn based candidates.
 
     $jenv update
 Update all git or svn based candidates.
+
+### jenv with Docker Executable Images
+If you want to integrate jenv with Docker Executable Images, you can use following steps:
+
+* create a repository in github
+* create autorun.sh file to create functions for commands in Docker images:
+```
+mvn() {
+    docker run --rm \
+              -v $(pwd):/project \
+              -w /project \
+              --entrypoint mvn \
+              maven:3.5.0-jdk-8 $*
+}
+```
+
+* install candidate from github
+* execute shell functions in autorun.sh
+
 
 ## How to update jenv
 Please use selfupdate command to get last version and candidate repository.
