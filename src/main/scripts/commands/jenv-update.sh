@@ -29,10 +29,12 @@ function __jenvtool_update {
                    if [ -d "$j/.git" ];then
                         echo "Pulling..."
                         (cd "${j}" && git pull)
+                         __jenvtool_autorun "${j}"
                         __jenvtool_utils_echo_green "${j} has been updated!"
                    elif [ -d "$j/.svn" ];then
                         echo "Updating..."
                         (cd "${j}" && svn update)
+                         __jenvtool_autorun "${j}"
                         __jenvtool_utils_echo_green "${j} has been updated!"
                    fi
                  fi
@@ -50,12 +52,20 @@ function __jenvtool_update {
 	if [ -d "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/.git" ]; then
 	    echo "Git pulling ${CANDIDATE}..."
         (cd "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/" && git pull)
+        __jenvtool_autorun "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}"
         __jenvtool_utils_echo_green "${CANDIDATE}'s ${VERSION} has been updated!"
      elif [ -d "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/.svn" ]; then
         echo "Subversion updating ${CANDIDATE}..."
         (cd "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/" && svn update)
+         __jenvtool_autorun "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}"
          __jenvtool_utils_echo_green "${CANDIDATE}'s ${VERSION} has been updated!"
      else
       __jenvtool_utils_echo_red "${CANDIDATE}'s ${VERSION} is not a Git or Subversion repository!"
 	fi
+}
+
+function __jenvtool_autorun() {
+  if [[ -f "$1" ]]; then
+     source "$1/autorun.sh"
+  fi
 }
