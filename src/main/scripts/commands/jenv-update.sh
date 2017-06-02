@@ -65,7 +65,7 @@ function __jenvtool_update {
 }
 
 function __jenvtool_autorun() {
-  if [[ -f "$1" ]]; then
+  if [[ -f "$1/autorun.sh" ]]; then
      source "$1/autorun.sh"
   fi
 }
