@@ -73,3 +73,16 @@ function __jenvtool_utils_zip_validate {
 		return 1
 	fi
 }
+
+
+function __jenvtool_autorun() {
+  if [[ -f "$1/autorun.sh" ]]; then
+     source "$1/autorun.sh"
+  fi
+}
+
+function __jenvtool_post_install() {
+  if [[ -f "$1/post-install.sh" ]]; then
+     source "$1/post-install.sh"
+  fi
+}
