@@ -159,9 +159,7 @@ __jenvtool_initialize() {
     done
     # autorun support
     for CANDIDATE in "${JENV_CANDIDATES[@]}" ; do
-        if [[ -f "${JENV_DIR}/candidates/${CANDIDATE}/current/autorun.sh" ]]; then
-            source "${JENV_DIR}/candidates/${CANDIDATE}/current/autorun.sh"
-        fi
+        __jenvtool_autorun "${JENV_DIR}/candidates/${CANDIDATE}/current"
     done
 
     if ! __jenvtool_utils_string_contains "$PATH" "JENV_DIR"; then
