@@ -114,6 +114,7 @@ function __jenvtool_install_git_repository {
 	mkdir -p "${JENV_DIR}/candidates/${CANDIDATE}"
 	echo "Clone ${CANDIDATE} ${VERSION} from ${GIT_REPO}"
 	git clone "${GIT_REPO}" "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}"
+	(cd "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}" && git fetch --tags)
 }
 
 # install svn repository
