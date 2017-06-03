@@ -106,6 +106,10 @@ Note:  Line started with # means line comment.
 ## autorun.sh
 autorun.sh is a script under candidate home, and jenv will execute the script automatically. In the autorun.sh, you can update LD_LIBRARY_PATH or create alias.
 
+### post-install.sh
+
+post-install.sh is a script under canidate home, and jenv will execute the script after install or update
+
 ## Install local candidates
 If you want to add custom candidate into jenv, please create candidates_local under $HOME/.jenv/db/ directory and input candidate name.
 
