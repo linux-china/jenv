@@ -28,7 +28,7 @@ function __jenvtool_update {
                  if ! __jenvtool_utils_string_contains "$j" "current"; then
                    if [ -d "$j/.git" ];then
                         echo "Pulling..."
-                        (cd "${j}" && git pull)
+                        (cd "${j}" && git pull --tags)
                          __jenvtool_post_install "${j}"
                          __jenvtool_autorun "${j}"
                          __jenvtool_utils_echo_green "${j} has been updated!"
@@ -53,7 +53,7 @@ function __jenvtool_update {
     fi
 	if [ -d "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/.git" ]; then
 	    echo "Git pulling ${CANDIDATE}..."
-        (cd "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/" && git pull)
+        (cd "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/" && git pull --tags)
         __jenvtool_post_install "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}"
         __jenvtool_autorun "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}"
         __jenvtool_utils_echo_green "${CANDIDATE}'s ${VERSION} has been updated!"
