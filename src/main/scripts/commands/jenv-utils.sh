@@ -86,3 +86,9 @@ function __jenvtool_post_install() {
      source "$1/post-install.sh"
   fi
 }
+
+function __jenvtool_uninstall() {
+  if [[ -f "$1/uninstall.sh" ]]; then
+     source "$1/uninstall.sh"
+  fi
+}
