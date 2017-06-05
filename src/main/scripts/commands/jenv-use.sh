@@ -43,9 +43,7 @@ function __jenvtool_use {
        	if ! __jenvtool_utils_string_contains "$PATH" "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}"; then
        	    __jenvtool_path_add_candidate "${CANDIDATE}" "${VERSION}"
        	fi
-       	if [ -f "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/autorun.sh" ]; then
-       	   source "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}/autorun.sh"
-       	fi
+       	__jenvtool_autorun "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}"
 	fi
 	__jenvtool_utils_echo_green "Using ${CANDIDATE}(${VERSION}) in this shell."
 }
