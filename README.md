@@ -103,12 +103,12 @@ You can use jenv init to generate jenvrc file.
       $jenv init
 Note:  Line started with # means line comment.
 
-## autorun.sh
-autorun.sh is a script under candidate home, and jenv will execute the script automatically. In the autorun.sh, you can update LD_LIBRARY_PATH or create alias.
+### Script Hook
+All the scripts are under candidate home and invoked by jenv automatically.
 
-### post-install.sh
-
-post-install.sh is a script under canidate home, and jenv will execute the script after install or update
+* autorun.sh: executed to load current candidate 
+* post-install.sh: executed after install
+* uninstall.sh: executed before uninstall
 
 ## Install local candidates
 If you want to add custom candidate into jenv, please create candidates_local under $HOME/.jenv/db/ directory and input candidate name.
