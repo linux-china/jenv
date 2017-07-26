@@ -34,5 +34,8 @@ function __jenvtool_pause {
     #unset home
     UPPER_CANDIDATE=`echo "${CANDIDATE}" | tr '[:lower:]' '[:upper:]'`
     unset "${UPPER_CANDIDATE}_HOME"
+    if [[ "${UPPER_CANDIDATE}" == 'MAVEN' ]]; then
+        unset "M2_HOME"
+    fi
     __jenvtool_utils_echo_green "${CANDIDATE} paused!"
 }

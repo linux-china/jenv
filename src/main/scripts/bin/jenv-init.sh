@@ -154,6 +154,9 @@ __jenvtool_initialize() {
         if ! __jenvtool_utils_string_contains "$PATH" "candidates/${CANDIDATE}/current" && [ -e "${JENV_DIR}/candidates/${CANDIDATE}/current" ]; then
            UPPER_CANDIDATE=`echo "${CANDIDATE}" | tr '[:lower:]' '[:upper:]'`
            export "${UPPER_CANDIDATE}_HOME"="${JENV_DIR}/candidates/${CANDIDATE}/current"
+           if [[ "${UPPER_CANDIDATE}" == 'MAVEN' ]]; then
+              export "M2_HOME"="${JENV_DIR}/candidates/${CANDIDATE}/current"
+           fi
            __jenvtool_path_add_candidate "${CANDIDATE}" "current"
         fi
     done

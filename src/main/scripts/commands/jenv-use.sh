@@ -40,6 +40,9 @@ function __jenvtool_use {
         # Just update the *_HOME and PATH for this shell.
        	UPPER_CANDIDATE=`echo "${CANDIDATE}" | tr '[:lower:]' '[:upper:]'`
        	export "${UPPER_CANDIDATE}_HOME"="${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}"
+       	if [[ "${UPPER_CANDIDATE}" == 'MAVEN' ]]; then
+              export "M2_HOME"="${JENV_DIR}/candidates/${CANDIDATE}/current"
+        fi
        	if ! __jenvtool_utils_string_contains "$PATH" "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}"; then
        	    __jenvtool_path_add_candidate "${CANDIDATE}" "${VERSION}"
        	fi
