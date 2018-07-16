@@ -20,28 +20,28 @@ If you have any problem, please join gitter room: https://gitter.im/linux-china/
 ## Installat jenv
 
 Open your favourite terminal and enter the following:
-
-    $ curl -L -s get.jenv.io | bash
-
+```
+    $ curl -L -s get.jenv.mvnsearch.org | bash
+```
 If the environment needs tweaking for jenv to be installed, the installer will prompt you accordingly and ask you to restart.
 
 ## Install Java
 Because I cannot redistribute Java SDK, so you should download it from http://www.oracle.com/technetwork/java/javase/downloads/index.html
 and install by yourself. After installation, please execute the following command:
-
+```
     $ mkdir -p $HOME/.jenv/candidates/java
-    $ ln -s /Library/Java/JavaVirtualMachines/jdk1.7.0_45.jdk/Contents/home $HOME/.jenv/candidates/java/1.7.0_45
-    $ jenv default java 1.7.0_45
-
+    $ ln -s /Library/Java/JavaVirtualMachines/jdk1.8.0_112.jdk/Contents/home $HOME/.jenv/candidates/java/1.8.0_112
+    $ jenv default java 1.8.0_112
+```
 for Mac user, after you install JDK from dmg file, please execute:
 
-   $ jenv install java 1.7.0_45 system
+   $ jenv install java 1.8.0_112 system
 
 and jenv will link the Java version automatically.
 
 You can also install Java by http url:
 
-   $ jenv install java 1.7.0_17  http://xxxx.com/java/java-1.7.0_17.zip
+   $ jenv install java 1.8.0_112  http://xxxx.com/java/java-1.8.0_112.zip
 
 ## Install candidates
 
@@ -55,7 +55,7 @@ Secondly, list available versions for the candidate, such as maven candidate:
 
 Finally, install the candidate with the specified version:
 
-    $ jenv install maven 3.3.9
+    $ jenv install maven 3.5.3
 
 In your terminal, type `mvn --version` to check the installation.
 
@@ -65,7 +65,7 @@ If you want to list all installed candidates, use the following command:
 
 For Docker user, your can use silent mode in your Dockerfile as following:
 
-    $ JENV_AUTO=true; jenv install maven 3.3.9
+    $ JENV_AUTO=true; jenv install maven 3.5.3
 ### Update repository
 The candidate's versions are maintained in the central repository. To keep updated with central repository, please use:
 
@@ -93,9 +93,10 @@ You can clone your jenv between multiple hosts.
 
 ## jenvrc support
 jenvrc is jenv setup file which contains candidate and the version as following:
-
-       java=1.6.0_45
-       maven=3.0.5
+```
+java=1.8.0_112
+maven=3.5.3
+```
 After you enter this directory, jenv will setup environment automatically.
 Now You can use jenvrc to setup Java environment for each of your individual projects.
 You can use jenv init to generate jenvrc file.
@@ -145,8 +146,9 @@ mvn() {
 ## How to update jenv
 Please use selfupdate command to get last version and candidate repository.
 
+```
    $ jenv selfupdate
-
+```
 ## jenv IntelliJ IDEA plugin
 With jenv IDEA plugin, you don't need to setup Java SDK, Maven, and so on, and jenv IDEA plugin can scan jenv directory
 and setup the settings in IDEA automatically. Please visit http://plugins.jetbrains.com/plugin/?idea&pluginId=7229
