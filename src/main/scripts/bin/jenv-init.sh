@@ -36,7 +36,7 @@ else
    shopt -s expand_aliases
 fi
 alias jenv_regex_sed="sed -r"
-alias jenv_ls="ls -1 --color=never"
+alias jenv_ls="\ls -1 --color=never"
 
 export JENV_SHELL
 
@@ -100,7 +100,7 @@ __jenvtool_initialize() {
         Darwin*)
             darwin=true
             alias jenv_regex_sed="sed -E"
-            alias jenv_ls="ls -1"
+            alias jenv_ls="\ls -1"
             ;;
     esac
 
