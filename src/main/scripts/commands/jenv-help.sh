@@ -29,5 +29,5 @@ function __jenvtool_help {
 	echo "eg: jenv all"
 	echo "eg: jenv install maven 3.0.5"
 	echo "Author: linux_china, @linux_china on weibo and twitter"
-	echo "For more information, please visit http://jenv.io"
+	echo "For more information, please visit http://jenv.mvnsearch.org"
 }

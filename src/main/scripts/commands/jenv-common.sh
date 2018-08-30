@@ -40,7 +40,7 @@ function __jenvtool_repo_all {
   if [ -d "${JENV_DIR}/repo/central" ] ; then
       repo_list=("${repo_list[@]}" "central")
   fi
-  for repo in $(ls -1 "${JENV_DIR}/repo" 2> /dev/null); do
+  for repo in $(jenv_ls "${JENV_DIR}/repo" 2> /dev/null); do
      if [[ "${repo}" != "central" && "${repo}" != "local" ]] ; then
           repo_list=("${repo_list[@]}" "${repo}")
      fi
@@ -81,7 +81,7 @@ function __jenvtool_repo_locate {
 function __jenvtool_candidate_reload_all {
 	JENV_CANDIDATES=()
 	# repository candidates
-	for repo in $(ls -1 "${JENV_DIR}/repo" 2> /dev/null); do
+	for repo in $(jenv_ls "${JENV_DIR}/repo" 2> /dev/null); do
 	   if [ -f "${JENV_DIR}/repo/${repo}/candidates" ]; then
 	     for candidate_name in $(cat "${JENV_DIR}/repo/${repo}/candidates"); do
 	        if ! __jenvtool_utils_array_contains "JENV_CANDIDATES[@]" "${candidate_name}"; then
@@ -118,7 +118,7 @@ function __jenvtool_candidate_versions {
        fi
     done
     # add local unversioned in repository
-    for version in $(ls -1 "${JENV_DIR}/candidates/${CANDIDATE}" 2> /dev/null); do
+    for version in $(jenv_ls "${JENV_DIR}/candidates/${CANDIDATE}" 2> /dev/null); do
     	if [ "${version}" != 'current' ]; then
              if ! __jenvtool_utils_array_contains "CANDIDATE_VERSIONS[@]" "${version}"; then
                  CANDIDATE_VERSIONS=("${CANDIDATE_VERSIONS[@]}" "${version}")
@@ -134,7 +134,7 @@ function __jenvtool_candidate_installed_versions {
     CANDIDATE="$1"
     CANDIDATE_VERSIONS=()
     # add local unversioned in repository
-    for version in $(ls -1 "${JENV_DIR}/candidates/${CANDIDATE}" 2> /dev/null); do
+    for version in $(jenv_ls "${JENV_DIR}/candidates/${CANDIDATE}" 2> /dev/null); do
     	if [ "${version}" != 'current' ]; then
              if ! __jenvtool_utils_array_contains "CANDIDATE_VERSIONS[@]" "${version}"; then
                  CANDIDATE_VERSIONS=("${CANDIDATE_VERSIONS[@]}" "${version}")
@@ -149,7 +149,7 @@ function __jenvtool_candidate_installed_versions {
 function __jenvtool_candidate_installed_versions {
     CANDIDATE="$1"
     CANDIDATE_VERSIONS=()
-    for version in $(ls -1 "${JENV_DIR}/candidates/${CANDIDATE}") ; do
+    for version in $(jenv_ls "${JENV_DIR}/candidates/${CANDIDATE}") ; do
        if [[ "${version}" != "current" && "${VERSION}" != "*" ]] ; then
          CANDIDATE_VERSIONS=("${CANDIDATE_VERSIONS[@]}" "${version}")
        fi
