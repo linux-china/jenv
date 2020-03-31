@@ -16,8 +16,8 @@
 #   limitations under the License.
 #
 
-# jenv version
-export JENV_VERSION="@JENV_VERSION@"
+# jenv for java version
+export JENV_VERSION="1.8"
 # platform, such as Linux, Unix, Darwin or CYGWIN etc
 export JENV_OS_NAME=$(uname)
 # matchine platform, such as x86_64, i686, i386
@@ -189,6 +189,8 @@ __jenvtool_initialize() {
 
 #jenv tool init
 __jenvtool_initialize
+# detect java version
+detect_java_version
 
 # change directory with jenvrc support
 jcd () {
