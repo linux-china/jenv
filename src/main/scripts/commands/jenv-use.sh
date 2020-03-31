@@ -43,6 +43,9 @@ function __jenvtool_use {
        	if [[ "${UPPER_CANDIDATE}" == 'MAVEN' ]]; then
             export "M2_HOME"="${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}"
         fi
+        if [[ "${UPPER_CANDIDATE}" == 'JAVA' ]]; then
+		        export JENV_VERSION="${VERSION}"
+        fi
        	if ! __jenvtool_utils_string_contains "$PATH" "${JENV_DIR}/candidates/${CANDIDATE}/${VERSION}"; then
        	    __jenvtool_path_add_candidate "${CANDIDATE}" "${VERSION}"
        	fi
