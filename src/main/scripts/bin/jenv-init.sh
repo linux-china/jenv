@@ -17,7 +17,7 @@
 #
 
 # jenv for java version
-export JENV_VERSION="1.8"
+export JENV_VERSION="system"
 # platform, such as Linux, Unix, Darwin or CYGWIN etc
 export JENV_OS_NAME=$(uname)
 # matchine platform, such as x86_64, i686, i386
