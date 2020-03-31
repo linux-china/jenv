@@ -92,3 +92,10 @@ function __jenvtool_uninstall() {
      source "$1/uninstall.sh"
   fi
 }
+
+function detect_java_version() {
+  if [[ -e "${JENV_DIR}/candidates/java/current" ]]; then
+    name=$(readlink ~/.jenv/candidates/java/current)
+    export JENV_VERSION="${name/*\//}"
+  fi
+}
